@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Distrirecarga</string>
+    <string name="str_username">Usuario</string>
+    <string name="str_password">Contraseña</string>
+    <string name="str_registrarse">Registrase</string>
+    <string name="str_ingresar">Ingresar</string>
+</resources>
