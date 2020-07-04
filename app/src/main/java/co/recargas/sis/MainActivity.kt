@@ -1,5 +1,6 @@
 package co.recargas.sis
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
+import co.recargas.sis.local.ProductRepository
+import co.recargas.sis.local.modelo.Producto
+import co.recargas.sis.ui.products.ProductViewModel
+import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,9 +28,12 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
         val edtUsuario:EditText=findViewById(R.id.idUsername);
         val edtPassword:EditText=findViewById(R.id.idPassword);
         val btnIngresar:Button=findViewById(R.id.idIngresar);
@@ -64,9 +72,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class Ingresar: AsyncTask<Void,Void,Void>(){
+        private lateinit var productViewModel: ProductViewModel
+        private var productRepository:ProductRepository=ProductRepository(application)
+        private lateinit var response:String
+
 
         override fun onPostExecute(result: Void?) {
             super.onPostExecute(result)
+            val intent : Intent=Intent(this@MainActivity,HomeActivity::class.java)
+            startActivity(intent)
+
         }
 
         override fun doInBackground(vararg params: Void?): Void? {
@@ -74,15 +89,40 @@ class MainActivity : AppCompatActivity() {
 
             }
             try {
-                var req:String = ConexionSocket().ClSocket(parametros)
-                Log.i("req", "Respuesta " + req)
-                if(req.isEmpty()==false){
-                    req = req.replace("\\n", "");
+                response = ConexionSocket().ClSocket(parametros)
+                Log.i("req", "Respuesta " + response)
+                if(response.isEmpty()==false){
+                    response = response.replace("\\n", "");
 
-                    var reqJson:JSONObject= JSONObject(req);
+                    var reqJson:JSONObject= JSONObject(response);
 
                     val idCliente:String=reqJson.getString("id")
                     Log.i("req", "probando el nuevo JSON $idCliente")
+                    val producto: JSONArray = reqJson.getJSONArray("pr")
+                    Log.i("INFO", " Pruebaaaaa "+producto.length())
+                    var size=producto.length()
+
+
+                    for(i in 0 .. size){
+
+                        val data: JSONObject = producto.getJSONObject(i)
+                        Log.i("INFO", " voy prebaaaaa "+data)
+                        Log.i("INFO", " este es eñ id: "+data.getString("id").toInt())
+                        var producto= Producto(data.getString("id").toInt(), data.getString("pr_n"),data.getString("val").toInt(),data.getString("obs"),data.getString("op_i").toInt(),data.getString("op_n"))
+                       Log.i("INFO", " "+producto.toString());
+                        productRepository.insertProductos(producto)
+
+                        //productReposit.insertProductos(producto)
+
+
+
+                       // Log.i("INFO", " Pruebaaaaa "+pro.nombre)
+
+
+                    }
+
+
+
 
                 }
 
