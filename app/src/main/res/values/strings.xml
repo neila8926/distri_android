@@ -7,6 +7,22 @@
     <string name="str_paq_dato">Paquetes Internet</string>
     <string name="str_todo_inc">Paquetes Todo Incl</string>
     <string name="str_voz">Paquetes Voz</string>
+    <string name="sel_paq">Seleccion El Paquete:</string>
+    <string name="numero">Numero</string>
+    <string name="realzar_pa">Realizar Paquete</string>
+    <string name="str_paquete_c">PAQUETE CLARO</string>
+    <string name="str_paquete_m">PAQUETE MOVISTAR</string>
+    <string name="str_paquete_T">PAQUETE TIGO</string>
+    <string name="str_paquete_v">PAQUETE VIRGIN</string>
+    <string name="str_paquete_a">PAQUETE AVANTEL</string>
+    <string name="str_paquete_e">PAQUETE EXITO</string>
+    <string name="str_paquete_k">PAQUETE KALLEY</string>
+    <string name="str_paquete_w">PAQUETE WINGS</string>
+    <string name="str_paquete_et">PAQUETE ETB</string>
+
+
+
+
     <string name="title_activity_dashboard">DashboardActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

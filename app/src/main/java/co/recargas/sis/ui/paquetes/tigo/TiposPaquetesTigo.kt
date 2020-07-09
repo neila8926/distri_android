@@ -1,10 +1,11 @@
-package co.recargas.sis
+package co.recargas.sis.ui.paquetes.tigo
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import co.recargas.sis.R
 
 /**
  * A simple [Fragment] subclass.

@@ -5,22 +5,26 @@
     android:id="@+id/fragmentHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PaquetesFragment">
+    tools:context=".ui.paquetes.PaquetesFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.gridlayout.widget.GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff">
+            android:layout_marginBottom="15dp"
+            android:background="#ffffff"
+            app:columnCount="2"
+            app:rowCount="5">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnClaroP"
                 android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="1"
                 app:layout_constraintEnd_toStartOf="@+id/btnTigoP"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,20 +37,19 @@
                     <ImageView
                         android:id="@+id/imageView5"
                         android:layout_width="0dp"
-                        android:layout_height="150dp"
+                        android:layout_height="130dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_paq_claro" />
+                        app:srcCompat="@drawable/paquete_claro" />
 
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
                         android:gravity="center_horizontal"
-                        android:text="Claro Paquete"
+                        android:text="@string/str_paquete_c"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +63,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnTigoP"
                 android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btnClaroP"
@@ -73,76 +78,24 @@
                     <ImageView
                         android:id="@+id/imageView6"
                         android:layout_width="0dp"
-                        android:layout_height="150dp"
+                        android:layout_height="130dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_p_tigo" />
+                        app:srcCompat="@drawable/paquete_tigo" />
 
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
                         android:gravity="center_horizontal"
-                        android:text="Tigo Paquete"
+                        android:text="@string/str_paquete_T"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="19dp"
-                        android:layout_height="16dp"
-                        android:layout_marginStart="60dp"
-                        android:layout_marginLeft="60dp"
-                        android:layout_marginTop="70dp"
-                        android:text="10%"
-                        android:textSize="8sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/imageView6"
-                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="78dp"
-                        android:layout_marginLeft="78dp"
-                        android:layout_marginTop="70dp"
-                        android:text="20%"
-                        android:textSize="8sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="95dp"
-                        android:layout_marginLeft="95dp"
-                        android:layout_marginTop="70dp"
-                        android:text="30%"
-                        android:textSize="8sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/imageView6"
-                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="75dp"
-                        android:layout_marginLeft="75dp"
-                        android:layout_marginTop="55dp"
-                        android:text="Hasta"
-                        android:textSize="10sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,8 +104,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnVirgin"
                 android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="1"
                 app:layout_constraintEnd_toStartOf="@+id/btnEtb"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +119,7 @@
                     <ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="0dp"
-                        android:layout_height="150dp"
+                        android:layout_height="130dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -175,8 +129,8 @@
                         android:id="@+id/textView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:text="Virgin Paquetes"
+                        android:gravity="center"
+                        android:text="@string/str_paquete_v"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +141,9 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnEtb"
                 android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btnVirgin"
@@ -200,53 +156,193 @@
                     <ImageView
                         android:id="@+id/imageView4"
                         android:layout_width="0dp"
-                        android:layout_height="150dp"
+                        android:layout_height="130dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_p_etb" />
+                        app:srcCompat="@drawable/paquete_etb_n" />
 
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
                         android:gravity="center"
-                        android:text="ETB Paquetes"
+                        android:text="@string/str_paquete_et"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="80dp"
-                        android:layout_marginLeft="80dp"
-                        android:layout_marginTop="70dp"
-                        android:text="5%"
-                        android:textSize="8sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView4" />
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="33dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="75dp"
-                        android:layout_marginLeft="75dp"
-                        android:layout_marginTop="56dp"
-                        android:text="Hasta"
-                        android:textSize="8sp"
-                        app:layout_constraintStart_toStartOf="@+id/imageView4"
-                        app:layout_constraintTop_toTopOf="@+id/imageView4" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnVirgin">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="0dp"
+                        android:layout_height="130dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/recarga_avantel" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_paquete_a"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnMovistarP"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/recarga_movistar" />
+
+                    <TextView
+                        android:id="@+id/txtPaquetem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_paquete_m"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnExitoP"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/recarga_exito" />
+
+                    <TextView
+                        android:id="@+id/txtPaquetee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_paquete_e"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnKalleyP"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/paquete_kalley" />
+
+                    <TextView
+                        android:id="@+id/txtPaqueteKalley"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_paquete_m"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnWingsP"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_margin="0.5dp"
+                app:layout_columnWeight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/paquete_wings" />
+
+                    <TextView
+                        android:id="@+id/txtPaqueteWings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_paquete_w"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.gridlayout.widget.GridLayout>
     </ScrollView>
 
 </FrameLayout>

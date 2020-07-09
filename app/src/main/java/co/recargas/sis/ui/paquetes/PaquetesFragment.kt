@@ -1,4 +1,4 @@
-package co.recargas.sis
+package co.recargas.sis.ui.paquetes
 
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import co.recargas.sis.R
 import co.recargas.sis.interfaces.FragmentCom
 import java.lang.ClassCastException
 
@@ -19,7 +20,6 @@ class PaquetesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
 
 

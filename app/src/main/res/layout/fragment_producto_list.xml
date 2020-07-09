@@ -5,10 +5,9 @@
     android:id="@+id/list"
     android:name="co.recargas.sis.ui.products.ProductoFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="2dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.products.ProductoFragmentClaroInt"
-    tools:listitem="@layout/fragment_producto_claro_int" />
+    tools:context=".ui.paquetes.claro.ProductoFragmentClaroInt"
+    tools:listitem="@layout/fragment_producto" />

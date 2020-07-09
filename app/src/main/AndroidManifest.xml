@@ -14,8 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RealizarPaquetes"></activity>
-        <activity android:name=".PaquetesActivity" />
+        <activity android:name=".ui.paquetes.claro.RealizarPaquetesClaro"></activity>
+        <activity android:name=".ui.paquetes.PaquetesActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" />
@@ -26,6 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -2,18 +2,13 @@ package co.recargas.sis
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import co.recargas.sis.interfaces.FragmentCom
-import co.recargas.sis.ui.TiposPaquetesClaro
+import co.recargas.sis.ui.paquetes.PaquetesActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity(), FragmentCom {
@@ -21,6 +16,7 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        supportActionBar?.hide()
         val navView = findViewById<BottomNavigationView>(R.id.nav_view)
 
 
@@ -47,7 +43,8 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
    override fun paquetesClaro() {
 
        Toast.makeText(this,"Probando ando ",Toast.LENGTH_LONG).show()
-       var intent: Intent= Intent(this,PaquetesActivity::class.java)
+       var intent: Intent= Intent(this,
+           PaquetesActivity::class.java)
        intent.putExtra("paquete","claro")
        startActivity(intent)
 
@@ -55,7 +52,8 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
 
     override fun paquetesTigo() {
         Toast.makeText(this,"Probando ando ",Toast.LENGTH_LONG).show()
-        var intent: Intent= Intent(this,PaquetesActivity::class.java)
+        var intent: Intent= Intent(this,
+            PaquetesActivity::class.java)
         intent.putExtra("paquete","tigo")
         startActivity(intent)
 

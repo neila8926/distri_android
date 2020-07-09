@@ -1,5 +1,6 @@
-package co.recargas.sis.ui.products
+package co.recargas.sis.ui.paquetes.claro
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,16 +10,23 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import co.recargas.sis.R
+import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
+import co.recargas.sis.ui.paquetes.products.ProductViewModel
+import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
+import kotlinx.android.synthetic.main.activity_realizar_paquetes.view.*
+import java.lang.ClassCastException
 
 
 class ProductoFragmentClaroInt : Fragment() {
     private lateinit var productViewModel: ProductViewModel
     private lateinit var productAdapter: ProductoRecyclerViewAdapter
     private var productos: List<Producto> = ArrayList()
+    var listener: DetallesPaquete?=null
 
 
     private var columnCount = 1
@@ -44,10 +52,25 @@ class ProductoFragmentClaroInt : Fragment() {
         //cuando se instanciara el adapter
         productAdapter= ProductoRecyclerViewAdapter()
 
+
+        productAdapter.setOnclicListener(View.OnClickListener {
+            var producto=it.tag as Producto
+            Toast.makeText(context, "mensaje "+producto.nombre,Toast.LENGTH_SHORT).show()
+
+            var nombre:String?=producto.nombre
+            var valor: Int? =producto.valor
+            var descripcion: String?= producto.observacion
+
+            listener?.obtenerDatosPaquetes(nombre!!,valor!!, descripcion!!)
+
+        })
+
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = when {
+
                     columnCount <= 1 -> LinearLayoutManager(context)
+
                     else -> GridLayoutManager(context, columnCount)
                 }
                 adapter = productAdapter
@@ -73,5 +96,14 @@ class ProductoFragmentClaroInt : Fragment() {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
+    }
+//Metodo que se lanza cuando se inserta un fragmento dentro de un activity
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            listener= context as DetallesPaquete
+        }catch (e:ClassCastException){
+            throw ClassCastException(context.toString()+"Debes Implementar la Interfaz")
+        }
     }
 }

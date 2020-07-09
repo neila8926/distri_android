@@ -1,11 +1,10 @@
-package co.recargas.sis
+package co.recargas.sis.ui.paquetes
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import co.recargas.sis.ui.TiposPaquetesClaro
+import co.recargas.sis.R
+import co.recargas.sis.ui.paquetes.claro.TiposPaquetesClaro
+import co.recargas.sis.ui.paquetes.tigo.TiposPaquetesTigo
 
 class PaquetesActivity : AppCompatActivity() {
 
@@ -19,13 +18,15 @@ class PaquetesActivity : AppCompatActivity() {
 
         when(tipo){
             "claro"->{
-                var paqueteClaro=TiposPaquetesClaro()
+                var paqueteClaro=
+                    TiposPaquetesClaro()
                 var fragmentTransation=managerFragmant.beginTransaction()
                 fragmentTransation.add(R.id.contenedor_paquetes,paqueteClaro).commit()
 
             }
             "tigo"->{
-                var paqueteTigo=TiposPaquetesTigo()
+                var paqueteTigo=
+                    TiposPaquetesTigo()
                 var fragmentTransation=managerFragmant.beginTransaction()
                 fragmentTransation.add(R.id.contenedor_paquetes,paqueteTigo).commit()
 

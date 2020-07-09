@@ -19,6 +19,9 @@ class ProductRepository(application: Application){
     fun getPaquetesClaroVoz(): LiveData<List<Producto>>{
         return productoDao?.getClaroVoz() ?: MutableLiveData<List<Producto>>()
     }
+    fun getPaquetesClaroTodoIncluido(): LiveData<List<Producto>>{
+        return productoDao?.getClaroTodoIncl() ?: MutableLiveData<List<Producto>>()
+    }
 
     private class InsertAsyncTask(private val productoDao: ProductoDao): AsyncTask<Producto,Void,Void>() {
         override fun doInBackground(vararg productos: Producto?): Void? {

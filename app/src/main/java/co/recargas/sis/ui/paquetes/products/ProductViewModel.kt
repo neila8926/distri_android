@@ -1,7 +1,6 @@
-package co.recargas.sis.ui.products
+package co.recargas.sis.ui.paquetes.products
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import co.recargas.sis.local.ProductRepository
@@ -12,25 +11,25 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     private var productRepository:ProductRepository
     private var listadoProductosClaroInt: LiveData<List<Producto>>
     private var listadoProductosClaroVoz: LiveData<List<Producto>>
+    private var listadoProductosClaroTodoIncluido: LiveData<List<Producto>>
 
     init {
         productRepository= ProductRepository(application)
         listadoProductosClaroInt=productRepository.getPaquetesClaroInt()
         listadoProductosClaroVoz= productRepository.getPaquetesClaroVoz()
+        listadoProductosClaroTodoIncluido=productRepository.getPaquetesClaroTodoIncluido()
     }
     fun saveProducts(product: Producto){
-        Log.i("INFO", "ESTOY AQUI3 :)")
         productRepository.insertProductos(product)
     }
     fun getProductsClaroInt(): LiveData<List<Producto>>{
-        Log.i("INFO", "ESTOY AQUI2 :)")
-        Log.i("INFO", " Prueba "+listadoProductosClaroInt.value)
         return listadoProductosClaroInt
     }
     fun getProductsClaroVoz(): LiveData<List<Producto>>{
-        Log.i("INFO", "ESTOY AQUI2 :)")
-        Log.i("INFO", " Prueba "+listadoProductosClaroVoz.value)
-        return listadoProductosClaroVoz
+         return listadoProductosClaroVoz
+    }
+    fun getProductsClaroTodoIncluido(): LiveData<List<Producto>>{
+        return listadoProductosClaroTodoIncluido
     }
 
 }

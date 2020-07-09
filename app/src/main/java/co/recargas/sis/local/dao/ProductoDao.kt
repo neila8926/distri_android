@@ -16,6 +16,9 @@ interface ProductoDao {
     //Obtener Paquetes de Claro Voz
     @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE 'PAQUETE%' AND nombre LIKE '%MIN%' AND nombre LIKE '%TAT'")
     fun getClaroVoz():LiveData<List<Producto>>
+    //Obtener Paquetes de Claro Todo Incluido
+    @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE '%TODOINCLUIDO%'")
+    fun getClaroTodoIncl():LiveData<List<Producto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllProductos(producto: Producto)

@@ -1,6 +1,7 @@
 package co.recargas.sis
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
+import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.local.ProductRepository
 import co.recargas.sis.local.modelo.Producto
-import co.recargas.sis.ui.products.ProductViewModel
+import co.recargas.sis.ui.paquetes.products.ProductViewModel
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -97,6 +99,8 @@ class MainActivity : AppCompatActivity() {
                     var reqJson:JSONObject= JSONObject(response);
 
                     val idCliente:String=reqJson.getString("id")
+                    //Almacenamos en las preferencias el Id del Cliente
+                    SharedPreferenceManager.setSomeStringValue("ID",idCliente)
                     Log.i("req", "probando el nuevo JSON $idCliente")
                     val producto: JSONArray = reqJson.getJSONArray("pr")
                     Log.i("INFO", " Pruebaaaaa "+producto.length())

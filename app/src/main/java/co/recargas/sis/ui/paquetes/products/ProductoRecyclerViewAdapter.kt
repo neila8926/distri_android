@@ -1,4 +1,4 @@
-package co.recargas.sis.ui.products
+package co.recargas.sis.ui.paquetes.products
 
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
@@ -13,39 +13,42 @@ import co.recargas.sis.local.modelo.Producto
 
 
 
-import kotlinx.android.synthetic.main.fragment_producto_claro_int.view.*
+import kotlinx.android.synthetic.main.fragment_producto.view.*
 
 
-class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewAdapter.ViewHolder>() {
+class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
 
-    private val mOnClickListener: View.OnClickListener
+    var mOnClickListener: View.OnClickListener
     private var productos : List<Producto> = ArrayList()
+
+    var nombre:String?=null
+    var valor:Int?=null
 
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as Producto
-
-
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_producto_claro_int, parent, false)
+            .inflate(R.layout.fragment_producto, parent, false)
         return ViewHolder(view)
     }
-
+//Se encarga de ir dibujando cada elemento de la lista sobre el RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    //Se obtiene el elemento actual de la lista
         val item = productos[position]
+    //Se carga la información elemento por elemento al ViewComponet
         holder.nameProduct.text = item.nombre
         holder.descriptionProduct.text = item.observacion
         holder.priceProduct.text = item.valor.toString()
-        Log.i("INFO", " Prueba "+item.nombre)
 
 
         with(holder.mView) {
             tag = item
             setOnClickListener(mOnClickListener)
+
         }
     }
 
@@ -65,4 +68,15 @@ class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewA
 
 
     }
+   public fun setOnclicListener(listener: View.OnClickListener){
+       mOnClickListener=listener
+   }
+
+    override fun onClick(v: View?) {
+        if(mOnClickListener!=null){
+            mOnClickListener.onClick(v)
+        }
+    }
+
+
 }
