@@ -33,14 +33,11 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(navView, navController)
 
-        Toast.makeText(this, " ffhgfhgfgh "+R.id.nav_host_fragment, Toast.LENGTH_LONG).show()
-
-
 
     }
 
 
-   override fun paquetesClaro() {
+    override fun paquetesClaro() {
 
        Toast.makeText(this,"Probando ando ",Toast.LENGTH_LONG).show()
        var intent: Intent= Intent(this,
@@ -58,6 +55,63 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
         startActivity(intent)
 
     }
+
+    override fun paqueteVirgin() {
+        Toast.makeText(this, "boton virgin", Toast.LENGTH_SHORT).show()
+        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        intent.putExtra("paquete","virgin")
+        startActivity(intent)
+
+    }
+    override fun paqueteEtb() {
+        Toast.makeText(this, "boton etb", Toast.LENGTH_SHORT).show()
+        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        intent.putExtra("paquete","etb")
+        startActivity(intent)
+
+    }
+
+    override fun paqueteAvantel() {
+        Toast.makeText(this, "boton avantel", Toast.LENGTH_SHORT).show()
+        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        intent.putExtra("paquete","avantel")
+        startActivity(intent)
+
+    }
+
+    override fun paqueteMovistar() {
+        Toast.makeText(this, "boton movistar", Toast.LENGTH_SHORT).show()
+        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        intent.putExtra("paquete","movistar")
+        startActivity(intent)
+
+    }
+
+    override fun paqueteExito() {
+        Toast.makeText(this, "boton exito", Toast.LENGTH_SHORT).show()
+        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        intent.putExtra("paquete","exito")
+        startActivity(intent)
+
+    }
+
+    override fun paqueteKalley() {
+        Toast.makeText(this, "boton kalley", Toast.LENGTH_SHORT).show()
+        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        intent.putExtra("paquete","kalley")
+        startActivity(intent)
+
+    }
+
+    override fun paqueteWings() {
+        Toast.makeText(this, "boton wigs", Toast.LENGTH_SHORT).show()
+        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        intent.putExtra("paquete","wings")
+        startActivity(intent)
+
+    }
+
+
 
 
 

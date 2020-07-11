@@ -19,6 +19,18 @@ interface ProductoDao {
     //Obtener Paquetes de Claro Todo Incluido
     @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE '%TODOINCLUIDO%'")
     fun getClaroTodoIncl():LiveData<List<Producto>>
+    //Obtenet paquetes Claro LDI
+    @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE '%LDI%'")
+    fun getClaroLdi():LiveData<List<Producto>>
+    //Obtener Paquetes reventa
+    @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE '%REVENTA%'")
+    fun getClaroReventa():LiveData<List<Producto>>
+    //Obtener Paquetes Claro APPS
+    @Query("SELECT * FROM productos WHERE operadorId=1 AND (nombre LIKE '%INSTAGRAM%' or nombre LIKE '%WAZE%' OR nombre LIKE '%SNAPCHAT%' OR nombre LIKE '%YOUTUBE%' OR nombre LIKE '%WHATSAPP%' OR nombre LIKE '%APP%')")
+    fun getClaroApps():LiveData<List<Producto>>
+    //Obtener Paquetes Claro Inetrnet y Tv Prepago
+    @Query("SELECT * FROM productos WHERE operadorId=1 AND ( nombre LIKE 'INALAMBRICO' OR nombre LIKE '%TV%' OR nombre LIKE '%PREPAGO%')")
+    fun getClaroPrepago():LiveData<List<Producto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllProductos(producto: Producto)

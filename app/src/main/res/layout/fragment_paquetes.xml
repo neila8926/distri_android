@@ -179,6 +179,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnAvantelP"
                 android:layout_width="170dp"
                 android:layout_height="150dp"
                 android:layout_margin="0.5dp"

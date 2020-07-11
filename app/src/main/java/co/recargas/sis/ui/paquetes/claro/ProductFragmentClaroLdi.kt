@@ -4,15 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import co.recargas.sis.R
 import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
@@ -21,7 +21,8 @@ import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
 import java.lang.ClassCastException
 
 
-class ProductoFragmentClaroInt : Fragment() {
+class ProductFragmentClaroLdi : Fragment() {
+
     private lateinit var productViewModel: ProductViewModel
     private lateinit var productAdapter: ProductoRecyclerViewAdapter
     private var productos: List<Producto> = ArrayList()
@@ -54,7 +55,7 @@ class ProductoFragmentClaroInt : Fragment() {
 
         productAdapter.setOnclicListener(View.OnClickListener {
             var producto=it.tag as Producto
-            Toast.makeText(context, "mensaje "+producto.nombre,Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "mensaje "+producto.nombre, Toast.LENGTH_SHORT).show()
 
             var nombre:String?=producto.nombre
             var valor: Int? =producto.valor
@@ -76,7 +77,7 @@ class ProductoFragmentClaroInt : Fragment() {
             }
         }
         //Observer de los productos
-        productViewModel.getProductsClaroInt().observe(viewLifecycleOwner, Observer {
+        productViewModel.getProductsClaroLdi().observe(viewLifecycleOwner, Observer {
             productos= it
             Log.i("INFO", " Prueba "+productos)
             productAdapter.setData(productos)
@@ -90,19 +91,20 @@ class ProductoFragmentClaroInt : Fragment() {
 
         @JvmStatic
         fun newInstance(columnCount: Int) =
-            ProductoFragmentClaroInt().apply {
-                arguments = Bundle().apply {
+            ProductFragmentClaroLdi().apply {
+                arguments=Bundle().apply {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
     }
-//Metodo que se lanza cuando se inserta un fragmento dentro de un activity
+    //Metodo que se lanza cuando se inserta un fragmento dentro de un activity
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try{
             listener= context as DetallesPaquete
-        }catch (e:ClassCastException){
+        }catch (e: ClassCastException){
             throw ClassCastException(context.toString()+"Debes Implementar la Interfaz")
         }
     }
+
 }

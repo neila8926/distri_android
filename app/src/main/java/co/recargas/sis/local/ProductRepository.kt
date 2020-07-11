@@ -22,6 +22,18 @@ class ProductRepository(application: Application){
     fun getPaquetesClaroTodoIncluido(): LiveData<List<Producto>>{
         return productoDao?.getClaroTodoIncl() ?: MutableLiveData<List<Producto>>()
     }
+    fun getPaqueteClaroLdi():LiveData<List<Producto>>{
+        return productoDao?.getClaroLdi() ?: MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteClaroReventa():LiveData<List<Producto>>{
+        return productoDao?.getClaroReventa() ?: MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteClaroApps():LiveData<List<Producto>>{
+        return productoDao?.getClaroApps() ?: MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteClaroPrepago(): LiveData<List<Producto>>{
+        return productoDao?.getClaroPrepago() ?: MutableLiveData<List<Producto>>()
+    }
 
     private class InsertAsyncTask(private val productoDao: ProductoDao): AsyncTask<Producto,Void,Void>() {
         override fun doInBackground(vararg productos: Producto?): Void? {

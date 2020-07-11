@@ -63,6 +63,12 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
                 fragmentTransation.add(R.id.contenedorTipoPaquete,todoIncluido).commit()
 
             }
+            "ldi"->{
+                var ldi= ProductFragmentClaroLdi()
+                var fragmentTransation=fragmentManager.beginTransaction()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()
+
+            }
         }
         btnRealizarPaquete?.setOnClickListener {
             var celular=numero?.text

@@ -12,16 +12,27 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     private var listadoProductosClaroInt: LiveData<List<Producto>>
     private var listadoProductosClaroVoz: LiveData<List<Producto>>
     private var listadoProductosClaroTodoIncluido: LiveData<List<Producto>>
+    private var listadoProductoClaroLdi: LiveData<List<Producto>>
+    private var listadoProductoClaroReventa: LiveData<List<Producto>>
+    private var listadoProductoClaroApps: LiveData<List<Producto>>
+    private var litadoProductoClaroPrepago: LiveData<List<Producto>>
 
     init {
         productRepository= ProductRepository(application)
+        //PAQUETES DE CLARO
         listadoProductosClaroInt=productRepository.getPaquetesClaroInt()
         listadoProductosClaroVoz= productRepository.getPaquetesClaroVoz()
         listadoProductosClaroTodoIncluido=productRepository.getPaquetesClaroTodoIncluido()
+        listadoProductoClaroLdi=productRepository.getPaqueteClaroLdi()
+        listadoProductoClaroReventa=productRepository.getPaqueteClaroReventa()
+        listadoProductoClaroApps=productRepository.getPaqueteClaroApps()
+        litadoProductoClaroPrepago=productRepository.getPaqueteClaroPrepago()
+        //PAQUETES DE TIGO
     }
     fun saveProducts(product: Producto){
         productRepository.insertProductos(product)
     }
+    //PAQUETES DE CLARO
     fun getProductsClaroInt(): LiveData<List<Producto>>{
         return listadoProductosClaroInt
     }
@@ -30,6 +41,18 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     }
     fun getProductsClaroTodoIncluido(): LiveData<List<Producto>>{
         return listadoProductosClaroTodoIncluido
+    }
+    fun getProductsClaroLdi(): LiveData<List<Producto>>{
+        return listadoProductoClaroLdi
+    }
+    fun getProductsReventa(): LiveData<List<Producto>>{
+        return listadoProductoClaroReventa
+    }
+    fun getProductsApps(): LiveData<List<Producto>>{
+        return listadoProductoClaroApps
+    }
+    fun getProductsPrepago(): LiveData<List<Producto>>{
+        return litadoProductoClaroPrepago
     }
 
 }

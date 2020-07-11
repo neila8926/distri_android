@@ -2,15 +2,26 @@ package co.recargas.sis.ui.paquetes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
+import co.recargas.sis.ui.paquetes.virgin.FragmentTiposPaquetesVirgin
 import co.recargas.sis.R
+import co.recargas.sis.ui.paquetes.avantel.FragmentTipoPaqueteAvantel
 import co.recargas.sis.ui.paquetes.claro.TiposPaquetesClaro
-import co.recargas.sis.ui.paquetes.tigo.TiposPaquetesTigo
+import co.recargas.sis.ui.paquetes.etb.FragmentTiposPaqueteEtb
+import co.recargas.sis.ui.paquetes.exito.FragmentTipoPaqueteExito
+import co.recargas.sis.ui.paquetes.kalley.FragmentTipoPaqueteKalley
+import co.recargas.sis.ui.paquetes.movistar.FragmentTipoPaqueteMovistar
+import co.recargas.sis.ui.paquetes.tigo.FragmentTipoPaqueteTigo
+import co.recargas.sis.ui.paquetes.wings.FragmentTipoPaqueteWings
 
 class PaquetesActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paquetes)
+
+
 
         var inte=intent.extras
        var tipo:String= inte?.get("paquete").toString()
@@ -18,6 +29,7 @@ class PaquetesActivity : AppCompatActivity() {
 
         when(tipo){
             "claro"->{
+
                 var paqueteClaro=
                     TiposPaquetesClaro()
                 var fragmentTransation=managerFragmant.beginTransaction()
@@ -26,11 +38,48 @@ class PaquetesActivity : AppCompatActivity() {
             }
             "tigo"->{
                 var paqueteTigo=
-                    TiposPaquetesTigo()
+                    FragmentTipoPaqueteTigo()
                 var fragmentTransation=managerFragmant.beginTransaction()
                 fragmentTransation.add(R.id.contenedor_paquetes,paqueteTigo).commit()
 
             }
+            "virgin"->{
+                var paqueteVirgin=
+                    FragmentTiposPaquetesVirgin()
+                var fragmentTransation=managerFragmant.beginTransaction()
+                fragmentTransation.add(R.id.contenedor_paquetes,paqueteVirgin).commit()
+            }
+            "etb"->{
+                var paqueteEtb=FragmentTiposPaqueteEtb()
+                var fragmentTransation=managerFragmant.beginTransaction()
+                fragmentTransation.add(R.id.contenedor_paquetes, paqueteEtb).commit()
+            }
+            "movistar"->{
+                var paqueteMovistar=FragmentTipoPaqueteMovistar()
+                var fragmentTransation=managerFragmant.beginTransaction()
+                fragmentTransation.add(R.id.contenedor_paquetes,paqueteMovistar).commit()
+            }
+            "avantel"->{
+                var paqueteAvantel=FragmentTipoPaqueteAvantel()
+                var fragmentTransation=managerFragmant.beginTransaction()
+                fragmentTransation.add(R.id.contenedor_paquetes,paqueteAvantel).commit()
+            }
+            "exito"->{
+                var paqueteExito=FragmentTipoPaqueteExito()
+                var fragmenTransation=managerFragmant.beginTransaction()
+                fragmenTransation.add(R.id.contenedor_paquetes,paqueteExito)
+            }
+            "kalley"->{
+                var paqueteKalley=FragmentTipoPaqueteKalley()
+                var fragmentTransation=managerFragmant.beginTransaction()
+                fragmentTransation.add(R.id.contenedor_paquetes,paqueteKalley).commit()
+            }
+            "wings"->{
+                var paqueteWings=FragmentTipoPaqueteWings()
+                var fragmentTransation=managerFragmant.beginTransaction()
+                fragmentTransation.add(R.id.contenedor_paquetes,paqueteWings).commit()
+            }
+
         }
 
     }

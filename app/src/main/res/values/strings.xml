@@ -4,12 +4,7 @@
     <string name="str_password">Contraseña</string>
     <string name="str_registrarse">Registrase</string>
     <string name="str_ingresar">Ingresar</string>
-    <string name="str_paq_dato">Paquetes Internet</string>
-    <string name="str_todo_inc">Paquetes Todo Incl</string>
-    <string name="str_voz">Paquetes Voz</string>
-    <string name="sel_paq">Seleccion El Paquete:</string>
-    <string name="numero">Numero</string>
-    <string name="realzar_pa">Realizar Paquete</string>
+    <!--DIFERENTES PAQUETES Y OPERADORES-->
     <string name="str_paquete_c">PAQUETE CLARO</string>
     <string name="str_paquete_m">PAQUETE MOVISTAR</string>
     <string name="str_paquete_T">PAQUETE TIGO</string>
@@ -19,8 +14,19 @@
     <string name="str_paquete_k">PAQUETE KALLEY</string>
     <string name="str_paquete_w">PAQUETE WINGS</string>
     <string name="str_paquete_et">PAQUETE ETB</string>
+    <!--TIPOS DE PAQUETES DE CLARO -->
+    <string name="str_paq_dato">Paquetes Internet</string>
+    <string name="str_todo_inc">Paquetes Todo Incl</string>
+    <string name="str_voz">Paquetes Voz</string>
+    <string name="str_ldi">Larga Distancia Int</string>
+    <string name="str_app">Paquete Apps</string>
+    <string name="str_reventa">Paquete Reventa</string>
+    <string name="str_prepago">Tv e Internet Prepago</string>
 
 
+    <string name="sel_paq">Seleccion El Paquete:</string>
+    <string name="numero">Numero</string>
+    <string name="realzar_pa">Realizar Paquete</string>
 
 
     <string name="title_activity_dashboard">DashboardActivity</string>
