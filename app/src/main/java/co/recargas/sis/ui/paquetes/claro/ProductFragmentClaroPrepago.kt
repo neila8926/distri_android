@@ -2,11 +2,10 @@ package co.recargas.sis.ui.paquetes.claro
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,35 +18,34 @@ import co.recargas.sis.ui.paquetes.products.ProductViewModel
 import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
 import java.lang.ClassCastException
 
-class ProductFragmentClaroReventa : Fragment() {
-
-   private  lateinit var productViewModel: ProductViewModel
-    private lateinit var produductAdapter: ProductoRecyclerViewAdapter
-      var listener: DetallesPaquete?=null
-    private  var productos:List<Producto> =ArrayList()
-
+class ProductFragmentClaroPrepago: Fragment() {
+    private lateinit var productViewModel:ProductViewModel
+    private lateinit var productAdapter:ProductoRecyclerViewAdapter
+    private var productos:List<Producto> = ArrayList()
+    var listener:DetallesPaquete?=null
     private var columnCount = 1
 
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         var view=inflater.inflate(R.layout.fragment_producto_list,container,false)
-        //obtenemos el viewModel
+
+        //obtenemos los datos del ViewModel
         productViewModel=ViewModelProvider(this).get(ProductViewModel::class.java)
-        //se instancia el adaptador
-        produductAdapter= ProductoRecyclerViewAdapter()
+        //instanciamos el adaptador
+        productAdapter= ProductoRecyclerViewAdapter()
 
+        productAdapter.setOnclicListener(View.OnClickListener {
 
-        produductAdapter.setOnclicListener(View.OnClickListener {
-            var producto=it.tag as Producto
+            var producto=it as Producto
 
-            var nombre=producto.nombre
-            var precio=producto.valor
-            var descripcion=producto.observacion
+            var nombre= producto.nombre
+            var precio = producto.valor
+            var descripcion = producto.observacion
 
-            listener?.obtenerDatosPaquetes(nombre!!,precio!!,descripcion!!)
+            listener?.obtenerDatosPaquetes(nombre!!,precio,descripcion!!)
         })
 
         if (view is RecyclerView) {
@@ -58,27 +56,25 @@ class ProductFragmentClaroReventa : Fragment() {
 
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = produductAdapter
+                adapter = productAdapter
             }
         }
 
         //observer de los productos
-        productViewModel.getProductsReventa().observe(viewLifecycleOwner, Observer {
+
+        productViewModel.getProductsPrepago().observe(viewLifecycleOwner, Observer {
             productos=it
-            produductAdapter.setData(productos)
+            productAdapter.setData(productos)
         })
 
-
-
         return view
-        }
+    }
 
-    companion object {
+    companion object{
         const val ARG_COLUMN_COUNT = "column-count"
-        fun newInstance(columnCount: Int)= ProductFragmentClaroReventa().apply{
-
+        fun newInstance(columnCont:Int)= ProductFragmentClaroPrepago().apply {
             val args = Bundle().apply {
-                putInt(ARG_COLUMN_COUNT, columnCount)
+                putInt(ARG_COLUMN_COUNT,columnCont)
             }
 
 
@@ -87,6 +83,7 @@ class ProductFragmentClaroReventa : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+
         try{
             listener= context as DetallesPaquete
         }catch (e: ClassCastException){

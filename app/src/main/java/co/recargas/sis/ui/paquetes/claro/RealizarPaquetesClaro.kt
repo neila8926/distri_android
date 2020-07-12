@@ -69,6 +69,21 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
                 fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()
 
             }
+            "reventa"->{
+                var reveta=ProductFragmentClaroReventa()
+                var fragmentTransation=fragmentManager.beginTransaction()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,reveta).commit()
+            }
+            "apps"->{
+                var apps=ProductFragmentClaroApps()
+                var fragmentTransation=fragmentManager.beginTransaction()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,apps).commit()
+            }
+            "prepago"->{
+                var prepago=ProductFragmentClaroPrepago()
+                var fragmentTransation=fragmentManager.beginTransaction()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,prepago).commit()
+            }
         }
         btnRealizarPaquete?.setOnClickListener {
             var celular=numero?.text

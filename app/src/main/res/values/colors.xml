@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EF1F1B</color>
-    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorPrimary">#d32f2f</color>
+    <color name="colorPrimaryLigth">#ff6659</color>
+    <color name="colorPrimaryDark">#9a0007</color>
+
+    <color name="colorSecundary">#b0bec5</color>
+    <color name="colorSecundaryLigth">#e2f1f8</color>
+    <color name="colorSecundaryDark">#808e95</color>
+
+    <color name="todoInter">#1976d2</color>
+    <color name="voz">#7b1fa2</color>
+    <color name="todoIc">#303f9f</color>
+    <color name="largaD">#ffa000</color>
+    <color name="reventa">#00acc1</color>
+    <color name="apps">#43a047</color>
+    <color name="prepago">#f4511e</color>
+
+
+
+
+
     <color name="colorAccent">#9E9E9E</color>
     <color name="violeta">#E040FB</color>
     <color name="white">#FFFFFF</color>
     <color name="negro">#000000</color>
+    <color name="rojoclaro">#DA291C</color>
+    <color name="bg_paquetes">#005cb2</color>
 </resources>
