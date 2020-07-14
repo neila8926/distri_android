@@ -1,5 +1,6 @@
 package co.recargas.sis
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.AsyncTask
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import co.recargas.sis.common.ConexionSocket
@@ -27,18 +29,21 @@ class MainActivity : AppCompatActivity() {
 
     var parametros:String="";
     val version=Constantes.VERSION_CODE;
+    private lateinit var progressBarInicio:ProgressDialog
+    private lateinit var edtUsuario:EditText
+    private lateinit var edtPassword:EditText
+    private lateinit var btnIngresar:Button
 
-
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+  override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        val edtUsuario:EditText=findViewById(R.id.idUsername);
-        val edtPassword:EditText=findViewById(R.id.idPassword);
-        val btnIngresar:Button=findViewById(R.id.idIngresar);
+        edtUsuario=findViewById(R.id.idUsername);
+        edtPassword=findViewById(R.id.idPassword);
+        btnIngresar=findViewById(R.id.idIngresar);
+        //progressBarInicio=findViewById(R.id.progressBarInicio)
+
+
         Toast.makeText(this,"Probando la version $version ",Toast.LENGTH_LONG).show()
 
         btnIngresar.setOnClickListener{view->
@@ -73,18 +78,23 @@ class MainActivity : AppCompatActivity() {
         return toHexString(mac.doFinal(data.toByteArray()))
     }
 
-    inner class Ingresar: AsyncTask<Void,Void,Void>(){
+    inner class Ingresar: AsyncTask<Void,Int,Void>(){
         private lateinit var productViewModel: ProductViewModel
         private var productRepository:ProductRepository=ProductRepository(application)
         private lateinit var response:String
 
+        override fun onPreExecute() {
+            super.onPreExecute()
 
-        override fun onPostExecute(result: Void?) {
-            super.onPostExecute(result)
-            val intent : Intent=Intent(this@MainActivity,HomeActivity::class.java)
-            startActivity(intent)
+            progressBarInicio= ProgressDialog(this@MainActivity)
+            progressBarInicio.setTitle("Iniciando Sesión")
+            progressBarInicio.setMessage("Procesando...")
+            progressBarInicio.setCancelable(false)
+            progressBarInicio.show()
+
 
         }
+
 
         override fun doInBackground(vararg params: Void?): Void? {
             if(params.isNotEmpty()){
@@ -105,6 +115,7 @@ class MainActivity : AppCompatActivity() {
                     val producto: JSONArray = reqJson.getJSONArray("pr")
                     Log.i("INFO", " Pruebaaaaa "+producto.length())
                     var size=producto.length()
+                    var x=size*100
 
 
                     for(i in 0 .. size){
@@ -115,36 +126,36 @@ class MainActivity : AppCompatActivity() {
                         var producto= Producto(data.getString("id").toInt(), data.getString("pr_n"),data.getString("val").toInt(),data.getString("obs"),data.getString("op_i").toInt(),data.getString("op_n"))
                        Log.i("INFO", " "+producto.toString());
                         productRepository.insertProductos(producto)
-
+                        publishProgress(x*size)
                         //productReposit.insertProductos(producto)
 
-
-
-                       // Log.i("INFO", " Pruebaaaaa "+pro.nombre)
-
-
                     }
-
-
-
-
                 }
 
             }catch ( ex: Exception) {
                 ex.printStackTrace()
             }
-
-
             return null
+        }
 
-
-
+        override fun onProgressUpdate(vararg values: Int?) {
+            super.onProgressUpdate(*values)
+            progressBarInicio.progress= values[0]!!
 
         }
 
-        override fun onPreExecute() {
-            super.onPreExecute()
+
+        override fun onPostExecute(result: Void?) {
+
+                progressBarInicio.dismiss()
+
+            super.onPostExecute(result)
+            val intent : Intent=Intent(this@MainActivity,HomeActivity::class.java)
+            startActivity(intent)
+
         }
+
+
     }
 }
 

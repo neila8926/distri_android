@@ -88,4 +88,5 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/ic_logotipo_distri"
         tools:ignore="VectorDrawableCompat" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

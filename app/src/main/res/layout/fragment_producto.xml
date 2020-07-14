@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
     app:cardBackgroundColor="@color/bg_paquetes"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,6 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:typeface="sans"
-            app:fontFamily="@font/rubik_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,6 @@
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:fontFamily="@font/rubik"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
