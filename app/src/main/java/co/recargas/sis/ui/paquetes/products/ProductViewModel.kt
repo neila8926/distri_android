@@ -9,6 +9,7 @@ import co.recargas.sis.local.modelo.Producto
 class ProductViewModel (application: Application): AndroidViewModel(application) {
 //la que se conecta al repositorio para poder obtener la peticion de las peliculas populares
     private var productRepository:ProductRepository
+    //Paquetes de Claro
     private var listadoProductosClaroInt: LiveData<List<Producto>>
     private var listadoProductosClaroVoz: LiveData<List<Producto>>
     private var listadoProductosClaroTodoIncluido: LiveData<List<Producto>>
@@ -16,6 +17,8 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     private var listadoProductoClaroReventa: LiveData<List<Producto>>
     private var listadoProductoClaroApps: LiveData<List<Producto>>
     private var litadoProductoClaroPrepago: LiveData<List<Producto>>
+    //Paquetes de Tigo
+    private var listafoProductosTigoCombo: LiveData<List<Producto>>
 
     init {
         productRepository= ProductRepository(application)
@@ -28,6 +31,7 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
         listadoProductoClaroApps=productRepository.getPaqueteClaroApps()
         litadoProductoClaroPrepago=productRepository.getPaqueteClaroPrepago()
         //PAQUETES DE TIGO
+        listafoProductosTigoCombo=productRepository.getPaqueteTigoCombo()
     }
     fun saveProducts(product: Producto){
         productRepository.insertProductos(product)
@@ -53,6 +57,10 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     }
     fun getProductsPrepago(): LiveData<List<Producto>>{
         return litadoProductoClaroPrepago
+    }
+    //PAQUES TIGO
+    fun getProductsCombo():LiveData<List<Producto>>{
+        return listafoProductosTigoCombo
     }
 
 }

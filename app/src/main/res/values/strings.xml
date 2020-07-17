@@ -22,6 +22,22 @@
     <string name="str_app">Paquete Apps</string>
     <string name="str_reventa">Paquete Reventa</string>
     <string name="str_prepago">Tv e Internet Prepago</string>
+    <!--TIPOS DE PAQUETES DE TIGO -->
+    <string name="str_combo">Combos</string>
+    <string name="str_paq_ldist">Larga Distancia</string>
+    <string name="str_paq_min">Minutos</string>
+    <string name="str_paq_bolsas">Bolsas</string>
+    <!--TIPOS DE PAQUETES DE VIRGIN -->
+    <string name="str_paq_ant">Antiplanes</string>
+    <string name="str_paq_bolsa_dat">Bolsas de Dato</string>
+    <string name="str_paq_bolsas_voz">Bolsas de Voz</string>
+    <string name="str_paq_bolsas_wha">Bolsas de Whatsapp</string>
+
+    <string name="str_paq_int">Internet</string>
+    <string name="str_paq_tod">Todo Incluido</string>
+    <string name="str_what">Whatsapp</string>
+
+
 
 
     <string name="sel_paq">Seleccion El Paquete:</string>

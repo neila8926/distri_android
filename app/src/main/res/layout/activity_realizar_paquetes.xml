@@ -8,6 +8,12 @@
     android:orientation="vertical"
     tools:context=".ui.paquetes.claro.RealizarPaquetesClaro">
 
+    <ProgressBar
+        android:id="@+id/progressBarPaq"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/nombrePaquete"
         android:layout_width="match_parent"

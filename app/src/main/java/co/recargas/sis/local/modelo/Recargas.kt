@@ -6,8 +6,8 @@ import java.util.*
 @Entity(tableName = "recargas")
 data class Recargas(
     @PrimaryKey(autoGenerate = true)
-    val estado:Int,
-    val operador: String,
+    //val estado:Int,
+    val operador: Int,
     val numero:String,
     val observacion :String,
     val valor: Int,

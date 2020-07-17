@@ -1,18 +1,23 @@
 package co.recargas.sis.ui.paquetes.claro
 
+import android.content.DialogInterface
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import co.recargas.sis.R
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
+import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.interfaces.DetallesPaquete
+import co.recargas.sis.local.ProductRepository
+import co.recargas.sis.local.RecargaRepository
+import co.recargas.sis.local.modelo.Recargas
+import co.recargas.sis.ui.paquetes.tigo.ProductFragmentTigoCombo
+import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,12 +27,16 @@ import javax.crypto.spec.SecretKeySpec
 class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
     var parametros:String="";
     val version=Constantes.VERSION_CODE;
+    var progressBar: ProgressBar?=null
+   // private var recargaRepository: RecargaRepository = RecargaRepository(application)
 
-    var nombrePaquete:TextView?=null
-    var valorPaquete:TextView?=null
-    var descripcionPaquete:TextView?=null
+    lateinit var nombrePaquete:TextView
+    lateinit var valorPaquete:TextView
+    lateinit var descripcionPaquete:TextView
     var btnRealizarPaquete: Button?=null
-    var numero:EditText?=null
+    lateinit var numero:EditText
+    var fechaActual:String?=null
+    var horaActual:String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +46,10 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
         descripcionPaquete=findViewById(R.id.descripcion)
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
+        progressBar=findViewById(R.id.progressBarPaq)
 
-        //var intent:Intent?=null
+
+
         var rec=intent.extras
        var tipo:String=rec?.get("tipo").toString()
         Log.i("INFO","probando "+tipo)
@@ -84,26 +95,54 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,prepago).commit()
             }
+
         }
         btnRealizarPaquete?.setOnClickListener {
-            var celular=numero?.text
-            var nombrePaquete=nombrePaquete?.text
-            var valorPaquete=valorPaquete?.text
-            var idCliente=SharedPreferenceManager.getSomeStringValue("ID")
-            //Se obtiene la fecha y la hora actual
-            val fechaActual= SimpleDateFormat("yyyy-MM-dd ").format(Date());
-            val horaActual= SimpleDateFormat("HH:mm:ss").format(Date());
 
-            //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
-            val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
-            //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
+            if(numero.text.isEmpty() || ValidacionDato.validarCelular(numero.text.toString())==false){
+                numero.setError("Digite un numero de celular Valido")
 
-            Toast.makeText(this,"me has pulsado "+idCliente, Toast.LENGTH_SHORT).show()
-            parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+1+"|"+version;
+            }
+            else {
+                var celular=numero.text
+                var nombrePaquete =nombrePaquete.text
+                var valorPaquete=valorPaquete.text
+                var idCliente=SharedPreferenceManager.getSomeStringValue("ID")
+                //Se obtiene la fecha y la hora actual
+                fechaActual= SimpleDateFormat("yyyy-MM-dd ").format(Date());
+                horaActual= SimpleDateFormat("HH:mm:ss").format(Date());
 
-            EnviarPaquete().execute()
+                //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
+                val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
+                //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
+                Log.i("INFO", "NOMBRE P "+nombrePaquete)
+
+                if(nombrePaquete.isNotEmpty()==true || valorPaquete.isNotEmpty()==true) {
+                parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+1+"|"+version;
+
+
+                    val alertDialog = AlertDialog.Builder(this)
+                alertDialog.setTitle("Confirmar Recarga")
+                alertDialog.setMessage("Numero: ${numero?.text.toString()}\nPaquete: ${nombrePaquete}\nValor: ${valorPaquete.toString()}")
+                alertDialog.apply {
+                        setPositiveButton("Aceptar",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                // User clicked OK button
+                                EnviarPaquete().execute()
+                            })
+                        setNegativeButton("Cancelar",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                // User cancelled the dialog
+                            })
+                    }
+
+                    alertDialog.show()
+
+        }else {
+                Toast.makeText(this,"Todos los campos son requeridos",Toast.LENGTH_SHORT).show()
+            }
+            }
         }
-
     }
 
     private fun toHexString(bytes: ByteArray): String? {
@@ -128,9 +167,19 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
         descripcionPaquete?.text=descripcion
 
     }
-    inner class EnviarPaquete:AsyncTask<Void,Void,Void>(){
+    inner class EnviarPaquete:AsyncTask<Void,Int,Boolean>(){
         private lateinit var response:String
-        override fun doInBackground(vararg params: Void?): Void? {
+        private lateinit var respuesta:String
+        lateinit var saldo:String
+        override fun onPreExecute() {
+            super.onPreExecute()
+            progressBar?.max=100
+            progressBar?.progress=0
+
+
+        }
+        override fun doInBackground(vararg params: Void?): Boolean? {
+
             if(params.isNotEmpty()){
 
             }
@@ -140,7 +189,39 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
             }catch (ex:Exception){
                 ex.printStackTrace()
             }
-            return null
+            if(response.isNotEmpty()){
+                var reqJson: JSONObject = JSONObject(response);
+                respuesta=reqJson.getString("respuesta")
+
+                if(respuesta.equals("ok")){
+                    //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
+                   // recargaRepository.insertRecargas(recargas)
+                    saldo=reqJson.getString("saldo")
+                    publishProgress(100)
+                        return true
+
+
+                }
+            }
+            return false
+        }
+
+        override fun onProgressUpdate(vararg values: Int?) {
+            super.onProgressUpdate(*values)
+            if (values.isNotEmpty()){
+                progressBar?.setProgress(values[0]!!)
+            }
+
+        }
+
+
+        override fun onPostExecute(result: Boolean?) {
+            super.onPostExecute(result)
+            if(result==true){
+                Toast.makeText(this@RealizarPaquetesClaro,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this@RealizarPaquetesClaro, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
+            }
         }
 
     }

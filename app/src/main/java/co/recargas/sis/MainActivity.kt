@@ -47,6 +47,14 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this,"Probando la version $version ",Toast.LENGTH_LONG).show()
 
         btnIngresar.setOnClickListener{view->
+            if(edtUsuario.text.isEmpty()){
+                edtUsuario.setError("Digite Usuario")
+            }
+            if(edtPassword.text.isEmpty()){
+                edtPassword.setError("Digite Contraseña")
+
+        }else {
+            if(edtUsuario.text.isNotEmpty() && edtPassword.text.isNotEmpty()) {
             //Se obtiene la fecha y la hora actual
             val fechaActual=SimpleDateFormat("yyyy-MM-dd ").format(Date());
             val horaActual=SimpleDateFormat("HH:mm:ss").format(Date());
@@ -58,8 +66,12 @@ class MainActivity : AppCompatActivity() {
             parametros = "mov|log|" + horaActual.toString() + "|" + hmac + "|" + edtUsuario.getText().toString().toString() + "|" + edtPassword.getText().toString().toString() + "|" + version
 
             Ingresar().execute()
+            }
+            else {
+                Toast.makeText(this,"Digite usuario y contraseña",Toast.LENGTH_SHORT).show()
+            }
 
-        }
+        }}
 
     }
 
@@ -78,10 +90,11 @@ class MainActivity : AppCompatActivity() {
         return toHexString(mac.doFinal(data.toByteArray()))
     }
 
-    inner class Ingresar: AsyncTask<Void,Int,Void>(){
+    inner class Ingresar: AsyncTask<Void,Int,Boolean>(){
         private lateinit var productViewModel: ProductViewModel
         private var productRepository:ProductRepository=ProductRepository(application)
         private lateinit var response:String
+        private lateinit var respuesta:String
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -96,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        override fun doInBackground(vararg params: Void?): Void? {
+        override fun doInBackground(vararg params: Void?): Boolean? {
             if(params.isNotEmpty()){
 
             }
@@ -107,35 +120,43 @@ class MainActivity : AppCompatActivity() {
                     response = response.replace("\\n", "");
 
                     var reqJson:JSONObject= JSONObject(response);
+                    respuesta=reqJson.getString("respuesta")
+                    if(respuesta.equals("Login exitoso")) {
 
-                    val idCliente:String=reqJson.getString("id")
-                    //Almacenamos en las preferencias el Id del Cliente
-                    SharedPreferenceManager.setSomeStringValue("ID",idCliente)
-                    Log.i("req", "probando el nuevo JSON $idCliente")
-                    val producto: JSONArray = reqJson.getJSONArray("pr")
-                    Log.i("INFO", " Pruebaaaaa "+producto.length())
-                    var size=producto.length()
-                    var x=size*100
+                        val idCliente:String=reqJson.getString("id")
+                        //Almacenamos en las preferencias el Id del Cliente
+                        SharedPreferenceManager.setSomeStringValue("ID",idCliente)
+                        Log.i("req", "probando el nuevo JSON $idCliente")
+                        val producto: JSONArray = reqJson.getJSONArray("pr")
+                        Log.i("INFO", " Pruebaaaaa "+producto.length())
+                        var size=producto.length()
+                        var x=size*100
 
 
-                    for(i in 0 .. size){
+                        for(i in 0 .. size){
 
-                        val data: JSONObject = producto.getJSONObject(i)
-                        Log.i("INFO", " voy prebaaaaa "+data)
-                        Log.i("INFO", " este es eñ id: "+data.getString("id").toInt())
-                        var producto= Producto(data.getString("id").toInt(), data.getString("pr_n"),data.getString("val").toInt(),data.getString("obs"),data.getString("op_i").toInt(),data.getString("op_n"))
-                       Log.i("INFO", " "+producto.toString());
-                        productRepository.insertProductos(producto)
-                        publishProgress(x*size)
-                        //productReposit.insertProductos(producto)
+                            val data: JSONObject = producto.getJSONObject(i)
 
+                            var producto= Producto(data.getString("id").toInt(), data.getString("pr_n"),data.getString("val").toInt(),data.getString("obs"),data.getString("op_i").toInt(),data.getString("op_n"))
+                           Log.i("INFO", " "+producto.toString());
+                            productRepository.insertProductos(producto)
+                            publishProgress(x*size)
+                            //productReposit.insertProductos(producto)
+                            if(isCancelled){
+                                break
+                            }
+
+                        }
+
+                    }else{
+                        return false
                     }
-                }
+                    }
 
             }catch ( ex: Exception) {
                 ex.printStackTrace()
             }
-            return null
+            return true
         }
 
         override fun onProgressUpdate(vararg values: Int?) {
@@ -145,17 +166,23 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        override fun onPostExecute(result: Void?) {
-
-                progressBarInicio.dismiss()
-
+        override fun onPostExecute(result: Boolean?) {
             super.onPostExecute(result)
+
+            progressBarInicio.dismiss()
+
+            if(result==true) {
             val intent : Intent=Intent(this@MainActivity,HomeActivity::class.java)
             startActivity(intent)
+            }else{
+                Toast.makeText(this@MainActivity,respuesta,Toast.LENGTH_LONG).show()
+            }
 
         }
 
-
+        override fun onCancelled() {
+            super.onCancelled()
+        }
     }
 }
 

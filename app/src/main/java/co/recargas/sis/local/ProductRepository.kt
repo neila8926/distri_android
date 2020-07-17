@@ -13,6 +13,7 @@ class ProductRepository(application: Application){
     fun insertProductos(producto: Producto){
        if (productoDao != null ) InsertAsyncTask(productoDao).execute(producto);
     }
+    //PAQUETES DE CLARO
     fun getPaquetesClaroInt(): LiveData<List<Producto>>{
        return productoDao?.getClaroInternet() ?: MutableLiveData<List<Producto>>()
     }
@@ -33,6 +34,10 @@ class ProductRepository(application: Application){
     }
     fun getPaqueteClaroPrepago(): LiveData<List<Producto>>{
         return productoDao?.getClaroPrepago() ?: MutableLiveData<List<Producto>>()
+    }
+    //PAQUETES DE TIGO
+    fun getPaqueteTigoCombo():LiveData<List<Producto>>{
+        return productoDao?.getTigoCombo() ?: MutableLiveData<List<Producto>>()
     }
 
     private class InsertAsyncTask(private val productoDao: ProductoDao): AsyncTask<Producto,Void,Void>() {

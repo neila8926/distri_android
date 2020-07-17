@@ -10,6 +10,7 @@ import co.recargas.sis.local.modelo.Producto
 //Se definen las operaciones que se pueden lleva a cabo
 @Dao
 interface ProductoDao {
+    //CLARO
     //Obtener Paquetes de Claro Internet
     @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE 'NAVEGA%' AND nombre LIKE '%MB'")
     fun getClaroInternet():LiveData<List<Producto>>
@@ -31,6 +32,11 @@ interface ProductoDao {
     //Obtener Paquetes Claro Inetrnet y Tv Prepago
     @Query("SELECT * FROM productos WHERE operadorId=1 AND ( nombre LIKE 'INALAMBRICO' OR nombre LIKE '%TV%' OR nombre LIKE '%PREPAGO%')")
     fun getClaroPrepago():LiveData<List<Producto>>
+    //TIGO
+    //Obtener paquetes de internet de Tigo
+    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%CMB%'")
+    fun getTigoCombo():LiveData<List<Producto>>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllProductos(producto: Producto)
