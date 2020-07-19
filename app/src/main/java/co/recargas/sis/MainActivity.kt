@@ -21,6 +21,8 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
@@ -55,7 +57,10 @@ class MainActivity : AppCompatActivity() {
 
         }else {
             if(edtUsuario.text.isNotEmpty() && edtPassword.text.isNotEmpty()) {
-            //Se obtiene la fecha y la hora actual
+
+                var user=edtUsuario.text.toString().trim().replace("\\s","")
+
+           //Se obtiene la fecha y la hora actual
             val fechaActual=SimpleDateFormat("yyyy-MM-dd ").format(Date());
             val horaActual=SimpleDateFormat("HH:mm:ss").format(Date());
 
@@ -63,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
             val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
             //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
-            parametros = "mov|log|" + horaActual.toString() + "|" + hmac + "|" + edtUsuario.getText().toString().toString() + "|" + edtPassword.getText().toString().toString() + "|" + version
+            parametros = "mov|log|" + horaActual.toString() + "|" + hmac + "|" +user+ "|" + edtPassword.getText().toString().toString() + "|" + version
 
             Ingresar().execute()
             }

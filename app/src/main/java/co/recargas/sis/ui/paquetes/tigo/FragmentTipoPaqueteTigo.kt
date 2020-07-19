@@ -38,8 +38,18 @@ class FragmentTipoPaqueteTigo : Fragment() {
         combo.setOnClickListener {
             var intent=Intent(context,RealizarPaquetesTigo::class.java)
             intent.putExtra("tigo","combo")
-            Toast.makeText(context,"probando paquetes Tiggo", Toast.LENGTH_SHORT).show()
             startActivity(intent)
+        }
+        internet.setOnClickListener {
+            var intent=Intent(context,RealizarPaquetesTigo::class.java)
+            intent.putExtra("tigo","internet")
+            startActivity(intent)
+        }
+        minuto.setOnClickListener {
+            var intent=Intent(context,RealizarPaquetesTigo::class.java)
+            intent.putExtra("tigo","minutos")
+            startActivity(intent)
+
         }
         return vista
     }

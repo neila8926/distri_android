@@ -33,10 +33,21 @@ interface ProductoDao {
     @Query("SELECT * FROM productos WHERE operadorId=1 AND ( nombre LIKE 'INALAMBRICO' OR nombre LIKE '%TV%' OR nombre LIKE '%PREPAGO%')")
     fun getClaroPrepago():LiveData<List<Producto>>
     //TIGO
-    //Obtener paquetes de internet de Tigo
+    //Obtener paquetes de Combo de Tigo
     @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%CMB%'")
     fun getTigoCombo():LiveData<List<Producto>>
-
+    //obtener paquetes de Internet de Tigo
+    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%_IN_%'")
+    fun getTigoInter():LiveData<List<Producto>>
+    //obtener paquetes de minutos y sms de Tigo
+    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%_MIN_%'  AND nombre LIKE '%_MS'")
+    fun getTigoMin(): LiveData<List<Producto>>
+    //obtener bolsas de tigo
+    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE 'B_INIT%'")
+    fun getTigoBolsa(): LiveData<List<Producto>>
+    //obtener paquetes de larga distancia de tigo
+    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%LDI'")
+    fun getTigoLdi(): LiveData<List<Producto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllProductos(producto: Producto)

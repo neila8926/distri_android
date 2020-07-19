@@ -71,7 +71,7 @@ class ProductFragmentTigoCombo :  Fragment(){
         const val ARG_COLUMN_COUNT = "column-count"
         fun newInstance(columsCount:Int)= ProductFragmentTigoCombo().apply {
             val args = Bundle().apply {
-                putInt(ARG_COLUMN_COUNT, columnCount)
+                putInt(ARG_COLUMN_COUNT, columsCount)
                 }
             }
         }

@@ -39,6 +39,18 @@ class ProductRepository(application: Application){
     fun getPaqueteTigoCombo():LiveData<List<Producto>>{
         return productoDao?.getTigoCombo() ?: MutableLiveData<List<Producto>>()
     }
+    fun getPaqueteTigoInternet(): LiveData<List<Producto>>{
+        return  productoDao?.getTigoInter() ?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaquetesTigoMinutos(): LiveData<List<Producto>>{
+        return productoDao?.getTigoMin()?: MutableLiveData<List<Producto>>()
+    }
+    fun getBolsasTigo(): LiveData<List<Producto>>{
+        return productoDao?.getTigoBolsa()?: MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteLdiTigo(): LiveData<List<Producto>>{
+        return productoDao?.getTigoLdi()?:MutableLiveData<List<Producto>>()
+    }
 
     private class InsertAsyncTask(private val productoDao: ProductoDao): AsyncTask<Producto,Void,Void>() {
         override fun doInBackground(vararg productos: Producto?): Void? {

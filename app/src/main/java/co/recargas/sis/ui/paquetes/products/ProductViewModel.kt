@@ -19,6 +19,10 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     private var litadoProductoClaroPrepago: LiveData<List<Producto>>
     //Paquetes de Tigo
     private var listafoProductosTigoCombo: LiveData<List<Producto>>
+    private var listadoProductosTigoInternet: LiveData<List<Producto>>
+    private var listadoProductosTigoMinutos: LiveData<List<Producto>>
+    private var listadoProductosTigoBolsas: LiveData<List<Producto>>
+    private var listadoProductosTigoLdi: LiveData<List<Producto>>
 
     init {
         productRepository= ProductRepository(application)
@@ -32,6 +36,10 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
         litadoProductoClaroPrepago=productRepository.getPaqueteClaroPrepago()
         //PAQUETES DE TIGO
         listafoProductosTigoCombo=productRepository.getPaqueteTigoCombo()
+        listadoProductosTigoInternet=productRepository.getPaqueteTigoInternet()
+        listadoProductosTigoMinutos=productRepository.getPaquetesTigoMinutos()
+        listadoProductosTigoBolsas=productRepository.getBolsasTigo()
+        listadoProductosTigoLdi=productRepository.getPaqueteLdiTigo()
     }
     fun saveProducts(product: Producto){
         productRepository.insertProductos(product)
@@ -62,5 +70,18 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     fun getProductsCombo():LiveData<List<Producto>>{
         return listafoProductosTigoCombo
     }
+    fun getProductsInternet():LiveData<List<Producto>>{
+        return listadoProductosTigoInternet
+    }
+    fun getProductosMinutosTigo():LiveData<List<Producto>>{
+        return  listadoProductosTigoMinutos
+    }
+    fun getProductosBolsasTigo():LiveData<List<Producto>>{
+        return listadoProductosTigoBolsas
+    }
+    fun getProductosLdiTigo():LiveData<List<Producto>>{
+        return listadoProductosTigoLdi
+    }
+
 
 }

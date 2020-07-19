@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import co.recargas.sis.R
@@ -175,6 +176,7 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
             super.onPreExecute()
             progressBar?.max=100
             progressBar?.progress=0
+            progressBar?.visibility=View.VISIBLE
 
 
         }
@@ -197,7 +199,7 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
                     //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
                    // recargaRepository.insertRecargas(recargas)
                     saldo=reqJson.getString("saldo")
-                    publishProgress(100)
+                    publishProgress()
                         return true
 
 
@@ -208,19 +210,37 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
 
         override fun onProgressUpdate(vararg values: Int?) {
             super.onProgressUpdate(*values)
-            if (values.isNotEmpty()){
-                progressBar?.setProgress(values[0]!!)
-            }
-
         }
-
 
         override fun onPostExecute(result: Boolean?) {
             super.onPostExecute(result)
+            progressBar?.visibility=View.GONE
+
             if(result==true){
                 Toast.makeText(this@RealizarPaquetesClaro,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(this@RealizarPaquetesClaro)
+                builder.setTitle("Confirmación")
+                builder.setMessage(respuesta)
+                    .setPositiveButton("Aceptar",
+                        DialogInterface.OnClickListener { dialog, id ->
+                        })
+                    .setNegativeButton("Imprimir",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            // User cancelled the dialog
+                        })
+
+                builder.show()
             }else{
                 Toast.makeText(this@RealizarPaquetesClaro, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
+
+                val builder = AlertDialog.Builder(this@RealizarPaquetesClaro)
+                builder.setTitle("Confirmación")
+                builder.setMessage(respuesta)
+                    .setPositiveButton("Aceptar",
+                        DialogInterface.OnClickListener { dialog, id ->
+                        })
+                    builder.show()
+
             }
         }
 
