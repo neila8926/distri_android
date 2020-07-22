@@ -49,7 +49,16 @@ class FragmentTipoPaqueteTigo : Fragment() {
             var intent=Intent(context,RealizarPaquetesTigo::class.java)
             intent.putExtra("tigo","minutos")
             startActivity(intent)
-
+        }
+        bolsaTigo.setOnClickListener {
+            var intent=Intent(context, RealizarPaquetesTigo::class.java)
+            intent.putExtra("tigo","bolsa")
+            startActivity(intent)
+        }
+        btnLdi.setOnClickListener {
+            var intent=Intent(context,RealizarPaquetesTigo::class.java)
+            intent.putExtra("tigo","ldi")
+            startActivity(intent)
         }
         return vista
     }

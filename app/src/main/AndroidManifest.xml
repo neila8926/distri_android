@@ -16,7 +16,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.paquetes.claro.RealizarPaquetesClaro"></activity>
         <activity android:name=".ui.paquetes.tigo.RealizarPaquetesTigo"></activity>
-
+        <activity android:name=".ui.paquetes.virgin.RealizarPaquetesVirgin"></activity>
+        <activity android:name=".ui.paquetes.etb.RealizarPaquetesEtb"> </activity>
+        <activity android:name=".ui.paquetes.avantel.RealizarPaquetesAvantel"></activity>
         <activity android:name=".ui.paquetes.PaquetesActivity" />
         <activity
             android:name=".HomeActivity"

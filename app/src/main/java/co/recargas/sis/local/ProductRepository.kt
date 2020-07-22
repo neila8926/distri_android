@@ -51,6 +51,39 @@ class ProductRepository(application: Application){
     fun getPaqueteLdiTigo(): LiveData<List<Producto>>{
         return productoDao?.getTigoLdi()?:MutableLiveData<List<Producto>>()
     }
+    //VIRGIN
+    fun getPaqueteVirginAntiplan():LiveData<List<Producto>>{
+        return productoDao?.getVirginAntiplan()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteVirginBolsaDato(): LiveData<List<Producto>>{
+        return productoDao?.getVirginBolsaDato()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteVirginBolsaVoz():LiveData<List<Producto>>{
+        return productoDao?.getVirginBolsaVoz()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteVirginBolsaWhatsapp(): LiveData<List<Producto>>{
+        return productoDao?.getVirginBolsaWhatsapp()?:MutableLiveData<List<Producto>>()
+    }
+    //ETB
+    fun getPaqueteEtbCombo():LiveData<List<Producto>>{
+        return productoDao?.getEtbCombo()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteEtbLdi():LiveData<List<Producto>>{
+        return productoDao?.getEtbLdi()?: MutableLiveData<List<Producto>>()
+    }
+    //AVANTEL
+    fun getPaqueteAvantelTodoInc():LiveData<List<Producto>>{
+        return productoDao?.getAvantelTodoIncluido()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteAvantelVoz():LiveData<List<Producto>>{
+        return productoDao?.getAvantelVoz()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteAvantelInternet():LiveData<List<Producto>>{
+        return  productoDao?.getAvantelInternet()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteAvantelWhatsapp():LiveData<List<Producto>>{
+        return productoDao?.getAvantelWhatsapp()?:MutableLiveData<List<Producto>>()
+    }
 
     private class InsertAsyncTask(private val productoDao: ProductoDao): AsyncTask<Producto,Void,Void>() {
         override fun doInBackground(vararg productos: Producto?): Void? {

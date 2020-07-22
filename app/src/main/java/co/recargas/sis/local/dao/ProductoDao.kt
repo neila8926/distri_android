@@ -43,11 +43,41 @@ interface ProductoDao {
     @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%_MIN_%'  AND nombre LIKE '%_MS'")
     fun getTigoMin(): LiveData<List<Producto>>
     //obtener bolsas de tigo
-    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE 'B_INIT%'")
+    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE 'B_INT%'")
     fun getTigoBolsa(): LiveData<List<Producto>>
     //obtener paquetes de larga distancia de tigo
     @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%LDI'")
     fun getTigoLdi(): LiveData<List<Producto>>
+    //VIRGIN
+    //obtener antiplanes de virgin
+    @Query("SELECT * FROM productos WHERE operadorId=7 AND nombre LIKE 'ANTIPLAN%'")
+    fun getVirginAntiplan():LiveData<List<Producto>>
+    //obtener bolsas de datos de virgin
+    @Query("SELECT * FROM productos WHERE operadorId=7 AND nombre LIKE 'BOLSA_DATOS%'")
+    fun getVirginBolsaDato():LiveData<List<Producto>>
+    //obtener Bolsa de Voz de Virgin
+    @Query("SELECT * FROM productos WHERE operadorId=7 AND nombre LIKE 'BOLSA_VOZ%'")
+    fun getVirginBolsaVoz(): LiveData<List<Producto>>
+    //obtener bolsa de Whatsapp de Virgin
+    @Query("SELECT * FROM productos WHERE operadorId=7 AND nombre LIKE 'BOLSA_WA%'")
+    fun getVirginBolsaWhatsapp():LiveData<List<Producto>>
+    //ETB
+    //obtener paquetes todo incluido de ETB
+    @Query("SELECT * FROM productos WHERE operadorId=9 AND nombre LIKE '%_COMBOS_%'")
+    fun getEtbCombo():LiveData<List<Producto>>
+    //obtener paquetes larga distancia de ETB
+    @Query("SELECT * FROM productos WHERE operadorId=9 AND ( nombre LIKE '%VENEZUELA%'  OR nombre LIKE '%LDI%')")
+    fun getEtbLdi():LiveData<List<Producto>>
+    //AVANTEL
+    @Query("SELECT * FROM productos WHERE operadorId=4 AND nombre LIKE '%_TI'")
+    fun getAvantelTodoIncluido():LiveData<List<Producto>>
+    @Query("SELECT * FROM productos WHERE operadorId=4 AND (nombre LIKE '%MIN%' AND nombre LIKE '%M' )")
+    fun getAvantelVoz():LiveData<List<Producto>>
+    @Query("SELECT * FROM productos WHERE operadorId=4 AND  nombre LIKE '%_I' ")
+    fun getAvantelInternet():LiveData<List<Producto>>
+    @Query("SELECT * FROM productos WHERE operadorId=4 AND  nombre LIKE '%W' ")
+    fun getAvantelWhatsapp():LiveData<List<Producto>>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllProductos(producto: Producto)

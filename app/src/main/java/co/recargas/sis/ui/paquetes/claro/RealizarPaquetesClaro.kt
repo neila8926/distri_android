@@ -49,10 +49,8 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
 
-
-
         var rec=intent.extras
-       var tipo:String=rec?.get("tipo").toString()
+        var tipo:String=rec?.get("tipo").toString()
         Log.i("INFO","probando "+tipo)
 
         var fragmentManager=supportFragmentManager
@@ -113,22 +111,21 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
                 fechaActual= SimpleDateFormat("yyyy-MM-dd ").format(Date());
                 horaActual= SimpleDateFormat("HH:mm:ss").format(Date());
 
-                //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
-                val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
-                //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
-                Log.i("INFO", "NOMBRE P "+nombrePaquete)
+
 
                 if(nombrePaquete.isNotEmpty()==true || valorPaquete.isNotEmpty()==true) {
-                parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+1+"|"+version;
-
+                    //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
+                    val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
+                    //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
+                    Log.i("INFO", "NOMBRE P "+nombrePaquete)
+                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+1+"|"+version;
 
                     val alertDialog = AlertDialog.Builder(this)
-                alertDialog.setTitle("Confirmar Recarga")
-                alertDialog.setMessage("Numero: ${numero?.text.toString()}\nPaquete: ${nombrePaquete}\nValor: ${valorPaquete.toString()}")
-                alertDialog.apply {
+                    alertDialog.setTitle("Confirmar Recarga")
+                    alertDialog.setMessage("Numero: ${numero?.text.toString()}\nPaquete: ${nombrePaquete}\nValor: ${valorPaquete.toString()}")
+                    alertDialog.apply {
                         setPositiveButton("Aceptar",
                             DialogInterface.OnClickListener { dialog, id ->
-                                // User clicked OK button
                                 EnviarPaquete().execute()
                             })
                         setNegativeButton("Cancelar",

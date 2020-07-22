@@ -8,22 +8,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.recargas.sis.R
 import co.recargas.sis.interfaces.DetallesPaquete
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
 import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
 import java.lang.ClassCastException
 
-class ProductFragmentTigoCombo :  Fragment(){
+class ProductFragmentTigoLdi: Fragment() {
     private lateinit var productViewModel: ProductViewModel
-    private lateinit var productAdapter: ProductoRecyclerViewAdapter
+    private lateinit var productAdapater: ProductoRecyclerViewAdapter
     private var listener: DetallesPaquete?=null
-    private var productos: List<Producto> = ArrayList()
-    private var columnCount = 1
+    private var paquetes:List<Producto> = ArrayList()
+    private var columnCount=1
 
 
     override fun onCreateView(
@@ -32,57 +32,53 @@ class ProductFragmentTigoCombo :  Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         var view=inflater.inflate(R.layout.fragment_producto_list,container,false)
-        //obteemos del ViewModel
+        //se obtiene el ViewModel
         productViewModel=ViewModelProvider(this).get(ProductViewModel::class.java)
-        //instanaciamos el adaptador
-        productAdapter=ProductoRecyclerViewAdapter()
+        //se instancia el adaptador
+        productAdapater=ProductoRecyclerViewAdapter()
 
-        productAdapter.setOnclicListener(View.OnClickListener {
+        productAdapater.setOnclicListener(View.OnClickListener {
             var producto=it.tag as Producto
-            var nombre= producto.nombre
-            var precio=producto.valor
+            var nombre=producto.nombre
+            var precio = producto.valor
             var descripcion=producto.observacion
 
             listener?.obtenerDatosPaquetes(nombre!!,precio!!,descripcion!!)
-
         })
         if(view is RecyclerView){
             with(view){
-                 layoutManager = when{
-                    columnCount <= 1 -> LinearLayoutManager(context)
-
-                    else -> GridLayoutManager(context, columnCount)
-
+                layoutManager=when{
+                    columnCount<=1 -> LinearLayoutManager(context)
+                    else->GridLayoutManager(context,columnCount)
                 }
-                adapter=productAdapter
+                adapter=productAdapater
             }
         }
-
         //observador del ViewModel
-        productViewModel.getProductsCombo().observe(viewLifecycleOwner, Observer {
-            productos=it
-            productAdapter.setData(productos)
-
+        productViewModel.getProductosLdiTigo().observe(viewLifecycleOwner, Observer {
+            paquetes=it
+            productAdapater.setData(paquetes)
         })
         return view
-
     }
-    companion object {
+    companion object{
         const val ARG_COLUMN_COUNT = "column-count"
-        fun newInstance(columsCount:Int)= ProductFragmentTigoCombo().apply {
+        fun newInstance(columnCount:Int)= ProductFragmentTigoLdi().apply {
             val args = Bundle().apply {
-                putInt(ARG_COLUMN_COUNT, columsCount)
-                }
+                putInt(ARG_COLUMN_COUNT,columnCount)
+
             }
+
         }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        super.onAttach(context)
-        try{
-            listener= context as DetallesPaquete
+
+        try {
+            listener=context as DetallesPaquete
         }catch (e: ClassCastException){
-            throw ClassCastException(context.toString()+" Debes Implementar la Interfaz")
+            throw ClassCastException(context.toString()+ " Debes Implementar la Interfaz" )
         }
     }
 }

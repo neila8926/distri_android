@@ -1,19 +1,23 @@
-package co.recargas.sis.ui.paquetes.tigo
+package co.recargas.sis.ui.paquetes.avantel
 
 import android.content.DialogInterface
 import android.os.AsyncTask
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import co.recargas.sis.R
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.interfaces.DetallesPaquete
+import co.recargas.sis.local.ProductRepository
+import co.recargas.sis.local.RecargaRepository
+import co.recargas.sis.local.modelo.Recargas
+import co.recargas.sis.ui.paquetes.tigo.ProductFragmentTigoCombo
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -21,20 +25,19 @@ import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
-class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
+class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
     var parametros:String="";
     val version=Constantes.VERSION_CODE;
     var progressBar: ProgressBar?=null
-    // private var recargaRepository: RecargaRepository = RecargaRepository(application)
+   // private var recargaRepository: RecargaRepository = RecargaRepository(application)
 
     lateinit var nombrePaquete:TextView
     lateinit var valorPaquete:TextView
     lateinit var descripcionPaquete:TextView
     var btnRealizarPaquete: Button?=null
-    lateinit var numero: EditText
+    lateinit var numero:EditText
     var fechaActual:String?=null
     var horaActual:String?=null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,41 +49,35 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
 
-        var intentTigo=intent.extras
-        var tipo:String=intentTigo?.get("tigo").toString()
+        var rec=intent.extras
+        var tipo:String=rec?.get("avantel").toString()
+        Log.i("INFO","probando "+tipo)
+
         var fragmentManager=supportFragmentManager
 
         when(tipo){
-            "combo"->{
-                var combo=ProductFragmentTigoCombo()
-                var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,combo).commit()
-            }
-            "internet"->{
-                var internet=ProductFragmentTigoInternet()
+            "todoInc"->{
+                var internet=ProductFragmentTodoInAvantel()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
             }
-            "minutos"->{
-                var minutos=ProductFragmentTigoMinutos()
+            "voz"->{
+                var internet=ProductFragmentVozAvantel()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,minutos).commit()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
             }
-            "bolsa"->{
-                var bolsa=ProductFragmentTigoBolsa()
+            "internet"->{
+                var internet=ProductFragmentInternetAvantel()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,bolsa).commit()
-
+                fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
             }
-            "ldi"-> {
-                var ldi=ProductFragmentTigoLdi()
+            "whatsapp"->{
+                var internet=ProductFragmentWhatAvantel()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
             }
         }
-
         btnRealizarPaquete?.setOnClickListener {
-            Toast.makeText(this,"Probando Paquete de Tigo", Toast.LENGTH_SHORT).show()
 
             if(numero.text.isEmpty() || ValidacionDato.validarCelular(numero.text.toString())==false){
                 numero.setError("Digite un numero de celular Valido")
@@ -90,19 +87,19 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
                 var celular=numero.text
                 var nombrePaquete =nombrePaquete.text
                 var valorPaquete=valorPaquete.text
-                var idCliente= SharedPreferenceManager.getSomeStringValue("ID")
+                var idCliente=SharedPreferenceManager.getSomeStringValue("ID")
                 //Se obtiene la fecha y la hora actual
                 fechaActual= SimpleDateFormat("yyyy-MM-dd ").format(Date());
                 horaActual= SimpleDateFormat("HH:mm:ss").format(Date());
 
-                //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
-                val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
-                //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
-                Log.i("INFO", "NOMBRE P "+nombrePaquete)
+
 
                 if(nombrePaquete.isNotEmpty()==true || valorPaquete.isNotEmpty()==true) {
+                    //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
+                    val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
+                    //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
+                    Log.i("INFO", "NOMBRE P "+nombrePaquete)
                     parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+1+"|"+version;
-
 
                     val alertDialog = AlertDialog.Builder(this)
                     alertDialog.setTitle("Confirmar Recarga")
@@ -110,7 +107,6 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
                     alertDialog.apply {
                         setPositiveButton("Aceptar",
                             DialogInterface.OnClickListener { dialog, id ->
-                                // User clicked OK button
                                 EnviarPaquete().execute()
                             })
                         setNegativeButton("Cancelar",
@@ -121,9 +117,9 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
 
                     alertDialog.show()
 
-                }else {
-                    Toast.makeText(this,"Todos los campos son requeridos",Toast.LENGTH_SHORT).show()
-                }
+        }else {
+                Toast.makeText(this,"Todos los campos son requeridos",Toast.LENGTH_SHORT).show()
+            }
             }
         }
     }
@@ -141,17 +137,16 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
         val mac: Mac = Mac.getInstance(Constantes.HMAC_MD5_ALGORITHM)
         mac.init(signingKey)
         return toHexString(mac.doFinal(data.toByteArray()))
-        }
-
-
-
-    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion: String) {
-
-        nombrePaquete.text=nombre
-        valorPaquete.text=valor.toString()
-        descripcionPaquete.text=descripcion
     }
-    inner class EnviarPaquete: AsyncTask<Void, Int, Boolean>(){
+
+    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion:String) {
+
+        nombrePaquete?.text=nombre
+        valorPaquete?.text=valor.toString()
+        descripcionPaquete?.text=descripcion
+
+    }
+    inner class EnviarPaquete:AsyncTask<Void,Int,Boolean>(){
         private lateinit var response:String
         private lateinit var respuesta:String
         lateinit var saldo:String
@@ -159,7 +154,7 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
             super.onPreExecute()
             progressBar?.max=100
             progressBar?.progress=0
-            progressBar?.visibility= View.VISIBLE
+            progressBar?.visibility=View.VISIBLE
 
 
         }
@@ -169,9 +164,9 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
 
             }
             try {
-                response= ConexionSocket().ClSocket(parametros)
+                response=ConexionSocket().ClSocket(parametros)
                 Log.i("INFO", response)
-            }catch (ex: Exception){
+            }catch (ex:Exception){
                 ex.printStackTrace()
             }
             if(response.isNotEmpty()){
@@ -180,10 +175,10 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
 
                 if(respuesta.equals("ok")){
                     //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
-                    // recargaRepository.insertRecargas(recargas)
+                   // recargaRepository.insertRecargas(recargas)
                     saldo=reqJson.getString("saldo")
                     publishProgress()
-                    return true
+                        return true
 
 
                 }
@@ -197,11 +192,11 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
 
         override fun onPostExecute(result: Boolean?) {
             super.onPostExecute(result)
-            progressBar?.visibility= View.GONE
+            progressBar?.visibility=View.GONE
 
             if(result==true){
-                Toast.makeText(this@RealizarPaquetesTigo,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
-                val builder = AlertDialog.Builder(this@RealizarPaquetesTigo)
+                Toast.makeText(this@RealizarPaquetesAvantel,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(this@RealizarPaquetesAvantel)
                 builder.setTitle("Confirmación")
                 builder.setMessage(respuesta)
                     .setPositiveButton("Aceptar",
@@ -214,15 +209,15 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
 
                 builder.show()
             }else{
-                Toast.makeText(this@RealizarPaquetesTigo, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RealizarPaquetesAvantel, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
 
-                val builder = AlertDialog.Builder(this@RealizarPaquetesTigo)
+                val builder = AlertDialog.Builder(this@RealizarPaquetesAvantel)
                 builder.setTitle("Confirmación")
                 builder.setMessage(respuesta)
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
                         })
-                builder.show()
+                    builder.show()
 
             }
         }

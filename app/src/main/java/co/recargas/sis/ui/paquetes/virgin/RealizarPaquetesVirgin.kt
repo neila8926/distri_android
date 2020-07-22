@@ -1,4 +1,4 @@
-package co.recargas.sis.ui.paquetes.tigo
+package co.recargas.sis.ui.paquetes.virgin
 
 import android.content.DialogInterface
 import android.os.AsyncTask
@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import co.recargas.sis.R
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
@@ -21,15 +22,15 @@ import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
-class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
+class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
     var parametros:String="";
-    val version=Constantes.VERSION_CODE;
+    val version= Constantes.VERSION_CODE;
     var progressBar: ProgressBar?=null
     // private var recargaRepository: RecargaRepository = RecargaRepository(application)
 
-    lateinit var nombrePaquete:TextView
-    lateinit var valorPaquete:TextView
-    lateinit var descripcionPaquete:TextView
+    lateinit var nombrePaquete: TextView
+    lateinit var valorPaquete: TextView
+    lateinit var descripcionPaquete: TextView
     var btnRealizarPaquete: Button?=null
     lateinit var numero: EditText
     var fechaActual:String?=null
@@ -39,44 +40,39 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_realizar_paquetes)
+
         nombrePaquete=findViewById(R.id.nombrePaquete)
         valorPaquete=findViewById(R.id.valorPaquete)
         descripcionPaquete=findViewById(R.id.descripcion)
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
-
         var intentTigo=intent.extras
-        var tipo:String=intentTigo?.get("tigo").toString()
+        var tipo:String=intentTigo?.get("virgin").toString()
         var fragmentManager=supportFragmentManager
 
         when(tipo){
-            "combo"->{
-                var combo=ProductFragmentTigoCombo()
-                var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,combo).commit()
+            "antiplan"->{
+                var antiplan=ProductFragmentVirginAntiplan()
+                var fragmentTransaction=fragmentManager.beginTransaction()
+                fragmentTransaction.add(R.id.contenedorTipoPaquete,antiplan).commit()
             }
-            "internet"->{
-                var internet=ProductFragmentTigoInternet()
+            "dato"->{
+                var dato=ProductFragmentVirginBolsaDato()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,dato).commit()
             }
-            "minutos"->{
-                var minutos=ProductFragmentTigoMinutos()
+            "voz"->{
+                var voz=ProductFragmentVirginBolsaVoz()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,minutos).commit()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,voz).commit()
             }
-            "bolsa"->{
-                var bolsa=ProductFragmentTigoBolsa()
+            "what"->{
+                var what=ProductFragmentVirginBolsaWha()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,bolsa).commit()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,what).commit()
+            }
 
-            }
-            "ldi"-> {
-                var ldi=ProductFragmentTigoLdi()
-                var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()
-            }
         }
 
         btnRealizarPaquete?.setOnClickListener {
@@ -141,7 +137,7 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
         val mac: Mac = Mac.getInstance(Constantes.HMAC_MD5_ALGORITHM)
         mac.init(signingKey)
         return toHexString(mac.doFinal(data.toByteArray()))
-        }
+    }
 
 
 
@@ -200,8 +196,8 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
             progressBar?.visibility= View.GONE
 
             if(result==true){
-                Toast.makeText(this@RealizarPaquetesTigo,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
-                val builder = AlertDialog.Builder(this@RealizarPaquetesTigo)
+                Toast.makeText(this@RealizarPaquetesVirgin,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(this@RealizarPaquetesVirgin)
                 builder.setTitle("Confirmación")
                 builder.setMessage(respuesta)
                     .setPositiveButton("Aceptar",
@@ -214,9 +210,9 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
 
                 builder.show()
             }else{
-                Toast.makeText(this@RealizarPaquetesTigo, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RealizarPaquetesVirgin, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
 
-                val builder = AlertDialog.Builder(this@RealizarPaquetesTigo)
+                val builder = AlertDialog.Builder(this@RealizarPaquetesVirgin)
                 builder.setTitle("Confirmación")
                 builder.setMessage(respuesta)
                     .setPositiveButton("Aceptar",
@@ -228,4 +224,5 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
         }
 
     }
+
 }
