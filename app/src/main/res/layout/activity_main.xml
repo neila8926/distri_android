@@ -7,68 +7,91 @@
     android:padding="10dp"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/idUsername"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/input_numero"
-        android:drawableRight="@drawable/custom_person_icon"
-        android:ems="10"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tUser"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/str_username"
-        android:inputType="textPersonName"
-        android:paddingLeft="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/idPassword"
+        app:layout_constraintBottom_toTopOf="@+id/tPass"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:startIconDrawable="@drawable/custom_person_icon">
 
-    <EditText
-        android:id="@+id/idPassword"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/idUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:inputType="text"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_numero"
-        android:drawableRight="@drawable/custom_lock_icon"
-        android:ems="10"
-        android:hint="@string/str_password"
-        android:inputType="textPassword"
-        android:paddingLeft="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/idIngresar"
-        app:layout_constraintEnd_toEndOf="@+id/idUsername"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/tUser"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/idUsername"
-        app:layout_constraintTop_toBottomOf="@+id/idUsername"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="VectorDrawableCompat" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/str_password"
+        app:endIconMode="password_toggle"
+        app:layout_constraintBottom_toTopOf="@+id/idIngresar"
+        app:layout_constraintEnd_toEndOf="@+id/tUser"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tUser"
+        app:startIconDrawable="@drawable/custom_lock_icon"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/idPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/idIngresar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/botton_login"
-        android:textColor="@color/white"
         android:text="@string/str_ingresar"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/idRegistrase"
-        app:layout_constraintEnd_toEndOf="@+id/idPassword"
+        app:layout_constraintEnd_toEndOf="@+id/tPass"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/idPassword"
-        app:layout_constraintTop_toBottomOf="@+id/idPassword"
+        app:layout_constraintStart_toStartOf="@+id/tPass"
+        app:layout_constraintTop_toBottomOf="@+id/tPass"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/idRegistrase"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
         android:text="@string/str_registrarse"
+        android:textColor="@color/registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/idIngresar"
         app:layout_constraintHorizontal_bias="0.5"
@@ -76,17 +99,5 @@
         app:layout_constraintTop_toBottomOf="@+id/idIngresar"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        app:layout_constraintBottom_toTopOf="@+id/idUsername"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/ic_logotipo_distri"
-        tools:ignore="VectorDrawableCompat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

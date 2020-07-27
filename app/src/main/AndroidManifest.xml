@@ -19,6 +19,10 @@
         <activity android:name=".ui.paquetes.virgin.RealizarPaquetesVirgin"></activity>
         <activity android:name=".ui.paquetes.etb.RealizarPaquetesEtb"> </activity>
         <activity android:name=".ui.paquetes.avantel.RealizarPaquetesAvantel"></activity>
+        <activity android:name=".ui.paquetes.movistar.RealizarPaquetesMovistar"></activity>
+        <activity android:name=".ui.paquetes.exito.RealizarPaquetesExito"></activity>
+        <activity android:name=".ui.paquetes.kalley.RealizarPaquetesKalley"></activity>
+        <activity android:name=".ui.paquetes.wings.RealizarPaquetesWings"></activity>
         <activity android:name=".ui.paquetes.PaquetesActivity" />
         <activity
             android:name=".HomeActivity"

@@ -84,6 +84,31 @@ class ProductRepository(application: Application){
     fun getPaqueteAvantelWhatsapp():LiveData<List<Producto>>{
         return productoDao?.getAvantelWhatsapp()?:MutableLiveData<List<Producto>>()
     }
+    //MOVISTAR
+    fun getPaqueteMovistarTodoInc():LiveData<List<Producto>>{
+        return productoDao?.getMovistarTodoInc()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteMovistarVoz():LiveData<List<Producto>>{
+        return productoDao?.getMovistarVoz()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteMovistarInternet():LiveData<List<Producto>>{
+        return productoDao?.getMovistarInternet()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPaqueteMovistarLdi():LiveData<List<Producto>>{
+        return productoDao?.getMovistarLdi()?:MutableLiveData<List<Producto>>()
+    }
+    //EXITO
+    fun getPaqueteExitoAll():LiveData<List<Producto>>{
+        return productoDao?.getExitoAllPaquetes()?:MutableLiveData<List<Producto>>()
+    }
+    //KALLEY
+    fun getPaquetesKalley():LiveData<List<Producto>>{
+        return productoDao?.getKalleyAllPaquetes()?:MutableLiveData<List<Producto>>()
+    }
+    //WINGS
+    fun getPaquetesWigs():LiveData<List<Producto>>{
+        return productoDao?.getWingsAllPaquetes()?:MutableLiveData<List<Producto>>()
+    }
 
     private class InsertAsyncTask(private val productoDao: ProductoDao): AsyncTask<Producto,Void,Void>() {
         override fun doInBackground(vararg productos: Producto?): Void? {

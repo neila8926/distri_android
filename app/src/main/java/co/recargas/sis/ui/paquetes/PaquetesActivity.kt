@@ -2,13 +2,11 @@ package co.recargas.sis.ui.paquetes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
 import co.recargas.sis.ui.paquetes.virgin.FragmentTiposPaquetesVirgin
 import co.recargas.sis.R
 import co.recargas.sis.ui.paquetes.avantel.FragmentTipoPaqueteAvantel
 import co.recargas.sis.ui.paquetes.claro.TiposPaquetesClaro
 import co.recargas.sis.ui.paquetes.etb.FragmentTiposPaqueteEtb
-import co.recargas.sis.ui.paquetes.exito.FragmentTipoPaqueteExito
 import co.recargas.sis.ui.paquetes.kalley.FragmentTipoPaqueteKalley
 import co.recargas.sis.ui.paquetes.movistar.FragmentTipoPaqueteMovistar
 import co.recargas.sis.ui.paquetes.tigo.FragmentTipoPaqueteTigo
@@ -65,21 +63,7 @@ class PaquetesActivity : AppCompatActivity() {
                 var fragmentTransation=managerFragmant.beginTransaction()
                 fragmentTransation.add(R.id.contenedor_paquetes,paqueteAvantel).commit()
             }
-            "exito"->{
-                var paqueteExito=FragmentTipoPaqueteExito()
-                var fragmenTransation=managerFragmant.beginTransaction()
-                fragmenTransation.add(R.id.contenedor_paquetes,paqueteExito)
-            }
-            "kalley"->{
-                var paqueteKalley=FragmentTipoPaqueteKalley()
-                var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.add(R.id.contenedor_paquetes,paqueteKalley).commit()
-            }
-            "wings"->{
-                var paqueteWings=FragmentTipoPaqueteWings()
-                var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.add(R.id.contenedor_paquetes,paqueteWings).commit()
-            }
+            
 
         }
 

@@ -9,6 +9,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import co.recargas.sis.interfaces.FragmentCom
 import co.recargas.sis.ui.paquetes.PaquetesActivity
+import co.recargas.sis.ui.paquetes.exito.RealizarPaquetesExito
+import co.recargas.sis.ui.paquetes.kalley.RealizarPaquetesKalley
+import co.recargas.sis.ui.paquetes.wings.RealizarPaquetesWings
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity(), FragmentCom {
@@ -89,7 +92,7 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
 
     override fun paqueteExito() {
         Toast.makeText(this, "boton exito", Toast.LENGTH_SHORT).show()
-        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        var intent:Intent= Intent(this, RealizarPaquetesExito::class.java)
         intent.putExtra("paquete","exito")
         startActivity(intent)
 
@@ -97,7 +100,7 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
 
     override fun paqueteKalley() {
         Toast.makeText(this, "boton kalley", Toast.LENGTH_SHORT).show()
-        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        var intent:Intent= Intent(this, RealizarPaquetesKalley::class.java)
         intent.putExtra("paquete","kalley")
         startActivity(intent)
 
@@ -105,7 +108,7 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
 
     override fun paqueteWings() {
         Toast.makeText(this, "boton wigs", Toast.LENGTH_SHORT).show()
-        var intent:Intent= Intent(this, PaquetesActivity::class.java)
+        var intent:Intent= Intent(this, RealizarPaquetesWings::class.java)
         intent.putExtra("paquete","wings")
         startActivity(intent)
 

@@ -36,6 +36,17 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     private var listadoProductoAvantelVoz:LiveData<List<Producto>>
     private var listadoProductoAvantelInternet:LiveData<List<Producto>>
     private var listadoProductoAvantelWhatsapp:LiveData<List<Producto>>
+    //MOVISTAR
+    private var listadoProductMovistarTodoInc:LiveData<List<Producto>>
+    private var listadoProductoMovistarVoz:LiveData<List<Producto>>
+    private var listadoProductoMovistarInternet:LiveData<List<Producto>>
+    private var listadoProductoMovistarLdi:LiveData<List<Producto>>
+    //EXITO
+    private var listadoProductsExito:LiveData<List<Producto>>
+    //KALLEY
+    private var listadoProductsKalley:LiveData<List<Producto>>
+    //WINGS
+    private var listadoProductsWings:LiveData<List<Producto>>
 
 
     init {
@@ -67,6 +78,17 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
         listadoProductoAvantelVoz=productRepository.getPaqueteAvantelVoz()
         listadoProductoAvantelInternet=productRepository.getPaqueteAvantelInternet()
         listadoProductoAvantelWhatsapp=productRepository.getPaqueteAvantelWhatsapp()
+        //MOVISTAR
+        listadoProductMovistarTodoInc=productRepository.getPaqueteMovistarTodoInc()
+        listadoProductoMovistarVoz=productRepository.getPaqueteMovistarVoz()
+        listadoProductoMovistarInternet=productRepository.getPaqueteMovistarInternet()
+        listadoProductoMovistarLdi=productRepository.getPaqueteMovistarLdi()
+        //EXITO
+        listadoProductsExito=productRepository.getPaqueteExitoAll()
+        //KALLEY
+        listadoProductsKalley=productRepository.getPaquetesKalley()
+        //WINGS
+        listadoProductsWings=productRepository.getPaquetesKalley()
 
 
     }
@@ -144,6 +166,32 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
     fun getProductWhatAvantel():LiveData<List<Producto>>{
         return listadoProductoAvantelWhatsapp
     }
+    //MOVISTAR
+    fun getProductTodoIncMovistar():LiveData<List<Producto>>{
+        return listadoProductMovistarTodoInc
+    }
+    fun getProductVozcMovistar():LiveData<List<Producto>>{
+        return listadoProductoMovistarVoz
+    }
+    fun getProductInternetMovistar():LiveData<List<Producto>>{
+        return listadoProductoMovistarInternet
+    }
+    fun getProductLdiMovistar():LiveData<List<Producto>>{
+        return listadoProductoMovistarLdi
+    }
+    //EXITO
+    fun getProductExito():LiveData<List<Producto>>{
+        return listadoProductsExito
+    }
+    //KALLEY
+    fun getProductKalley():LiveData<List<Producto>>{
+        return listadoProductsKalley
+    }
+    //WINGS
+    fun getProductWigns():LiveData<List<Producto>>{
+        return listadoProductsWings
+    }
+
 
 
 

@@ -36,6 +36,18 @@
     <string name="str_paq_int">Internet</string>
     <string name="str_paq_tod">Todo Incluido</string>
     <string name="str_what">Whatsapp</string>
+    <!--VALORES-->
+    <string name="mil">1.000</string>
+    <string name="dos_mil">2.000</string>
+    <string name="tres_mil">3.000</string>
+    <string name="cinco_mil">5.000</string>
+    <string name="diez_mil">10.000</string>
+    <string name="veinte_mil">20.000</string>
+    <string name="recargar">RECARGAR</string>
+    <string name="limpiar">LIMPIAR</string>
+    <string name="recargas">Recargas</string>
+    <string name="paquetes">Paquetes</string>
+    <string name="pines">Pines</string>
 
 
 

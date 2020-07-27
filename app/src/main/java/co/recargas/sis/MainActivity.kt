@@ -17,6 +17,8 @@ import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.local.ProductRepository
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -32,8 +34,8 @@ class MainActivity : AppCompatActivity() {
     var parametros:String="";
     val version=Constantes.VERSION_CODE;
     private lateinit var progressBarInicio:ProgressDialog
-    private lateinit var edtUsuario:EditText
-    private lateinit var edtPassword:EditText
+    private lateinit var edtUsuario:TextInputEditText
+    private lateinit var edtPassword:TextInputEditText
     private lateinit var btnIngresar:Button
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,14 +51,14 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this,"Probando la version $version ",Toast.LENGTH_LONG).show()
 
         btnIngresar.setOnClickListener{view->
-            if(edtUsuario.text.isEmpty()){
+            if(edtUsuario.text?.isEmpty()==true){
                 edtUsuario.setError("Digite Usuario")
             }
-            if(edtPassword.text.isEmpty()){
+            if(edtPassword.text?.isEmpty()==true){
                 edtPassword.setError("Digite Contraseña")
 
         }else {
-            if(edtUsuario.text.isNotEmpty() && edtPassword.text.isNotEmpty()) {
+            if(edtUsuario.text?.isNotEmpty()==true && edtPassword.text?.isNotEmpty()==true) {
 
                 var user=edtUsuario.text.toString().trim().replace("\\s","")
 

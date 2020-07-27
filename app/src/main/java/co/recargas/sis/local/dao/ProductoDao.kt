@@ -73,10 +73,32 @@ interface ProductoDao {
     fun getAvantelTodoIncluido():LiveData<List<Producto>>
     @Query("SELECT * FROM productos WHERE operadorId=4 AND (nombre LIKE '%MIN%' AND nombre LIKE '%M' )")
     fun getAvantelVoz():LiveData<List<Producto>>
-    @Query("SELECT * FROM productos WHERE operadorId=4 AND  nombre LIKE '%_I' ")
+    @Query("SELECT * FROM productos WHERE operadorId=4 AND(  nombre LIKE '%I' AND nombre NOT LIKE '%T_' )")
     fun getAvantelInternet():LiveData<List<Producto>>
     @Query("SELECT * FROM productos WHERE operadorId=4 AND  nombre LIKE '%W' ")
     fun getAvantelWhatsapp():LiveData<List<Producto>>
+    //MOVISTAR
+    //Obtener todos los paquetes todo Incluido de Movistar
+    @Query("SELECT * FROM productos WHERE operadorId=3 AND nombre LIKE '%TI'")
+    fun getMovistarTodoInc():LiveData<List<Producto>>
+    //Obtener todos los paquetes de Minutos
+    @Query("SELECT * FROM productos WHERE operadorId=3 AND nombre LIKE '%M'")
+    fun getMovistarVoz():LiveData<List<Producto>>
+    //obtener todos los paquetes de Internet
+    @Query("SELECT * FROM productos WHERE operadorId=3 AND ( nombre LIKE '%I' AND nombre NOT LIKE '%T_')")
+    fun getMovistarInternet(): LiveData<List<Producto>>
+    //obtener todos los paquetes larga distancia
+    @Query("SELECT * FROM productos WHERE operadorId=3 AND nombre LIKE '%LDI%'")
+    fun getMovistarLdi():LiveData<List<Producto>>
+    //Todos los paquetes de EXITO
+    @Query("SELECT * FROM productos WHERE operadorId=10 AND nombre != 'RECARGA'" )
+    fun getExitoAllPaquetes():LiveData<List<Producto>>
+    //Todos los paquetes de Kalley
+    @Query("SELECT * FROM productos WHERE operadorId=20 AND nombre != 'RECARGA'" )
+    fun getKalleyAllPaquetes():LiveData<List<Producto>>
+    //Todos los paquetes de Wings
+    @Query("SELECT * FROM productos WHERE operadorId=21 AND nombre != 'RECARGA'" )
+    fun getWingsAllPaquetes():LiveData<List<Producto>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

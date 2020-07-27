@@ -18,7 +18,7 @@ class FragmentTipoPaqueteExito : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tipo_paquete_exito, container, false)
+        return inflater.inflate(R.layout.fragment_tipo_paquete_kalley, container, false)
     }
 
 }
