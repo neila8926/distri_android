@@ -10,6 +10,9 @@ import co.recargas.sis.local.modelo.Producto
 //Se definen las operaciones que se pueden lleva a cabo
 @Dao
 interface ProductoDao {
+    //RECARGAS
+    @Query("SELECT * FROM productos WHERE nombre='RECARGA'")
+    fun getRecargas():LiveData<List<Producto>>
     //CLARO
     //Obtener Paquetes de Claro Internet
     @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE 'NAVEGA%' AND nombre LIKE '%MB'")

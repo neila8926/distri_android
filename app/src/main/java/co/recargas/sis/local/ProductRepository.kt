@@ -13,6 +13,10 @@ class ProductRepository(application: Application){
     fun insertProductos(producto: Producto){
        if (productoDao != null ) InsertAsyncTask(productoDao).execute(producto);
     }
+    //RECARGAS
+    fun getRecargas(): LiveData<List<Producto>>{
+        return productoDao?.getRecargas()?:MutableLiveData<List<Producto>>()
+    }
     //PAQUETES DE CLARO
     fun getPaquetesClaroInt(): LiveData<List<Producto>>{
        return productoDao?.getClaroInternet() ?: MutableLiveData<List<Producto>>()
