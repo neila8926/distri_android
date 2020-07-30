@@ -32,6 +32,7 @@ class RealizarPaquetesEtb: AppCompatActivity(), DetallesPaquete {
     lateinit var numero: EditText
     var fechaActual:String?=null
     var horaActual:String?=null
+        var idPaquete:Int?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +83,7 @@ class RealizarPaquetesEtb: AppCompatActivity(), DetallesPaquete {
                     val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
                     //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
                     Log.i("INFO", "NOMBRE P "+nombrePaquete)
-                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+1+"|"+version;
+                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+idPaquete+"|"+version;
 
                     var alertDialog= AlertDialog.Builder(this)
                     alertDialog.setTitle("Confirmar Recarga")
@@ -122,10 +123,15 @@ class RealizarPaquetesEtb: AppCompatActivity(), DetallesPaquete {
 
 
 
-    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion: String) {
+    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion: String,id:Int) {
+        nombrePaquete.visibility=View.VISIBLE
+        valorPaquete.visibility=View.VISIBLE
+        descripcionPaquete.visibility=View.VISIBLE
+
         nombrePaquete?.text=nombre
         valorPaquete?.text=valor.toString()
         descripcionPaquete?.text=descripcion
+        idPaquete=id
     }
     inner class EnviarPaquete:AsyncTask<Void,Int,Boolean>(){
         private lateinit var response:String

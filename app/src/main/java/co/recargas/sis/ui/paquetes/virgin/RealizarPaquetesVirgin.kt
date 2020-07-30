@@ -35,6 +35,7 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
     lateinit var numero: EditText
     var fechaActual:String?=null
     var horaActual:String?=null
+    var idPaquete:Int?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,7 +98,7 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
                 Log.i("INFO", "NOMBRE P "+nombrePaquete)
 
                 if(nombrePaquete.isNotEmpty()==true || valorPaquete.isNotEmpty()==true) {
-                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+1+"|"+version;
+                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+idPaquete+"|"+version;
 
 
                     val alertDialog = AlertDialog.Builder(this)
@@ -141,11 +142,16 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
 
 
 
-    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion: String) {
+    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion: String,id:Int) {
+
+        nombrePaquete.visibility=View.VISIBLE
+        valorPaquete.visibility=View.VISIBLE
+        descripcionPaquete.visibility=View.VISIBLE
 
         nombrePaquete.text=nombre
         valorPaquete.text=valor.toString()
         descripcionPaquete.text=descripcion
+        idPaquete=id
     }
     inner class EnviarPaquete: AsyncTask<Void, Int, Boolean>(){
         private lateinit var response:String

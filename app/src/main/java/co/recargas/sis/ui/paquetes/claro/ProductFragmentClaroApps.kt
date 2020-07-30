@@ -43,8 +43,9 @@ class ProductFragmentClaroApps: Fragment() {
             var nombre=producto.nombre
             var precio=producto.valor
             var descripcion=producto.observacion
+            var id=producto.id
 
-            listener?.obtenerDatosPaquetes(nombre!!,precio!!,descripcion!!)
+            listener?.obtenerDatosPaquetes(nombre!!,precio!!,descripcion!!,id!!)
         })
 
         if (view is RecyclerView) {

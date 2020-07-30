@@ -41,8 +41,9 @@ class ProductFragmentVirginAntiplan: Fragment() {
             var nombre=paquete.nombre
             var precio=paquete.valor
             var descripcion=paquete.observacion
+            var id=paquete.id
 
-            listener?.obtenerDatosPaquetes(nombre!!,precio!!,descripcion!!)
+            listener?.obtenerDatosPaquetes(nombre!!,precio!!,descripcion!!,id)
         })
 
         if(view is RecyclerView){

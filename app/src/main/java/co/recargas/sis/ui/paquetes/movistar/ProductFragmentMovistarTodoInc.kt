@@ -60,8 +60,9 @@ class ProductFragmentMovistarTodoInc : Fragment() {
             var nombre:String?=producto.nombre
             var valor: Int? =producto.valor
             var descripcion: String?= producto.observacion
+            var id=producto.id
 
-            listener?.obtenerDatosPaquetes(nombre!!,valor!!, descripcion!!)
+            listener?.obtenerDatosPaquetes(nombre!!,valor!!, descripcion!!,id!!)
 
         })
 

@@ -58,8 +58,9 @@ class ProductoFragmentKalley : Fragment() {
             var nombre=producto.nombre
             var valor = producto.valor
             var descripcion=producto.observacion
+            var id=producto.id
 
-            listener?.obtenerDatosPaquetes(nombre,valor,descripcion)
+            listener?.obtenerDatosPaquetes(nombre,valor,descripcion,id)
 
 
         })

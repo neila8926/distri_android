@@ -29,7 +29,7 @@
                 android:indeterminate="true" />
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/logoOperador"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 app:srcCompat="@drawable/recarga_claro"
@@ -49,7 +49,8 @@
                     android:id="@+id/itemReca"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:text="Seleccione Operador" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -156,14 +157,6 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:text="@string/recargar" />
-
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:text="@string/limpiar" />
 
         </LinearLayout>
     </ScrollView>

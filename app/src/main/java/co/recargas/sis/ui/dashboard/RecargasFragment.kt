@@ -21,6 +21,7 @@ import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.local.modelo.Producto
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.fragment_tipo_paquete_movistar.*
 import org.json.JSONObject
 import java.lang.Exception
 import java.lang.NumberFormatException
@@ -52,6 +53,7 @@ class RecargasFragment:Fragment() {
     var operadorId:Int?=null
     private lateinit var editNumero:TextInputLayout
     private lateinit var edtValor:TextInputLayout
+    var logoOperador:ImageView?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,6 +73,7 @@ class RecargasFragment:Fragment() {
         btnCincoMil=root.findViewById(R.id.btnCincoMil)
         btnDiezMil=root.findViewById(R.id.btnDiezMil)
         btnVeinteMil=root.findViewById(R.id.btnVeinteMil)
+        logoOperador=root.findViewById(R.id.logoOperador)
 
         recargasViewModel=ViewModelProvider(this).get(RecargasViewModel::class.java)
         
@@ -103,7 +106,41 @@ class RecargasFragment:Fragment() {
             (recargas?.editText as? AutoCompleteTextView )?.setAdapter(adaptador)
 
             (recargas?.editText as? AutoCompleteTextView )?.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
-               nombreOperador= lista[position]        
+               nombreOperador= lista[position]
+                if(nombreOperador=="MOVISTAR"){
+                    logoOperador?.setImageResource(R.drawable.recarga_movistar)
+                }
+                if(nombreOperador=="CLARO"){
+                    logoOperador?.setImageResource(R.drawable.recarga_claro)
+                }
+                if(nombreOperador=="TIGO"){
+                    logoOperador?.setImageResource(R.drawable.paquete_tigo)
+                }
+                if(nombreOperador=="EXITO"){
+                    logoOperador?.setImageResource(R.drawable.recarga_exito)
+                }
+                if(nombreOperador=="DIRECTV"){
+                    logoOperador?.setImageResource(R.drawable.recarga_directv)
+                }
+                if(nombreOperador=="VIRGIN MOBILE"){
+                    logoOperador?.setImageResource(R.drawable.virgin)
+                }
+                if(nombreOperador=="KALLEY_MOBILE"){
+                    logoOperador?.setImageResource(R.drawable.recrga_kalley)
+                }
+                if(nombreOperador=="WINGS_MOBILE"){
+                    logoOperador?.setImageResource(R.drawable.recarga_wings)
+                }
+                if(nombreOperador=="AVANTEL"){
+                    logoOperador?.setImageResource(R.drawable.recarga_avantel)
+                }
+                if(nombreOperador=="WPLAY"){
+                    logoOperador?.setImageResource(R.drawable.recarga_wplay)
+                }
+                if(nombreOperador=="FLASH_MOBILE"){
+                    logoOperador?.setImageResource(R.drawable.recarga_flashmobile)
+                }
+
 
             })
            })
@@ -111,10 +148,11 @@ class RecargasFragment:Fragment() {
             if(nombreOperador==null) {
                 recargas?.error="Seleccione un operador"
             }else{
+                recargas?.error=null
             operadores.forEach {
                 if(nombreOperador.equals(it.operadorNombre)==true){
                     operadorId=it.operadorId
-                    recargas?.error=null
+
                     Log.i("INFO",operadorId.toString())
                 }
              }
@@ -122,9 +160,7 @@ class RecargasFragment:Fragment() {
             if(editNumero.editText?.text?.isEmpty()==true || ValidacionDato.validarCelular(editNumero.editText?.text.toString())==false ){
                 editNumero.setError("Digite un numero de celular Valido")
 
-            }else{
-                editNumero.error=null
-            }
+            }else
             if(edtValor.editText?.text?.isEmpty()==true ){
                 edtValor.setError("Digite un valor")
 
@@ -136,6 +172,7 @@ class RecargasFragment:Fragment() {
                     edtValor.setError("Digite un valor valido, debe ser mayor a 1.000 y menor a 100.000")
 
             }else{
+                    editNumero.error=null
                     edtValor.error=null
                     var idCliente= SharedPreferenceManager.getSomeStringValue("ID")
                     //Se obtiene la fecha y la hora actual

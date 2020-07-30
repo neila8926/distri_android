@@ -48,7 +48,8 @@ class ProductoFragmentClaroTodoInc : Fragment() {
             var nombre=producto.nombre
             var valor=producto.valor
             var descripcion=producto.observacion
-            listener?.obtenerDatosPaquetes(nombre,valor,descripcion)
+            var id=producto.id
+            listener?.obtenerDatosPaquetes(nombre,valor,descripcion,id!!)
         })
 
 

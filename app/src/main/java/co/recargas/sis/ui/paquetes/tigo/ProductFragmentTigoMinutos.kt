@@ -41,8 +41,9 @@ class ProductFragmentTigoMinutos: Fragment() {
             var nombre=producto.nombre
             var descripcion=producto.observacion
             var precio=producto.valor
+            var id=producto.id
 
-            listener?.obtenerDatosPaquetes(nombre!!,precio!!,descripcion!!)
+            listener?.obtenerDatosPaquetes(nombre!!,precio!!,descripcion!!,id!!)
         })
 
         if(view is RecyclerView){

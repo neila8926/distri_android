@@ -18,6 +18,7 @@ import co.recargas.sis.local.ProductRepository
 import co.recargas.sis.local.RecargaRepository
 import co.recargas.sis.local.modelo.Recargas
 import co.recargas.sis.ui.paquetes.tigo.ProductFragmentTigoCombo
+import kotlinx.android.synthetic.main.activity_home.view.*
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -38,6 +39,7 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
     lateinit var numero:EditText
     var fechaActual:String?=null
     var horaActual:String?=null
+    var idPaquete:Int?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +101,7 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
                     val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
                     //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
                     Log.i("INFO", "NOMBRE P "+nombrePaquete)
-                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+1+"|"+version;
+                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+idPaquete+"|"+version;
 
                     val alertDialog = AlertDialog.Builder(this)
                     alertDialog.setTitle("Confirmar Recarga")
@@ -139,11 +141,15 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
         return toHexString(mac.doFinal(data.toByteArray()))
     }
 
-    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion:String) {
-
+    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion:String,id:Int) {
+        nombrePaquete.visibility=View.VISIBLE
+        valorPaquete.visibility=View.VISIBLE
+        descripcionPaquete.visibility=View.VISIBLE
         nombrePaquete?.text=nombre
         valorPaquete?.text=valor.toString()
         descripcionPaquete?.text=descripcion
+        idPaquete=id
+
 
     }
     inner class EnviarPaquete:AsyncTask<Void,Int,Boolean>(){
