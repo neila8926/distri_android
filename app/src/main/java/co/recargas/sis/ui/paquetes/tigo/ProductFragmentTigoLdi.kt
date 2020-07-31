@@ -15,7 +15,7 @@ import co.recargas.sis.R
 import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
-import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
+import co.recargas.sis.ui.ProductoRecyclerViewAdapter
 import java.lang.ClassCastException
 
 class ProductFragmentTigoLdi: Fragment() {
@@ -35,7 +35,7 @@ class ProductFragmentTigoLdi: Fragment() {
         //se obtiene el ViewModel
         productViewModel=ViewModelProvider(this).get(ProductViewModel::class.java)
         //se instancia el adaptador
-        productAdapater=ProductoRecyclerViewAdapter()
+        productAdapater= ProductoRecyclerViewAdapter()
 
         productAdapater.setOnclicListener(View.OnClickListener {
             var producto=it.tag as Producto

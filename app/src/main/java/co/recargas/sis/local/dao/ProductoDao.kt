@@ -102,6 +102,18 @@ interface ProductoDao {
     //Todos los paquetes de Wings
     @Query("SELECT * FROM productos WHERE operadorId=21 AND nombre != 'RECARGA'" )
     fun getWingsAllPaquetes():LiveData<List<Producto>>
+    //PINES NETFLIX
+    @Query("SELECT * FROM productos WHERE operadorId=11 AND nombre LIKE '%NETFLIX%'")
+    fun getPinesNetflix():LiveData<List<Producto>>
+    //PINES SPOTIFY
+    @Query("SELECT * FROM productos WHERE operadorId=11 AND nombre LIKE '%SPOTIFY%'")
+    fun getPinesSpotify():LiveData<List<Producto>>
+    //PINES IMVU
+    @Query("SELECT * FROM productos WHERE operadorId=11 AND nombre LIKE '%IMVU%'")
+    fun getPinesImvu():LiveData<List<Producto>>
+    //PINES MINECRAFT
+    @Query("SELECT * FROM productos WHERE operadorId=11 AND nombre LIKE '%MINECRAFT%'")
+    fun getPinesMinecraft():LiveData<List<Producto>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

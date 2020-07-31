@@ -1,23 +1,23 @@
-package co.recargas.sis.ui.paquetes.claro
+package co.recargas.sis.ui.notifications
 
 import android.content.DialogInterface
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import co.recargas.sis.R
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.interfaces.DetallesPaquete
-import co.recargas.sis.local.ProductRepository
-import co.recargas.sis.local.RecargaRepository
-import co.recargas.sis.local.modelo.Recargas
-import co.recargas.sis.ui.paquetes.tigo.ProductFragmentTigoCombo
+import co.recargas.sis.ui.notifications.imvu.ProductFragmentImvu
+import co.recargas.sis.ui.notifications.minecraft.ProductFragmentMinecraft
+import co.recargas.sis.ui.notifications.netflix.ProductFragmentNetflix
+import co.recargas.sis.ui.notifications.spotify.ProductFragmentSpotify
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -25,17 +25,17 @@ import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
-class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
+class RealizarPines:AppCompatActivity(),DetallesPaquete{
     var parametros:String="";
-    val version=Constantes.VERSION_CODE;
+    val version= Constantes.VERSION_CODE;
     var progressBar: ProgressBar?=null
-   // private var recargaRepository: RecargaRepository = RecargaRepository(application)
+    // private var recargaRepository: RecargaRepository = RecargaRepository(application)
 
-    lateinit var nombrePaquete:TextView
-    lateinit var valorPaquete:TextView
-    lateinit var descripcionPaquete:TextView
-    var btnRealizarPaquete: Button?=null
-    lateinit var numero:EditText
+    lateinit var nombrePaquete: TextView
+    lateinit var valorPaquete: TextView
+    lateinit var descripcionPaquete: TextView
+    var btnRealizarPin: Button?=null
+    lateinit var numero: EditText
     var fechaActual:String?=null
     var horaActual:String?=null
     var idPaquete:Int?=null
@@ -43,63 +43,46 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_realizar_paquetes)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         nombrePaquete=findViewById(R.id.nombrePaquete)
         valorPaquete=findViewById(R.id.valorPaquete)
         descripcionPaquete=findViewById(R.id.descripcion)
-        btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
+        btnRealizarPin=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
 
         var rec=intent.extras
-        var tipo:String=rec?.get("tipo").toString()
+        var tipo:String=rec?.get("pin").toString()
         Log.i("INFO","probando "+tipo)
 
         var fragmentManager=supportFragmentManager
 
         when(tipo){
-            "internet"->{
-                var internet=ProductoFragmentClaroInt()
+            "netflix"->{
+                var netflix=
+                    ProductFragmentNetflix()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
-
+                fragmentTransation.add(R.id.contenedorTipoPaquete,netflix).commit()
             }
-            "voz"->{
-                var voz = ProductoFragmentClaroVoz()
+            "imvu"->{
+                var imvu=ProductFragmentImvu()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,voz).commit()
+                fragmentTransation.add(R.id.contenedorTipoPaquete,imvu).commit()
             }
-            "todoInc"->{
-                var todoIncluido=ProductoFragmentClaroTodoInc()
+            "spotify"->{
+                var spotify=ProductFragmentSpotify()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,todoIncluido).commit()
-
+                fragmentTransation.add(R.id.contenedorTipoPaquete,spotify).commit()
             }
-            "ldi"->{
-                var ldi= ProductFragmentClaroLdi()
+            "minecraft"->{
+                var minecraft=ProductFragmentMinecraft()
                 var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()
-
+                fragmentTransation.add(R.id.contenedorTipoPaquete,minecraft).commit()
             }
-            "reventa"->{
-                var reveta=ProductFragmentClaroReventa()
-                var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,reveta).commit()
-            }
-            "apps"->{
-                var apps=ProductFragmentClaroApps()
-                var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,apps).commit()
-            }
-            "prepago"->{
-                var prepago=ProductFragmentClaroPrepago()
-                var fragmentTransation=fragmentManager.beginTransaction()
-                fragmentTransation.add(R.id.contenedorTipoPaquete,prepago).commit()
-            }
-
         }
-        btnRealizarPaquete?.setOnClickListener {
+
+        btnRealizarPin?.setOnClickListener {
 
             if(numero.text.isEmpty() || ValidacionDato.validarCelular(numero.text.toString())==false){
                 numero.setError("Digite un numero de celular Valido")
@@ -109,7 +92,7 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
                 var celular=numero.text
                 var nombrePaquete =nombrePaquete.text
                 var valorPaquete=valorPaquete.text
-                var idCliente=SharedPreferenceManager.getSomeStringValue("ID")
+                var idCliente= SharedPreferenceManager.getSomeStringValue("ID")
                 //Se obtiene la fecha y la hora actual
                 fechaActual= SimpleDateFormat("yyyy-MM-dd ").format(Date());
                 horaActual= SimpleDateFormat("HH:mm:ss").format(Date());
@@ -139,13 +122,14 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
 
                     alertDialog.show()
 
-        }else {
-                Toast.makeText(this,"Todos los campos son requeridos",Toast.LENGTH_SHORT).show()
-            }
+                }else {
+                    Toast.makeText(this,"Todos los campos son requeridos", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-    }
 
+
+    }
     private fun toHexString(bytes: ByteArray): String? {
         val formatter = Formatter()
         for (b in bytes) {
@@ -161,18 +145,17 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
         return toHexString(mac.doFinal(data.toByteArray()))
     }
 
-    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion:String,id:Int) {
-        nombrePaquete.visibility=View.VISIBLE
-        valorPaquete.visibility=View.VISIBLE
-        descripcionPaquete.visibility=View.VISIBLE
-
+    override fun obtenerDatosPaquetes(nombre: String, valor: Int, descripcion: String, id: Int) {
+        nombrePaquete.visibility= View.VISIBLE
+        valorPaquete.visibility= View.VISIBLE
+        descripcionPaquete.visibility= View.VISIBLE
         nombrePaquete?.text=nombre
         valorPaquete?.text=valor.toString()
         descripcionPaquete?.text=descripcion
         idPaquete=id
-
     }
-    inner class EnviarPaquete:AsyncTask<Void,Int,Boolean>(){
+
+    inner class EnviarPaquete: AsyncTask<Void, Int, Boolean>(){
         private lateinit var response:String
         private lateinit var respuesta:String
         lateinit var saldo:String
@@ -190,9 +173,9 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
 
             }
             try {
-                response=ConexionSocket().ClSocket(parametros)
+                response= ConexionSocket().ClSocket(parametros)
                 Log.i("INFO", response)
-            }catch (ex:Exception){
+            }catch (ex: Exception){
                 ex.printStackTrace()
             }
             if(response.isNotEmpty()){
@@ -201,10 +184,10 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
 
                 if(respuesta.equals("ok")){
                     //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
-                   // recargaRepository.insertRecargas(recargas)
+                    // recargaRepository.insertRecargas(recargas)
                     saldo=reqJson.getString("saldo")
                     publishProgress()
-                        return true
+                    return true
 
 
                 }
@@ -221,8 +204,8 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
             progressBar?.visibility=View.GONE
 
             if(result==true){
-                Toast.makeText(this@RealizarPaquetesClaro,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
-                val builder = AlertDialog.Builder(this@RealizarPaquetesClaro)
+                Toast.makeText(this@RealizarPines,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(this@RealizarPines)
                 builder.setTitle("Confirmación")
                 builder.setMessage(respuesta)
                     .setPositiveButton("Aceptar",
@@ -235,15 +218,15 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
 
                 builder.show()
             }else{
-                Toast.makeText(this@RealizarPaquetesClaro, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RealizarPines, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
 
-                val builder = AlertDialog.Builder(this@RealizarPaquetesClaro)
+                val builder = AlertDialog.Builder(this@RealizarPines)
                 builder.setTitle("Confirmación")
                 builder.setMessage(respuesta)
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
                         })
-                    builder.show()
+                builder.show()
 
             }
         }

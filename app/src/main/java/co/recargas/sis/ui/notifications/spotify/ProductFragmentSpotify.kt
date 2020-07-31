@@ -1,4 +1,4 @@
-package co.recargas.sis.ui.paquetes.avantel
+package co.recargas.sis.ui.notifications.spotify
 
 import android.content.Context
 import android.os.Bundle
@@ -16,11 +16,12 @@ import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
 import co.recargas.sis.ui.ProductoRecyclerViewAdapter
+import co.recargas.sis.ui.notifications.PinesViewModel
 import java.lang.ClassCastException
 
-class ProductFragmentInternetAvantel:Fragment() {
+class ProductFragmentSpotify:Fragment() {
     private lateinit var productAdapater: ProductoRecyclerViewAdapter
-    private lateinit var productViewModel: ProductViewModel
+    private lateinit var productViewModel: PinesViewModel
     private var listener: DetallesPaquete?=null
     private var productos:List<Producto> = ArrayList()
     var columnCount=1
@@ -32,7 +33,7 @@ class ProductFragmentInternetAvantel:Fragment() {
     ): View? {
         var view=inflater.inflate(R.layout.fragment_producto_list,container,false)
         //se obtiene el ViewModel
-        productViewModel=ViewModelProvider(this).get(ProductViewModel::class.java)
+        productViewModel=ViewModelProvider(this).get(PinesViewModel::class.java)
         //se instancia el adaptador
         productAdapater= ProductoRecyclerViewAdapter()
 
@@ -56,8 +57,8 @@ class ProductFragmentInternetAvantel:Fragment() {
                 adapter=productAdapater
             }
 
-            //Observado
-            productViewModel.getProductIntAvantel().observe(viewLifecycleOwner, Observer {
+            //Observador
+            productViewModel.getProductSpotify().observe(viewLifecycleOwner, Observer {
                 productos=it
                 productAdapater.setData(productos)
             })
@@ -67,7 +68,7 @@ class ProductFragmentInternetAvantel:Fragment() {
     }
     companion object{
         const val ARG_COLUMN_COUNT = "column-count"
-        fun newInstance(columnCount:Int)=ProductFragmentInternetAvantel().apply {
+        fun newInstance(columnCount:Int)=ProductFragmentSpotify().apply {
             val args = Bundle().apply {
                 putInt(ARG_COLUMN_COUNT,columnCount)
 

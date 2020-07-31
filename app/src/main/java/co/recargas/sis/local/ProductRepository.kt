@@ -113,6 +113,19 @@ class ProductRepository(application: Application){
     fun getPaquetesWigs():LiveData<List<Producto>>{
         return productoDao?.getWingsAllPaquetes()?:MutableLiveData<List<Producto>>()
     }
+    //PINES
+    fun getPinesNetflix():LiveData<List<Producto>>{
+        return productoDao?.getPinesNetflix()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPinesSpotify():LiveData<List<Producto>>{
+        return productoDao?.getPinesSpotify()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPinesImvu():LiveData<List<Producto>>{
+        return productoDao?.getPinesImvu()?:MutableLiveData<List<Producto>>()
+    }
+    fun getPinesMinecraft():LiveData<List<Producto>>{
+        return productoDao?.getPinesMinecraft()?:MutableLiveData<List<Producto>>()
+    }
 
     private class InsertAsyncTask(private val productoDao: ProductoDao): AsyncTask<Producto,Void,Void>() {
         override fun doInBackground(vararg productos: Producto?): Void? {

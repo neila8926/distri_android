@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
-import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
+import co.recargas.sis.ui.ProductoRecyclerViewAdapter
 import java.lang.ClassCastException
 
 class ProductFragmentTigoCombo :  Fragment(){
@@ -35,7 +35,7 @@ class ProductFragmentTigoCombo :  Fragment(){
         //obteemos del ViewModel
         productViewModel=ViewModelProvider(this).get(ProductViewModel::class.java)
         //instanaciamos el adaptador
-        productAdapter=ProductoRecyclerViewAdapter()
+        productAdapter= ProductoRecyclerViewAdapter()
 
         productAdapter.setOnclicListener(View.OnClickListener {
             var producto=it.tag as Producto

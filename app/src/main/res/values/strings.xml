@@ -32,6 +32,11 @@
     <string name="str_paq_bolsa_dat">Bolsas de Dato</string>
     <string name="str_paq_bolsas_voz">Bolsas de Voz</string>
     <string name="str_paq_bolsas_wha">Bolsas de Whatsapp</string>
+    <!--PINES -->
+    <string name="str_pin_netflix">PINES NETFLIX</string>
+    <string name="str_pin_spotify">PINES SPOTIFY</string>
+    <string name="str_pin_imvu">PNES IMVU</string>
+    <string name="str_pin_minecraft">PINES MINECRAFT</string>
 
     <string name="str_paq_int">Internet</string>
     <string name="str_paq_tod">Todo Incluido</string>

@@ -15,12 +15,12 @@ import co.recargas.sis.R
 import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
-import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
+import co.recargas.sis.ui.ProductoRecyclerViewAdapter
 import java.lang.ClassCastException
 
 class ProductFragmentClaroPrepago: Fragment() {
     private lateinit var productViewModel:ProductViewModel
-    private lateinit var productAdapter:ProductoRecyclerViewAdapter
+    private lateinit var productAdapter: ProductoRecyclerViewAdapter
     private var productos:List<Producto> = ArrayList()
     var listener:DetallesPaquete?=null
     private var columnCount = 1

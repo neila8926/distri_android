@@ -1,10 +1,10 @@
-package co.recargas.sis.ui.paquetes.products
+package co.recargas.sis.ui
 
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import co.recargas.sis.R
 import co.recargas.sis.local.modelo.Producto
@@ -43,6 +43,43 @@ class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewA
         holder.nameProduct.text = item.nombre
         holder.descriptionProduct.text = item.observacion
         holder.priceProduct.text = item.valor.toString()
+    if(item.operadorNombre=="CLARO"){
+        holder.imageLogo.setImageResource(R.drawable.recarga_claro)
+    }
+    if(item.operadorNombre=="MOVISTAR"){
+        holder.imageLogo.setImageResource(R.drawable.recarga_movistar)
+    }
+    if(item.operadorNombre=="AVANTEL"){
+        holder.imageLogo.setImageResource(R.drawable.recarga_avantel)
+    }
+    if(item.operadorNombre=="KALLEY_MOBILE"){
+        holder.imageLogo.setImageResource(R.drawable.recrga_kalley)
+    }
+    if(item.operadorNombre=="VIRGIN MOBILE"){
+        holder.imageLogo.setImageResource(R.drawable.virgin)
+    }
+    if(item.operadorNombre=="EXITO"){
+        holder.imageLogo.setImageResource(R.drawable.recarga_exito)
+    }
+    if(item.operadorNombre=="TIGO"){
+        holder.imageLogo.setImageResource(R.drawable.tigo)
+    }
+    if(item.operadorNombre=="WINGS_MOBILE"){
+        holder.imageLogo.setImageResource(R.drawable.recarga_wings)
+    }
+    if(item.nombre.indexOf("NETFLIX")!=-1){
+        holder.imageLogo.setImageResource(R.drawable.pin_netflix)
+    }
+    if(item.nombre.indexOf("SPOTIFY")!=-1){
+        holder.imageLogo.setImageResource(R.drawable.spotify)
+    }
+    if(item.nombre.indexOf("IMVU")!=-1){
+        holder.imageLogo.setImageResource(R.drawable.imvu)
+    }
+    if(item.nombre.indexOf("MINECRAFT")!=-1){
+        holder.imageLogo.setImageResource(R.drawable.minecraft)
+    }
+
 
 
         with(holder.mView) {
@@ -61,7 +98,7 @@ class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewA
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        //val imageLogo: ImageView = mView.imageView_logo
+        val imageLogo: ImageView = mView.logoPaquetes
         val nameProduct: TextView = mView.nameProduct
         val descriptionProduct: TextView = mView.descriptionProduct
         val priceProduct : TextView = mView.priceProduct

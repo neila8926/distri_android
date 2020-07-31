@@ -15,11 +15,11 @@ import co.recargas.sis.R
 import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
-import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
+import co.recargas.sis.ui.ProductoRecyclerViewAdapter
 import java.lang.ClassCastException
 
 class ProductFragmentVozAvantel:Fragment() {
-    private lateinit var productAdapater:ProductoRecyclerViewAdapter
+    private lateinit var productAdapater: ProductoRecyclerViewAdapter
     private lateinit var productViewModel: ProductViewModel
     private var listener: DetallesPaquete?=null
     private var productos:List<Producto> = ArrayList()

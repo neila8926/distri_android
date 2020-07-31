@@ -109,36 +109,47 @@ class RecargasFragment:Fragment() {
                nombreOperador= lista[position]
                 if(nombreOperador=="MOVISTAR"){
                     logoOperador?.setImageResource(R.drawable.recarga_movistar)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="CLARO"){
                     logoOperador?.setImageResource(R.drawable.recarga_claro)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="TIGO"){
                     logoOperador?.setImageResource(R.drawable.paquete_tigo)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="EXITO"){
                     logoOperador?.setImageResource(R.drawable.recarga_exito)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="DIRECTV"){
                     logoOperador?.setImageResource(R.drawable.recarga_directv)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="VIRGIN MOBILE"){
                     logoOperador?.setImageResource(R.drawable.virgin)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="KALLEY_MOBILE"){
                     logoOperador?.setImageResource(R.drawable.recrga_kalley)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="WINGS_MOBILE"){
                     logoOperador?.setImageResource(R.drawable.recarga_wings)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="AVANTEL"){
                     logoOperador?.setImageResource(R.drawable.recarga_avantel)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="WPLAY"){
                     logoOperador?.setImageResource(R.drawable.recarga_wplay)
+                    logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="FLASH_MOBILE"){
                     logoOperador?.setImageResource(R.drawable.recarga_flashmobile)
+                    logoOperador?.visibility=View.VISIBLE
                 }
 
 

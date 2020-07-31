@@ -32,9 +32,9 @@
                 android:id="@+id/logoOperador"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                app:srcCompat="@drawable/recarga_claro"
+                android:visibility="gone"
 
-                />
+                app:srcCompat="@drawable/recarga_claro" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/recargas"

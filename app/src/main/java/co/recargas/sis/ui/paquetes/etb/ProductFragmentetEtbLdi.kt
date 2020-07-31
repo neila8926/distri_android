@@ -14,13 +14,13 @@ import co.recargas.sis.R
 import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
-import co.recargas.sis.ui.paquetes.products.ProductoRecyclerViewAdapter
+import co.recargas.sis.ui.ProductoRecyclerViewAdapter
 import java.lang.ClassCastException
 
 
 class ProductFragmentetEtbLdi:Fragment() {
     private lateinit var productViewModel:ProductViewModel
-    private lateinit var productoAdapter:ProductoRecyclerViewAdapter
+    private lateinit var productoAdapter: ProductoRecyclerViewAdapter
     private var listener:DetallesPaquete?=null
     private var productos:List<Producto> = ArrayList()
     var columnCont=1

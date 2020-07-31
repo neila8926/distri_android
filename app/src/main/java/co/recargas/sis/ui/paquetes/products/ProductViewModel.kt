@@ -88,7 +88,7 @@ class ProductViewModel (application: Application): AndroidViewModel(application)
         //KALLEY
         listadoProductsKalley=productRepository.getPaquetesKalley()
         //WINGS
-        listadoProductsWings=productRepository.getPaquetesKalley()
+        listadoProductsWings=productRepository.getPaquetesWigs()
 
 
     }

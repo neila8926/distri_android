@@ -52,7 +52,7 @@
     <EditText
         android:id="@+id/editNumero"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
@@ -84,17 +84,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
         android:text="@string/sel_paq"
-        android:textSize="17sp" />
+        android:textColor="@color/todoIc"
+        android:textSize="20sp" />
 
     <FrameLayout
         android:id="@+id/contenedorTipoPaquete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:background="@drawable/bg_claro"
+        android:background="@color/colorSecundaryLigth"
         android:padding="4dp">
 
     </FrameLayout>
