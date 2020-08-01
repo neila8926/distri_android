@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.paquetes.claro.RealizarPaquetesClaro"
-            android:parentActivityName=".ui.paquetes.PaquetesActivity">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".HomeActivity">
             <meta-data
                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.paquetes.PaquetesActivity"></meta-data>
@@ -40,6 +41,7 @@
         </activity>
         <activity
             android:name=".HomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_home" />
         <activity android:name=".MainActivity">
             <intent-filter>

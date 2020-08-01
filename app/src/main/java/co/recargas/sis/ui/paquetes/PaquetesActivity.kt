@@ -2,6 +2,7 @@ package co.recargas.sis.ui.paquetes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import co.recargas.sis.ui.paquetes.virgin.FragmentTiposPaquetesVirgin
 import co.recargas.sis.R
 import co.recargas.sis.ui.paquetes.avantel.FragmentTipoPaqueteAvantel
@@ -13,13 +14,19 @@ import co.recargas.sis.ui.paquetes.tigo.FragmentTipoPaqueteTigo
 import co.recargas.sis.ui.paquetes.wings.FragmentTipoPaqueteWings
 
 class PaquetesActivity : AppCompatActivity() {
+    var toolbar:Toolbar?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paquetes)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title="Claro Paquetes"
+        toolbar=findViewById(R.id.toolbar2)
+        toolbar?.setTitle(R.string.tituloToolbar)
+        setSupportActionBar(toolbar)
+
+        var actionBar=supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+
 
 
 

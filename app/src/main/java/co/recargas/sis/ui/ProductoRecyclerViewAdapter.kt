@@ -43,40 +43,43 @@ class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewA
         holder.nameProduct.text = item.nombre
         holder.descriptionProduct.text = item.observacion
         holder.priceProduct.text = item.valor.toString()
-    if(item.operadorNombre=="CLARO"){
+    if(item.operadorNombre.toUpperCase()=="CLARO"){
         holder.imageLogo.setImageResource(R.drawable.recarga_claro)
     }
-    if(item.operadorNombre=="MOVISTAR"){
+    if(item.operadorNombre.toUpperCase()=="MOVISTAR"){
         holder.imageLogo.setImageResource(R.drawable.recarga_movistar)
     }
-    if(item.operadorNombre=="AVANTEL"){
+    if(item.operadorNombre.toUpperCase()=="AVANTEL"){
         holder.imageLogo.setImageResource(R.drawable.recarga_avantel)
     }
-    if(item.operadorNombre=="KALLEY_MOBILE"){
+    if(item.operadorNombre.toUpperCase()=="KALLEY_MOBILE"){
         holder.imageLogo.setImageResource(R.drawable.recrga_kalley)
     }
-    if(item.operadorNombre=="VIRGIN MOBILE"){
+    if(item.operadorNombre.toUpperCase()=="VIRGIN MOBILE"){
         holder.imageLogo.setImageResource(R.drawable.virgin)
     }
-    if(item.operadorNombre=="EXITO"){
+    if(item.operadorNombre.toUpperCase()=="ETB"){
+        holder.imageLogo.setImageResource(R.drawable.paquete_etb_n)
+    }
+    if(item.operadorNombre.toUpperCase()=="EXITO"){
         holder.imageLogo.setImageResource(R.drawable.recarga_exito)
     }
-    if(item.operadorNombre=="TIGO"){
+    if(item.operadorNombre.toUpperCase()=="TIGO"){
         holder.imageLogo.setImageResource(R.drawable.tigo)
     }
-    if(item.operadorNombre=="WINGS_MOBILE"){
+    if(item.operadorNombre.toUpperCase()=="WINGS_MOBILE"){
         holder.imageLogo.setImageResource(R.drawable.recarga_wings)
     }
-    if(item.nombre.indexOf("NETFLIX")!=-1){
+    if(item.nombre.toUpperCase().indexOf("NETFLIX")!=-1){
         holder.imageLogo.setImageResource(R.drawable.pin_netflix)
     }
-    if(item.nombre.indexOf("SPOTIFY")!=-1){
+    if(item.nombre.toUpperCase().indexOf("SPOTIFY")!=-1){
         holder.imageLogo.setImageResource(R.drawable.spotify)
     }
-    if(item.nombre.indexOf("IMVU")!=-1){
+    if(item.nombre.toUpperCase().indexOf("IMVU")!=-1){
         holder.imageLogo.setImageResource(R.drawable.imvu)
     }
-    if(item.nombre.indexOf("MINECRAFT")!=-1){
+    if(item.nombre.toUpperCase().indexOf("MINECRAFT")!=-1){
         holder.imageLogo.setImageResource(R.drawable.minecraft)
     }
 
@@ -88,6 +91,7 @@ class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewA
 
         }
     }
+
 
     override fun getItemCount(): Int = productos.size
 

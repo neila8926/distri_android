@@ -4,6 +4,7 @@
     <string name="str_password">Contraseña</string>
     <string name="str_registrarse">Registrase</string>
     <string name="str_ingresar">Ingresar</string>
+    <string name="tituloToolbar">Distrirecarga</string>
     <!--DIFERENTES PAQUETES Y OPERADORES-->
     <string name="str_paquete_c">PAQUETE CLARO</string>
     <string name="str_paquete_m">PAQUETE MOVISTAR</string>
