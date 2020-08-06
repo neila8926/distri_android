@@ -24,8 +24,7 @@ class PaquetesActivity : AppCompatActivity() {
         toolbar?.setTitle(R.string.tituloToolbar)
         setSupportActionBar(toolbar)
 
-        var actionBar=supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
 

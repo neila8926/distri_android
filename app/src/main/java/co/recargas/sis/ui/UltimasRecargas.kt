@@ -1,23 +1,30 @@
 package co.recargas.sis.ui
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.recargas.sis.R
+import co.recargas.sis.app.MyApp
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
+import co.recargas.sis.interfaces.ClickListenerUltiRec
 import co.recargas.sis.local.RecargaRepository
 import co.recargas.sis.local.modelo.Recargas
 import co.recargas.sis.ui.ultimasrecargas.UltimasRecargasAdaptador
 import co.recargas.sis.ui.ultimasrecargas.UltimasRecargasViewModel
+import kotlinx.android.synthetic.main.item_recarga.view.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
@@ -48,14 +55,18 @@ class UltimasRecargas : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ultimas_recargas)
+        toolbar3=findViewById(R.id.toolbar3)
+        setSupportActionBar(toolbar3)
+
         var actionBar=supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
 
         //Se obtiene la fecha y la hora actual
-        toolbar3=findViewById(R.id.toolbar3)
+
         listaRecargas=findViewById(R.id.listaRecargas)
         toolbar3?.setTitle(R.string.tituloToolbar)
+
         //altura definida
         listaRecargas?.setHasFixedSize(true)
         layoutManager=LinearLayoutManager(this)
@@ -73,6 +84,21 @@ class UltimasRecargas : AppCompatActivity() {
         ObtenerUltimasRecargas().execute()
 
         ultimasRecargasViewModel=ViewModelProvider(this).get(UltimasRecargasViewModel::class.java)
+        ultimasRecargasViewModel.getUltimasRecargas().observe(this, androidx.lifecycle.Observer {
+            ultimas=it
+                adaptador=UltimasRecargasAdaptador(ultimas,object : ClickListenerUltiRec{
+                override fun onClick(vista: View, index: Int) {
+                    var alerDialogo=AlertDialog.Builder(this@UltimasRecargas)
+                    alerDialogo.setTitle("Imprimir")
+                    alerDialogo.setMessage("Numero: ${vista.idNumeroR.text}\nValor: ${vista.idValorR.text}\nOperador: ${vista.idOperadorR.text}\nProducto: ${vista.idProductoR.text}\nRespuesta: ${vista.idObservacionR.text}\nFecha: ${vista.idFechaRecarga.text}")
+                        .setPositiveButton("ok",DialogInterface.OnClickListener { dialog, which ->  })
+                        .show()
+
+                }
+            })
+            listaRecargas?.adapter=adaptador
+
+        })
 
 
 
@@ -153,13 +179,7 @@ class UltimasRecargas : AppCompatActivity() {
             super.onPostExecute(result)
             progressBar.dismiss()
             if(result==true){
-                ultimasRecargasViewModel.getUltimasRecargas().observe(this@UltimasRecargas, androidx.lifecycle.Observer {
-                    ultimas=it
-                    Log.i("estaas",ultimas.get(0).producto)
-                    adaptador=UltimasRecargasAdaptador(this@UltimasRecargas,ultimas)
-                    listaRecargas?.adapter=adaptador
 
-                })
 
             }
         }
