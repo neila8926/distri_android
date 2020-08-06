@@ -240,7 +240,7 @@ class RecargasFragment:Fragment() {
 
     inner class RealizarRecarga: AsyncTask<Void, Int , Boolean>(){
         private lateinit var response:String
-        private lateinit var respuesta:String
+        private  var respuesta:String="Error de Conexión"
         lateinit var saldo:String
 
         override fun onPreExecute() {
@@ -260,7 +260,7 @@ class RecargasFragment:Fragment() {
             }catch (ex: Exception){
                 ex.printStackTrace()
             }
-            if(response.isNotEmpty()){
+            if(response.equals("Error de Conexión")==false){
                 var reqJson: JSONObject = JSONObject(response);
                 respuesta=reqJson.getString("respuesta")
 

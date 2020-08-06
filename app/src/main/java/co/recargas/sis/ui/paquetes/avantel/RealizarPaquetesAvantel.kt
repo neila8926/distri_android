@@ -154,8 +154,8 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
     }
     inner class EnviarPaquete:AsyncTask<Void,Int,Boolean>(){
         private lateinit var response:String
-        private lateinit var respuesta:String
-        lateinit var saldo:String
+        private  var respuesta:String="Error de Conexión"
+        private var saldo:String?=null
         override fun onPreExecute() {
             super.onPreExecute()
             progressBar?.max=100
@@ -175,7 +175,7 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
             }catch (ex:Exception){
                 ex.printStackTrace()
             }
-            if(response.isNotEmpty()){
+            if(response.equals("Error de Conexión")==false){
                 var reqJson: JSONObject = JSONObject(response);
                 respuesta=reqJson.getString("respuesta")
 

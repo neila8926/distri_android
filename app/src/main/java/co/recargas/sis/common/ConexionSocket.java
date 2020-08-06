@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ConexionSocket {
-    static String response;
+    static String response="Error de conexion";
     static Socket socket = null;
 
     public ConexionSocket() {
@@ -35,13 +35,17 @@ public class ConexionSocket {
         while ((bytesRead = in.read(buffer)) != -1) {
             byteArrayOutputStream.write(buffer, 0, bytesRead);
             response = byteArrayOutputStream.toString();
+            Log.i("socket","ss"+response);
         }
         out.close();
         in.close();
         socket.close();
     } catch (IOException e) {
         e.printStackTrace();
+            Log.i("socket","ss"+response);
+            return "Error de Conexión";
     }
+
         return response;
 }
 }

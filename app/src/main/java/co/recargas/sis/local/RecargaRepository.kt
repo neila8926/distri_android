@@ -2,6 +2,8 @@ package co.recargas.sis.local
 
 import android.app.Application
 import android.os.AsyncTask
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import co.recargas.sis.local.dao.RecargaDao
 import co.recargas.sis.local.modelo.Recargas
 
@@ -10,6 +12,10 @@ class RecargaRepository(application: Application) {
 
     fun insertRecargas(recarga:Recargas){
         if(recargaDao!=null) InsertAsyncTask(recargaDao).execute(recarga)
+    }
+    fun getRecargas():LiveData<List<Recargas>>{
+        return recargaDao?.getAllRecargas()?: MutableLiveData<List<Recargas>>()
+
     }
 
 

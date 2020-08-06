@@ -14,30 +14,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.paquetes.claro.RealizarPaquetesClaro"
+        <activity android:name=".ui.UltimasRecargas"
+            android:parentActivityName=".HomeActivity">
+
+            <!-- SOPORTE PARA VERSIONES 4.0 O MENORES -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity android:name=".RegistroActivity" />
+        <activity
+            android:name=".ui.paquetes.claro.RealizarPaquetesClaro"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".HomeActivity">
             <meta-data
-               android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.paquetes.PaquetesActivity"></meta-data>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.paquetes.PaquetesActivity" />
         </activity>
-        <activity android:name=".ui.paquetes.tigo.RealizarPaquetesTigo"></activity>
-        <activity android:name=".ui.paquetes.virgin.RealizarPaquetesVirgin"></activity>
-        <activity android:name=".ui.paquetes.etb.RealizarPaquetesEtb"> </activity>
-        <activity android:name="co.recargas.sis.ui.notifications.RealizarPines"></activity>
-        <activity android:name=".ui.paquetes.avantel.RealizarPaquetesAvantel"></activity>
-        <activity android:name=".ui.paquetes.movistar.RealizarPaquetesMovistar"></activity>
-        <activity android:name=".ui.paquetes.exito.RealizarPaquetesExito"></activity>
-        <activity android:name=".ui.paquetes.kalley.RealizarPaquetesKalley"></activity>
-        <activity android:name=".ui.paquetes.wings.RealizarPaquetesWings"></activity>
-        <activity android:name=".ui.paquetes.PaquetesActivity"
+        <activity android:name=".ui.paquetes.tigo.RealizarPaquetesTigo" />
+        <activity android:name=".ui.paquetes.virgin.RealizarPaquetesVirgin" />
+        <activity android:name=".ui.paquetes.etb.RealizarPaquetesEtb" />
+        <activity android:name=".ui.notifications.RealizarPines" />
+        <activity android:name=".ui.paquetes.avantel.RealizarPaquetesAvantel" />
+        <activity android:name=".ui.paquetes.movistar.RealizarPaquetesMovistar" />
+        <activity android:name=".ui.paquetes.exito.RealizarPaquetesExito" />
+        <activity android:name=".ui.paquetes.kalley.RealizarPaquetesKalley" />
+        <activity android:name=".ui.paquetes.wings.RealizarPaquetesWings" />
+        <activity
+            android:name=".ui.paquetes.PaquetesActivity"
             android:parentActivityName=".HomeActivity">
-            <!--SOPORTE PARA VERSIONES 4.0 O MENORES-->
+
+            <!-- SOPORTE PARA VERSIONES 4.0 O MENORES -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity">
-
-            </meta-data>
+                android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".HomeActivity"

@@ -2,9 +2,15 @@
     <string name="app_name">Distrirecarga</string>
     <string name="str_username">Usuario</string>
     <string name="str_password">Contraseña</string>
-    <string name="str_registrarse">Registrase</string>
+    <string name="str_registrarse">Registrarse</string>
     <string name="str_ingresar">Ingresar</string>
     <string name="tituloToolbar">Distrirecarga</string>
+    <string name="valor">Valor</string>
+    <string name="operador">Operador</string>
+    <string name="producto">Producto</string>
+    <string name="observacion">Respuesta</string>
+    <string name="fecha">Fecha</string>
+    <string name="informe">Informe  de Ultimas Recargas</string>
     <!--DIFERENTES PAQUETES Y OPERADORES-->
     <string name="str_paquete_c">PAQUETE CLARO</string>
     <string name="str_paquete_m">PAQUETE MOVISTAR</string>
@@ -56,8 +62,6 @@
     <string name="pines">Pines</string>
 
 
-
-
     <string name="sel_paq">Seleccion El Paquete:</string>
     <string name="numero">Numero</string>
     <string name="realzar_pa">Realizar Paquete</string>
@@ -71,4 +75,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="registrarse">REGISTRO</string>
 </resources>

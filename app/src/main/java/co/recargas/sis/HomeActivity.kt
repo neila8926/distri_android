@@ -18,6 +18,7 @@ import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.interfaces.FragmentCom
+import co.recargas.sis.ui.UltimasRecargas
 import co.recargas.sis.ui.paquetes.PaquetesActivity
 import co.recargas.sis.ui.paquetes.exito.RealizarPaquetesExito
 import co.recargas.sis.ui.paquetes.kalley.RealizarPaquetesKalley
@@ -104,6 +105,8 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
         when(item?.itemId){
             R.id.cRecargas->{
                 Toast.makeText(this,"Consultar Ultimas Recargas",Toast.LENGTH_SHORT).show()
+                var intent=Intent(this, UltimasRecargas::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.cEfecty->{

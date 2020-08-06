@@ -6,10 +6,7 @@ import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
@@ -37,18 +34,24 @@ class MainActivity : AppCompatActivity() {
     private lateinit var edtUsuario:TextInputEditText
     private lateinit var edtPassword:TextInputEditText
     private lateinit var btnIngresar:Button
+    private lateinit var idRegistrase:TextView
 
-  override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
         edtUsuario=findViewById(R.id.idUsername);
         edtPassword=findViewById(R.id.idPassword);
         btnIngresar=findViewById(R.id.idIngresar);
+        idRegistrase=findViewById(R.id.idRegistrase)
         //progressBarInicio=findViewById(R.id.progressBarInicio)
 
 
         Toast.makeText(this,"Probando la version $version ",Toast.LENGTH_LONG).show()
+        idRegistrase.setOnClickListener {
+            var intent =Intent(this,RegistroActivity::class.java)
+            startActivity(intent)
+        }
 
         btnIngresar.setOnClickListener{view->
             if(edtUsuario.text?.isEmpty()==true){
@@ -57,28 +60,28 @@ class MainActivity : AppCompatActivity() {
             if(edtPassword.text?.isEmpty()==true){
                 edtPassword.setError("Digite Contraseña")
 
-        }else {
-            if(edtUsuario.text?.isNotEmpty()==true && edtPassword.text?.isNotEmpty()==true) {
+            }else {
+                if(edtUsuario.text?.isNotEmpty()==true && edtPassword.text?.isNotEmpty()==true) {
 
-                var user=edtUsuario.text.toString().trim().replace("\\s","")
+                    var user=edtUsuario.text.toString().trim().replace("\\s","")
 
-           //Se obtiene la fecha y la hora actual
-            val fechaActual=SimpleDateFormat("yyyy-MM-dd ").format(Date());
-            val horaActual=SimpleDateFormat("HH:mm:ss").format(Date());
+                    //Se obtiene la fecha y la hora actual
+                    val fechaActual=SimpleDateFormat("yyyy-MM-dd ").format(Date());
+                    val horaActual=SimpleDateFormat("HH:mm:ss").format(Date());
 
-            Toast.makeText(this,"Probando : $fechaActual $horaActual", Toast.LENGTH_LONG ).show()
-            //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
-            val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
-            //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
-            parametros = "mov|log|" + horaActual.toString() + "|" + hmac + "|" +user+ "|" + edtPassword.getText().toString().toString() + "|" + version
+                    Toast.makeText(this,"Probando : $fechaActual $horaActual", Toast.LENGTH_LONG ).show()
+                    //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
+                    val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
+                    //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
+                    parametros = "mov|log|" + horaActual.toString() + "|" + hmac + "|" +user+ "|" + edtPassword.getText().toString().toString() + "|" + version
 
-            Ingresar().execute()
-            }
-            else {
-                Toast.makeText(this,"Digite usuario y contraseña",Toast.LENGTH_SHORT).show()
-            }
+                    Ingresar().execute()
+                }
+                else {
+                    Toast.makeText(this,"Digite usuario y contraseña",Toast.LENGTH_SHORT).show()
+                }
 
-        }}
+            }}
 
     }
 
@@ -101,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         private lateinit var productViewModel: ProductViewModel
         private var productRepository:ProductRepository=ProductRepository(application)
         private lateinit var response:String
-        private lateinit var respuesta:String
+        private  var respuesta:String="Error de Conexión"
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -111,8 +114,6 @@ class MainActivity : AppCompatActivity() {
             progressBarInicio.setMessage("Procesando...")
             progressBarInicio.setCancelable(false)
             progressBarInicio.show()
-
-
         }
 
 
@@ -123,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 response = ConexionSocket().ClSocket(parametros)
                 Log.i("req", "Respuesta " + response)
-                if(response.isEmpty()==false){
+                if(response.equals("Error de Conexión")==false){
                     response = response.replace("\\n", "");
 
                     var reqJson:JSONObject= JSONObject(response);
@@ -135,30 +136,20 @@ class MainActivity : AppCompatActivity() {
                         SharedPreferenceManager.setSomeStringValue("ID",idCliente)
                         Log.i("req", "probando el nuevo JSON $idCliente")
                         val producto: JSONArray = reqJson.getJSONArray("pr")
-                        Log.i("INFO", " Pruebaaaaa "+producto.length())
                         var size=producto.length()
                         var x=size*100
 
-
-                        for(i in 0 .. size){
-
+                        for(i in 0  ..  size){
                             val data: JSONObject = producto.getJSONObject(i)
-
                             var producto= Producto(data.getString("id").toInt(), data.getString("pr_n"),data.getString("val").toInt(),data.getString("obs"),data.getString("op_i").toInt(),data.getString("op_n"))
-                           Log.i("INFO", " "+producto.toString());
+                            Log.i("INFO", " "+producto.toString());
                             productRepository.insertProductos(producto)
                             publishProgress(x*size)
                             //productReposit.insertProductos(producto)
-                            if(isCancelled){
-                                break
-                            }
-
-                        }
-
-                    }else{
-                        return false
-                    }
-                    }
+                          }
+                       }
+                }
+                return false
 
             }catch ( ex: Exception) {
                 ex.printStackTrace()
@@ -179,8 +170,8 @@ class MainActivity : AppCompatActivity() {
             progressBarInicio.dismiss()
 
             if(result==true) {
-            val intent : Intent=Intent(this@MainActivity,HomeActivity::class.java)
-            startActivity(intent)
+                val intent : Intent=Intent(this@MainActivity,HomeActivity::class.java)
+                startActivity(intent)
             }else{
                 Toast.makeText(this@MainActivity,respuesta,Toast.LENGTH_LONG).show()
             }
@@ -192,6 +183,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-
 
