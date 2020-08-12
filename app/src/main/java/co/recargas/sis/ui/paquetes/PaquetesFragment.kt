@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import co.recargas.sis.R
+import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.interfaces.FragmentCom
 import kotlinx.android.synthetic.main.fragment_paquetes.*
 import java.lang.ClassCastException
@@ -53,6 +55,7 @@ class PaquetesFragment : Fragment() {
         btnKalley=view.findViewById(R.id.btnKalleyP)
         btnAvantel=view.findViewById(R.id.btnAvantelP)
         btnExito=view.findViewById(R.id.btnExitoP)
+
 
         //Eventos en cada boton
 

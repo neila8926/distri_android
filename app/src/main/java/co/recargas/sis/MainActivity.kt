@@ -2,7 +2,6 @@ package co.recargas.sis
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -12,16 +11,14 @@ import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.local.ProductRepository
+import co.recargas.sis.local.RecargaRepository
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
@@ -30,30 +27,45 @@ class MainActivity : AppCompatActivity() {
 
     var parametros:String="";
     val version=Constantes.VERSION_CODE;
+    val ESTADO_BUTTON="SESION"
     private lateinit var progressBarInicio:ProgressDialog
     private lateinit var edtUsuario:TextInputEditText
     private lateinit var edtPassword:TextInputEditText
     private lateinit var btnIngresar:Button
     private lateinit var idRegistrase:TextView
+    private lateinit var idSesionI:RadioButton
+    var btnDesactivado=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+        if(SharedPreferenceManager.getSomeBooleanValue(ESTADO_BUTTON)==true){
+            var intent=Intent(this,HomeActivity::class.java)
+            startActivity(intent)
+        }
         edtUsuario=findViewById(R.id.idUsername);
         edtPassword=findViewById(R.id.idPassword);
         btnIngresar=findViewById(R.id.idIngresar);
         idRegistrase=findViewById(R.id.idRegistrase)
-        //progressBarInicio=findViewById(R.id.progressBarInicio)
+        idSesionI=findViewById(R.id.idSesionI)
 
+       btnDesactivado=idSesionI.isChecked
 
-        Toast.makeText(this,"Probando la version $version ",Toast.LENGTH_LONG).show()
+        idSesionI.setOnClickListener {
+            if(btnDesactivado)
+                idSesionI.isChecked=false
+            btnDesactivado=idSesionI.isChecked
+        }
+
         idRegistrase.setOnClickListener {
+
             var intent =Intent(this,RegistroActivity::class.java)
             startActivity(intent)
         }
 
         btnIngresar.setOnClickListener{view->
+
             if(edtUsuario.text?.isEmpty()==true){
                 edtUsuario.setError("Digite Usuario")
             }
@@ -69,13 +81,14 @@ class MainActivity : AppCompatActivity() {
                     val fechaActual=SimpleDateFormat("yyyy-MM-dd ").format(Date());
                     val horaActual=SimpleDateFormat("HH:mm:ss").format(Date());
 
-                    Toast.makeText(this,"Probando : $fechaActual $horaActual", Toast.LENGTH_LONG ).show()
                     //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
                     val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
                     //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
                     parametros = "mov|log|" + horaActual.toString() + "|" + hmac + "|" +user+ "|" + edtPassword.getText().toString().toString() + "|" + version
 
-                    Ingresar().execute()
+
+                        Ingresar().execute()
+
                 }
                 else {
                     Toast.makeText(this,"Digite usuario y contraseña",Toast.LENGTH_SHORT).show()
@@ -103,6 +116,7 @@ class MainActivity : AppCompatActivity() {
     inner class Ingresar: AsyncTask<Void,Int,Boolean>(){
         private lateinit var productViewModel: ProductViewModel
         private var productRepository:ProductRepository=ProductRepository(application)
+        private var recargasRepository:RecargaRepository= RecargaRepository(application)
         private lateinit var response:String
         private  var respuesta:String="Error de Conexión"
 
@@ -125,6 +139,8 @@ class MainActivity : AppCompatActivity() {
                 response = ConexionSocket().ClSocket(parametros)
                 Log.i("req", "Respuesta " + response)
                 if(response.equals("Error de Conexión")==false){
+                    productRepository.deleteProduct()
+                    recargasRepository.deleteRecargas()
                     response = response.replace("\\n", "");
 
                     var reqJson:JSONObject= JSONObject(response);
@@ -170,8 +186,10 @@ class MainActivity : AppCompatActivity() {
             progressBarInicio.dismiss()
 
             if(result==true) {
+                SharedPreferenceManager.setSomeBooleanValue(ESTADO_BUTTON,idSesionI.isChecked)
                 val intent : Intent=Intent(this@MainActivity,HomeActivity::class.java)
                 startActivity(intent)
+                finish()
             }else{
                 Toast.makeText(this@MainActivity,respuesta,Toast.LENGTH_LONG).show()
             }

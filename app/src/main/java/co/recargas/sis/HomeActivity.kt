@@ -12,7 +12,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
@@ -49,9 +48,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
         toolbar?.setTitle(R.string.tituloToolbar)
         setSupportActionBar(toolbar)
 
-
-
-
         //Se obtiene la fecha y la hora actual
         fechaActual= SimpleDateFormat("yyyy-MM-dd ").format(Date());
         horaActual= SimpleDateFormat("HH:mm:ss").format(Date());
@@ -62,13 +58,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
         hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
         //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
 
-
-
-
-
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
 
 
     //    val appBarConfiguration = AppBarConfiguration.Builder(
@@ -104,13 +93,11 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId){
             R.id.cRecargas->{
-                Toast.makeText(this,"Consultar Ultimas Recargas",Toast.LENGTH_SHORT).show()
                 var intent=Intent(this, UltimasRecargas::class.java)
                 startActivity(intent)
                 return true
             }
             R.id.cEfecty->{
-                Toast.makeText(this,"Cosultar Codigo Efecty",Toast.LENGTH_SHORT).show()
                 var alertDialog=AlertDialog.Builder(this)
                 alertDialog.setTitle("Datos Para Consignar en Efecty")
                 alertDialog.setMessage("Convenio: 110911\nReferencia: 110${idCliente}")
@@ -124,7 +111,10 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
                 return true
             }
             R.id.sesion->{
-                Toast.makeText(this,"Cerrar Sesión",Toast.LENGTH_SHORT).show()
+                SharedPreferenceManager.deleteSomeValue()
+                var intent=Intent(this,MainActivity::class.java)
+                startActivity(intent)
+                finish()
                 return true
             }
             else->( return super.onOptionsItemSelected(item))

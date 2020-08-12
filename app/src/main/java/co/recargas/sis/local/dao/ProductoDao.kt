@@ -13,6 +13,8 @@ interface ProductoDao {
     //RECARGAS
     @Query("SELECT * FROM productos WHERE nombre='RECARGA'")
     fun getRecargas():LiveData<List<Producto>>
+    @Query("DELETE FROM productos")
+    fun eliminarProductos()
     //CLARO
     //Obtener Paquetes de Claro Internet
     @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE 'NAVEGA%' AND nombre LIKE '%MB'")

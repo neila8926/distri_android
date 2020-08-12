@@ -21,7 +21,7 @@ class UltimasRecargasAdaptador(item:List<Recargas>, var listener:ClickListenerUl
     var item:List<Recargas>? =null
     init {
         this.item=item
-        Log.i("item",item.get(1).numero)
+        //Log.i("item",item.get(1).numero)
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,

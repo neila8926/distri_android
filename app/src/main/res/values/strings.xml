@@ -76,4 +76,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="registrarse">REGISTRO</string>
+    <string name="regresar">Regresar</string>
+    <string name="conectar_impresora">Sincronizar Impresora</string>
+    <string name="sesionIn">Mantener la sesión iniciada</string>
 </resources>

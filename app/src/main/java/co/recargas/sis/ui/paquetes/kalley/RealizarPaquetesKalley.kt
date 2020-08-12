@@ -1,6 +1,7 @@
 package co.recargas.sis.ui.paquetes.kalley
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import co.recargas.sis.HomeActivity
 import co.recargas.sis.R
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
@@ -39,6 +41,7 @@ class RealizarPaquetesKalley : AppCompatActivity(), DetallesPaquete {
     var fechaActual:String?=null
     var horaActual:String?=null
     var idPaquete:Int?=null
+    var btnRegresar:Button?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,13 @@ class RealizarPaquetesKalley : AppCompatActivity(), DetallesPaquete {
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
+        btnRegresar=findViewById(R.id.btnRegresar)
+
+        btnRegresar?.setOnClickListener {
+            var intent= Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+
+        }
 
         var rec=intent.extras
         var tipo:String=rec?.get("paquete").toString()
@@ -172,9 +182,7 @@ class RealizarPaquetesKalley : AppCompatActivity(), DetallesPaquete {
                     saldo=reqJson.getString("saldo")
                     publishProgress()
                         return true
-
-
-                }
+               }
             }
             return false
         }
@@ -195,11 +203,6 @@ class RealizarPaquetesKalley : AppCompatActivity(), DetallesPaquete {
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
                         })
-                    .setNegativeButton("Imprimir",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            // User cancelled the dialog
-                        })
-
                 builder.show()
             }else{
                 Toast.makeText(this@RealizarPaquetesKalley, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()

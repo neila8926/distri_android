@@ -36,9 +36,7 @@ class RegistroActivity : AppCompatActivity() {
     var idCelular:TextInputLayout?=null
     var idCorreoE:TextInputLayout?=null
     var btnRegistrase: Button?=null
-
-
-
+    var btnLimpiarR:Button?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,13 +51,27 @@ class RegistroActivity : AppCompatActivity() {
         idCorreoE=findViewById(R.id.idCorreoE)
         btnRegistrase=findViewById(R.id.btnRegistrase)
         toolbar?.setTitle(R.string.tituloToolbar)
+        btnLimpiarR=findViewById(R.id.btnLimpiarR)
+
+
         setSupportActionBar(toolbar)
-        var  identificacion=idIdentificacion?.editText?.text
-        var nombre=idNombre?.editText?.text
-        var usuario=idUsuarioR?.editText?.text
-        var direccion=idDireccion?.editText?.text
-        var celular=idCelular?.editText?.text
-        var correo=idCorreoE?.editText?.text
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        var  identificacion=idIdentificacion?.editText?.text?.trim()
+        var nombre=idNombre?.editText?.text?.trim()
+        var usuario=idUsuarioR?.editText?.text?.trim()
+        var direccion=idDireccion?.editText?.text?.trim()
+        var celular=idCelular?.editText?.text?.trim()
+        var correo=idCorreoE?.editText?.text?.trim()
+
+        btnLimpiarR?.setOnClickListener {
+            idIdentificacion?.editText?.setText("")
+            idNombre?.editText?.setText("")
+            idUsuarioR?.editText?.setText("")
+            idDireccion?.editText?.setText("")
+            idCelular?.editText?.setText("")
+            idCorreoE?.editText?.setText("")
+        }
+
 
         btnRegistrase?.setOnClickListener {
             idIdentificacion?.error=""

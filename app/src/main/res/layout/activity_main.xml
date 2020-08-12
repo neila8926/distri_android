@@ -47,6 +47,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tPass"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/str_password"
@@ -56,8 +57,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tUser"
-        app:startIconDrawable="@drawable/custom_lock_icon"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+        app:startIconDrawable="@drawable/custom_lock_icon">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/idPassword"
@@ -77,27 +77,39 @@
         android:background="@drawable/botton_login"
         android:text="@string/str_ingresar"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/idRegistrase"
+        app:layout_constraintBottom_toTopOf="@+id/idSesionI"
         app:layout_constraintEnd_toEndOf="@+id/tPass"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/tPass"
         app:layout_constraintTop_toBottomOf="@+id/tPass"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/idRegistrase"
+    <RadioButton
+        android:id="@+id/idSesionI"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/str_registrarse"
-        android:textColor="@color/registrarse"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/sesionIn"
+        app:layout_constraintBottom_toTopOf="@+id/idRegistrase"
         app:layout_constraintEnd_toEndOf="@+id/idIngresar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/idIngresar"
         app:layout_constraintTop_toBottomOf="@+id/idIngresar"
+        app:useMaterialThemeColors="true" />
+
+    <TextView
+        android:id="@+id/idRegistrase"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="4dp"
+        android:text="@string/str_registrarse"
+        android:textColor="@color/bg_paquetes"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/idSesionI"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/idSesionI"
+        app:layout_constraintTop_toBottomOf="@+id/idSesionI"
         app:layout_constraintVertical_chainStyle="packed" />
 
 

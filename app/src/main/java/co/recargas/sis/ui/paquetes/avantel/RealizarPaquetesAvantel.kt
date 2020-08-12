@@ -1,6 +1,7 @@
 package co.recargas.sis.ui.paquetes.avantel
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.ProductRepository
 import co.recargas.sis.local.RecargaRepository
 import co.recargas.sis.local.modelo.Recargas
+import co.recargas.sis.ui.paquetes.PaquetesActivity
 import co.recargas.sis.ui.paquetes.tigo.ProductFragmentTigoCombo
 import kotlinx.android.synthetic.main.activity_home.view.*
 import org.json.JSONObject
@@ -36,6 +38,7 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
     lateinit var valorPaquete:TextView
     lateinit var descripcionPaquete:TextView
     var btnRealizarPaquete: Button?=null
+    var btnRegresar:Button?=null
     lateinit var numero:EditText
     var fechaActual:String?=null
     var horaActual:String?=null
@@ -50,6 +53,13 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
+        btnRegresar=findViewById(R.id.btnRegresar)
+
+        btnRegresar?.setOnClickListener {
+            var intent=Intent(this,PaquetesActivity::class.java)
+            intent.putExtra("paquete","avantel")
+            startActivity(intent)
+        }
 
         var rec=intent.extras
         var tipo:String=rec?.get("avantel").toString()
@@ -185,9 +195,7 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
                     saldo=reqJson.getString("saldo")
                     publishProgress()
                         return true
-
-
-                }
+              }
             }
             return false
         }
@@ -208,11 +216,6 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
                         })
-                    .setNegativeButton("Imprimir",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            // User cancelled the dialog
-                        })
-
                 builder.show()
             }else{
                 Toast.makeText(this@RealizarPaquetesAvantel, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()

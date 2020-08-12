@@ -17,6 +17,9 @@ class RecargaRepository(application: Application) {
         return recargaDao?.getAllRecargas()?: MutableLiveData<List<Recargas>>()
 
     }
+    fun deleteRecargas(){
+        recargaDao?.deleteRecargas()
+    }
 
 
     private class InsertAsyncTask(private val recargaDao: RecargaDao): AsyncTask<Recargas, Void, Void>() {
@@ -25,6 +28,7 @@ class RecargaRepository(application: Application) {
                 if (recarga != null){
                     recargaDao.insertRecargas(recarga)
                 }
+
             }
 
             return null

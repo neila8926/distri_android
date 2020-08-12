@@ -1,4 +1,4 @@
-package co.recargas.sis.ui.notifications
+package co.recargas.sis.ui.pines
 
 import android.content.Intent
 import android.os.Bundle

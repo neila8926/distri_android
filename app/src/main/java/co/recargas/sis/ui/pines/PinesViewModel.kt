@@ -1,4 +1,4 @@
-package co.recargas.sis.ui.notifications
+package co.recargas.sis.ui.pines
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

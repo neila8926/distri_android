@@ -1,6 +1,5 @@
-package co.recargas.sis.ui.dashboard
+package co.recargas.sis.ui.recargas
 
-import android.app.Dialog
 import android.content.DialogInterface
 import android.os.AsyncTask
 import android.os.Bundle
@@ -19,9 +18,7 @@ import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.local.modelo.Producto
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.fragment_tipo_paquete_movistar.*
 import org.json.JSONObject
 import java.lang.Exception
 import java.lang.NumberFormatException

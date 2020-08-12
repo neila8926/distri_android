@@ -1,4 +1,4 @@
-package co.recargas.sis.ui.notifications.minecraft
+package co.recargas.sis.ui.pines.imvu
 
 import android.content.Context
 import android.os.Bundle
@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import co.recargas.sis.R
 import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
-import co.recargas.sis.ui.paquetes.products.ProductViewModel
 import co.recargas.sis.ui.ProductoRecyclerViewAdapter
-import co.recargas.sis.ui.notifications.PinesViewModel
+import co.recargas.sis.ui.pines.PinesViewModel
 import java.lang.ClassCastException
 
-class ProductFragmentMinecraft:Fragment() {
+class ProductFragmentImvu:Fragment() {
     private lateinit var productAdapater: ProductoRecyclerViewAdapter
     private lateinit var productViewModel: PinesViewModel
     private var listener: DetallesPaquete?=null
@@ -58,7 +57,7 @@ class ProductFragmentMinecraft:Fragment() {
             }
 
             //Observado
-            productViewModel.getProductMinecraft().observe(viewLifecycleOwner, Observer {
+            productViewModel.getProductImvu().observe(viewLifecycleOwner, Observer {
                 productos=it
                 productAdapater.setData(productos)
             })
@@ -68,7 +67,7 @@ class ProductFragmentMinecraft:Fragment() {
     }
     companion object{
         const val ARG_COLUMN_COUNT = "column-count"
-        fun newInstance(columnCount:Int)=ProductFragmentMinecraft().apply {
+        fun newInstance(columnCount:Int)=ProductFragmentImvu().apply {
             val args = Bundle().apply {
                 putInt(ARG_COLUMN_COUNT,columnCount)
 

@@ -1,6 +1,7 @@
 package co.recargas.sis.ui.paquetes.tigo
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.interfaces.DetallesPaquete
+import co.recargas.sis.ui.paquetes.PaquetesActivity
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -35,6 +37,7 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
     var fechaActual:String?=null
     var horaActual:String?=null
     var idPaquete:Int?=null
+    var btnRegresar:Button?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +49,14 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
+
+        btnRegresar=findViewById(R.id.btnRegresar)
+
+        btnRegresar?.setOnClickListener {
+            var  intent= Intent(this, PaquetesActivity::class.java)
+            intent.putExtra("paquete","tigo")
+            startActivity(intent)
+        }
 
         var intentTigo=intent.extras
         var tipo:String=intentTigo?.get("tigo").toString()
@@ -212,11 +223,6 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
                         })
-                    .setNegativeButton("Imprimir",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            // User cancelled the dialog
-                        })
-
                 builder.show()
             }else{
                 Toast.makeText(this@RealizarPaquetesTigo, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()

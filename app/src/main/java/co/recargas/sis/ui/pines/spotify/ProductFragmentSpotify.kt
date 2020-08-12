@@ -1,4 +1,4 @@
-package co.recargas.sis.ui.notifications.imvu
+package co.recargas.sis.ui.pines.spotify
 
 import android.content.Context
 import android.os.Bundle
@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import co.recargas.sis.R
 import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.modelo.Producto
-import co.recargas.sis.ui.paquetes.products.ProductViewModel
 import co.recargas.sis.ui.ProductoRecyclerViewAdapter
-import co.recargas.sis.ui.notifications.PinesViewModel
+import co.recargas.sis.ui.pines.PinesViewModel
 import java.lang.ClassCastException
 
-class ProductFragmentImvu:Fragment() {
+class ProductFragmentSpotify:Fragment() {
     private lateinit var productAdapater: ProductoRecyclerViewAdapter
     private lateinit var productViewModel: PinesViewModel
     private var listener: DetallesPaquete?=null
@@ -57,8 +56,8 @@ class ProductFragmentImvu:Fragment() {
                 adapter=productAdapater
             }
 
-            //Observado
-            productViewModel.getProductImvu().observe(viewLifecycleOwner, Observer {
+            //Observador
+            productViewModel.getProductSpotify().observe(viewLifecycleOwner, Observer {
                 productos=it
                 productAdapater.setData(productos)
             })
@@ -68,7 +67,7 @@ class ProductFragmentImvu:Fragment() {
     }
     companion object{
         const val ARG_COLUMN_COUNT = "column-count"
-        fun newInstance(columnCount:Int)=ProductFragmentImvu().apply {
+        fun newInstance(columnCount:Int)=ProductFragmentSpotify().apply {
             val args = Bundle().apply {
                 putInt(ARG_COLUMN_COUNT,columnCount)
 

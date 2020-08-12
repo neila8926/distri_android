@@ -1,4 +1,4 @@
-package co.recargas.sis.ui.dashboard
+package co.recargas.sis.ui.recargas
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

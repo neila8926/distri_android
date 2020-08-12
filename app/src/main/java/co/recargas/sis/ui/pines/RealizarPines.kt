@@ -1,6 +1,7 @@
-package co.recargas.sis.ui.notifications
+package co.recargas.sis.ui.pines
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -8,16 +9,17 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import co.recargas.sis.HomeActivity
 import co.recargas.sis.R
 import co.recargas.sis.common.ConexionSocket
 import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.interfaces.DetallesPaquete
-import co.recargas.sis.ui.notifications.imvu.ProductFragmentImvu
-import co.recargas.sis.ui.notifications.minecraft.ProductFragmentMinecraft
-import co.recargas.sis.ui.notifications.netflix.ProductFragmentNetflix
-import co.recargas.sis.ui.notifications.spotify.ProductFragmentSpotify
+import co.recargas.sis.ui.pines.imvu.ProductFragmentImvu
+import co.recargas.sis.ui.pines.minecraft.ProductFragmentMinecraft
+import co.recargas.sis.ui.pines.netflix.ProductFragmentNetflix
+import co.recargas.sis.ui.pines.spotify.ProductFragmentSpotify
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -39,6 +41,7 @@ class RealizarPines:AppCompatActivity(),DetallesPaquete{
     var fechaActual:String?=null
     var horaActual:String?=null
     var idPaquete:Int?=null
+    var btnRegresar:Button?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,12 @@ class RealizarPines:AppCompatActivity(),DetallesPaquete{
         btnRealizarPin=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
+        btnRegresar=findViewById(R.id.btnRegresar)
+
+        btnRegresar?.setOnClickListener {
+            var intent=Intent(this,HomeActivity::class.java)
+            startActivity(intent)
+        }
 
         var rec=intent.extras
         var tipo:String=rec?.get("pin").toString()

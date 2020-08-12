@@ -1,6 +1,7 @@
 package co.recargas.sis.ui.paquetes.movistar
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.local.ProductRepository
 import co.recargas.sis.local.RecargaRepository
 import co.recargas.sis.local.modelo.Recargas
+import co.recargas.sis.ui.paquetes.PaquetesActivity
 import co.recargas.sis.ui.paquetes.tigo.ProductFragmentTigoCombo
 import org.json.JSONObject
 import java.lang.Exception
@@ -39,6 +41,7 @@ class RealizarPaquetesMovistar : AppCompatActivity(), DetallesPaquete {
     var fechaActual:String?=null
     var horaActual:String?=null
     var idPaquete:Int?=null
+    var btnRegresar:Button?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,13 @@ class RealizarPaquetesMovistar : AppCompatActivity(), DetallesPaquete {
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
+        btnRegresar=findViewById(R.id.btnRegresar)
+
+        btnRegresar?.setOnClickListener {
+            var intent= Intent(this,PaquetesActivity::class.java)
+            intent.putExtra("paquete","movistar")
+            startActivity(intent)
+        }
 
         var rec=intent.extras
         var tipo:String=rec?.get("movistar").toString()
@@ -212,11 +222,6 @@ class RealizarPaquetesMovistar : AppCompatActivity(), DetallesPaquete {
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
                         })
-                    .setNegativeButton("Imprimir",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            // User cancelled the dialog
-                        })
-
                 builder.show()
             }else{
                 Toast.makeText(this@RealizarPaquetesMovistar, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()

@@ -39,36 +39,38 @@ class PaquetesActivity : AppCompatActivity() {
                 var paqueteClaro=
                     TiposPaquetesClaro()
                 var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.add(R.id.contenedor_paquetes,paqueteClaro).commit()
+                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteClaro)
+                    .commit()
 
             }
             "tigo"->{
                 var paqueteTigo=
                     FragmentTipoPaqueteTigo()
                 var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.add(R.id.contenedor_paquetes,paqueteTigo).commit()
+                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteTigo).commit()
 
             }
             "virgin"->{
                 var paqueteVirgin=
                     FragmentTiposPaquetesVirgin()
                 var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.add(R.id.contenedor_paquetes,paqueteVirgin).commit()
+                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteVirgin).commit()
             }
             "etb"->{
                 var paqueteEtb=FragmentTiposPaqueteEtb()
                 var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.add(R.id.contenedor_paquetes, paqueteEtb).commit()
+                fragmentTransation.replace(R.id.contenedor_paquetes, paqueteEtb).commit()
             }
             "movistar"->{
                 var paqueteMovistar=FragmentTipoPaqueteMovistar()
                 var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.add(R.id.contenedor_paquetes,paqueteMovistar).commit()
+                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteMovistar).commit()
             }
             "avantel"->{
                 var paqueteAvantel=FragmentTipoPaqueteAvantel()
                 var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.add(R.id.contenedor_paquetes,paqueteAvantel).commit()
+                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteAvantel).addToBackStack(null)
+                    .commit()
             }
             
 

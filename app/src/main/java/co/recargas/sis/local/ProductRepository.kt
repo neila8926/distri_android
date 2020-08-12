@@ -13,6 +13,9 @@ class ProductRepository(application: Application){
     fun insertProductos(producto: Producto){
        if (productoDao != null ) InsertAsyncTask(productoDao).execute(producto);
     }
+    fun deleteProduct(){
+        productoDao?.eliminarProductos()
+    }
     //RECARGAS
     fun getRecargas(): LiveData<List<Producto>>{
         return productoDao?.getRecargas()?:MutableLiveData<List<Producto>>()

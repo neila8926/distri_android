@@ -5,11 +5,11 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
 
     <application
-        android:name=".app.MyApp"
+        android:name=".app.AppClase"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,7 +26,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
-        <activity android:name=".RegistroActivity" />
+        <activity android:name=".RegistroActivity"
+            android:parentActivityName=".MainActivity"/>
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"
+            />
         <activity
             android:name=".ui.paquetes.claro.RealizarPaquetesClaro"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -38,7 +43,7 @@
         <activity android:name=".ui.paquetes.tigo.RealizarPaquetesTigo" />
         <activity android:name=".ui.paquetes.virgin.RealizarPaquetesVirgin" />
         <activity android:name=".ui.paquetes.etb.RealizarPaquetesEtb" />
-        <activity android:name=".ui.notifications.RealizarPines" />
+        <activity android:name=".ui.pines.RealizarPines" />
         <activity android:name=".ui.paquetes.avantel.RealizarPaquetesAvantel" />
         <activity android:name=".ui.paquetes.movistar.RealizarPaquetesMovistar" />
         <activity android:name=".ui.paquetes.exito.RealizarPaquetesExito" />
@@ -69,5 +74,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 
 </manifest>

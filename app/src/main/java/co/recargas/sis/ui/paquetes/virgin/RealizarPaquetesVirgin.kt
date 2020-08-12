@@ -1,6 +1,7 @@
 package co.recargas.sis.ui.paquetes.virgin
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import co.recargas.sis.common.Constantes
 import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.interfaces.DetallesPaquete
+import co.recargas.sis.ui.paquetes.PaquetesActivity
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -36,6 +38,7 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
     var fechaActual:String?=null
     var horaActual:String?=null
     var idPaquete:Int?=null
+    var btnRegresar:Button?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +54,14 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
         var intentTigo=intent.extras
         var tipo:String=intentTigo?.get("virgin").toString()
         var fragmentManager=supportFragmentManager
+
+        btnRegresar=findViewById(R.id.btnRegresar)
+
+        btnRegresar?.setOnClickListener {
+            var  intent= Intent(this, PaquetesActivity::class.java)
+            intent.putExtra("paquete","virgin")
+            startActivity(intent)
+        }
 
         when(tipo){
             "antiplan"->{
@@ -209,11 +220,6 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
                         })
-                    .setNegativeButton("Imprimir",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            // User cancelled the dialog
-                        })
-
                 builder.show()
             }else{
                 Toast.makeText(this@RealizarPaquetesVirgin, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
