@@ -8,10 +8,8 @@ import co.recargas.sis.R
 import co.recargas.sis.ui.paquetes.avantel.FragmentTipoPaqueteAvantel
 import co.recargas.sis.ui.paquetes.claro.TiposPaquetesClaro
 import co.recargas.sis.ui.paquetes.etb.FragmentTiposPaqueteEtb
-import co.recargas.sis.ui.paquetes.kalley.FragmentTipoPaqueteKalley
 import co.recargas.sis.ui.paquetes.movistar.FragmentTipoPaqueteMovistar
 import co.recargas.sis.ui.paquetes.tigo.FragmentTipoPaqueteTigo
-import co.recargas.sis.ui.paquetes.wings.FragmentTipoPaqueteWings
 
 class PaquetesActivity : AppCompatActivity() {
     var toolbar:Toolbar?=null
@@ -39,8 +37,7 @@ class PaquetesActivity : AppCompatActivity() {
                 var paqueteClaro=
                     TiposPaquetesClaro()
                 var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteClaro)
-                    .commit()
+                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteClaro) .commit()
 
             }
             "tigo"->{
@@ -69,7 +66,7 @@ class PaquetesActivity : AppCompatActivity() {
             "avantel"->{
                 var paqueteAvantel=FragmentTipoPaqueteAvantel()
                 var fragmentTransation=managerFragmant.beginTransaction()
-                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteAvantel).addToBackStack(null)
+                fragmentTransation.replace(R.id.contenedor_paquetes,paqueteAvantel)
                     .commit()
             }
             

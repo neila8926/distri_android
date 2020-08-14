@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import co.recargas.sis.R
@@ -54,7 +53,7 @@ class ProductoFragmentClaroInt : Fragment() {
 
         productAdapter.setOnclicListener(View.OnClickListener {
             var producto=it.tag as Producto
-            Toast.makeText(context, "mensaje "+producto.nombre,Toast.LENGTH_SHORT).show()
+
 
             var nombre:String?=producto.nombre
             var valor: Int? =producto.valor

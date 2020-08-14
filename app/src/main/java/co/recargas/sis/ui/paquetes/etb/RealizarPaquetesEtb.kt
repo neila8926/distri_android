@@ -30,6 +30,7 @@ class RealizarPaquetesEtb: AppCompatActivity(), DetallesPaquete {
     lateinit var nombrePaquete: TextView
     lateinit var valorPaquete: TextView
     lateinit var descripcionPaquete: TextView
+    lateinit var txTipoPaquete:TextView
     var btnRealizarPaquete: Button?=null
     lateinit var numero: EditText
     var fechaActual:String?=null
@@ -46,6 +47,7 @@ class RealizarPaquetesEtb: AppCompatActivity(), DetallesPaquete {
         descripcionPaquete=findViewById(R.id.descripcion)
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
+        txTipoPaquete=findViewById(R.id.txTipoPaquete)
         progressBar=findViewById(R.id.progressBarPaq)
         btnRegresar=findViewById(R.id.btnRegresar)
 
@@ -64,11 +66,13 @@ class RealizarPaquetesEtb: AppCompatActivity(), DetallesPaquete {
 
         when(tipo){
             "combo"->{
+                txTipoPaquete.text="Paquetes Combo\nSeleccione el Paquete"
                 var combo=ProductFragmentetbCombo()
                 var fragmentTransation=fragmentoManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,combo).commit()
             }
             "ldiE"->{
+                txTipoPaquete.text="Paquetes Larga Distancia Int\nSeleccione el paquete"
                 var ldi=ProductFragmentetEtbLdi()
                 var fragmentTransation=fragmentoManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()

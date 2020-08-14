@@ -37,6 +37,7 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
     lateinit var nombrePaquete:TextView
     lateinit var valorPaquete:TextView
     lateinit var descripcionPaquete:TextView
+    lateinit var txTipoPaquete:TextView
     var btnRealizarPaquete: Button?=null
     var btnRegresar:Button?=null
     lateinit var numero:EditText
@@ -51,6 +52,7 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
         valorPaquete=findViewById(R.id.valorPaquete)
         descripcionPaquete=findViewById(R.id.descripcion)
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
+        txTipoPaquete=findViewById(R.id.txTipoPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
         btnRegresar=findViewById(R.id.btnRegresar)
@@ -69,21 +71,25 @@ class RealizarPaquetesAvantel : AppCompatActivity(), DetallesPaquete {
 
         when(tipo){
             "todoInc"->{
+                txTipoPaquete.text="Paquetes Todo Incluido\nSeleccione el paquete"
                 var internet=ProductFragmentTodoInAvantel()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
             }
             "voz"->{
+                txTipoPaquete.text="Paquetes de Voz\nSeleccione el paquete"
                 var internet=ProductFragmentVozAvantel()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
             }
             "internet"->{
+                txTipoPaquete.text="Paquetes de Internet\nSeleccione el paquete"
                 var internet=ProductFragmentInternetAvantel()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
             }
             "whatsapp"->{
+                txTipoPaquete.text="Paquetes Whatsapp\nSeleccione el paquete"
                 var internet=ProductFragmentWhatAvantel()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()

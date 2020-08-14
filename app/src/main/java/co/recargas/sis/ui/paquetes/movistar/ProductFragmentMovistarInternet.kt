@@ -55,7 +55,7 @@ class ProductFragmentMovistarInternet : Fragment() {
 
         productAdapter.setOnclicListener(View.OnClickListener {
             var producto=it.tag as Producto
-            Toast.makeText(context, "mensaje "+producto.nombre, Toast.LENGTH_SHORT).show()
+
 
             var nombre:String?=producto.nombre
             var valor: Int? =producto.valor

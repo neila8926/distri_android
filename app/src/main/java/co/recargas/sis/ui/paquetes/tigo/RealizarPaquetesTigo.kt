@@ -38,6 +38,7 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
     var horaActual:String?=null
     var idPaquete:Int?=null
     var btnRegresar:Button?=null
+    lateinit var txTipoPaquete:TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +46,7 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
         setContentView(R.layout.activity_realizar_paquetes)
         nombrePaquete=findViewById(R.id.nombrePaquete)
         valorPaquete=findViewById(R.id.valorPaquete)
+        txTipoPaquete=findViewById(R.id.txTipoPaquete)
         descripcionPaquete=findViewById(R.id.descripcion)
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
@@ -64,27 +66,32 @@ class RealizarPaquetesTigo:AppCompatActivity(),DetallesPaquete {
 
         when(tipo){
             "combo"->{
+                txTipoPaquete.text="Paquetes Combo\nSeleccione el paquete"
                 var combo=ProductFragmentTigoCombo()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,combo).commit()
             }
             "internet"->{
+                txTipoPaquete.text="Paquetes Internet\nSeleccione el paquete"
                 var internet=ProductFragmentTigoInternet()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
             }
             "minutos"->{
+                txTipoPaquete.text="Paquetes de Minutos\nSeleccione el paquete"
                 var minutos=ProductFragmentTigoMinutos()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,minutos).commit()
             }
             "bolsa"->{
+                txTipoPaquete.text="Bolsas\nSeleccione el paquete"
                 var bolsa=ProductFragmentTigoBolsa()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,bolsa).commit()
 
             }
             "ldi"-> {
+                txTipoPaquete.text="Paquetes Larga Distancia Int\nSeleccione el paquete"
                 var ldi=ProductFragmentTigoLdi()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()

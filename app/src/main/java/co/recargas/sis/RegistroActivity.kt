@@ -56,12 +56,12 @@ class RegistroActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        var  identificacion=idIdentificacion?.editText?.text?.trim()
-        var nombre=idNombre?.editText?.text?.trim()
-        var usuario=idUsuarioR?.editText?.text?.trim()
-        var direccion=idDireccion?.editText?.text?.trim()
-        var celular=idCelular?.editText?.text?.trim()
-        var correo=idCorreoE?.editText?.text?.trim()
+        var  identificacion=idIdentificacion?.editText?.text
+        var nombre=idNombre?.editText?.text
+        var usuario=idUsuarioR?.editText?.text
+        var direccion=idDireccion?.editText?.text
+        var celular=idCelular?.editText?.text
+        var correo=idCorreoE?.editText?.text
 
         btnLimpiarR?.setOnClickListener {
             idIdentificacion?.editText?.setText("")
@@ -76,7 +76,7 @@ class RegistroActivity : AppCompatActivity() {
         btnRegistrase?.setOnClickListener {
             idIdentificacion?.error=""
             idNombre?.error=""
-            Toast.makeText(this,"probando el registro",Toast.LENGTH_SHORT).show()
+
             if(identificacion?.isEmpty()==true && nombre?.isEmpty()==true && usuario?.isEmpty()==true && direccion?.isEmpty()==true && celular?.isEmpty()==true && correo?.isEmpty()==true){
                 Toast.makeText(this,"Todos los campos son requeridos",Toast.LENGTH_SHORT).show()
             }else{

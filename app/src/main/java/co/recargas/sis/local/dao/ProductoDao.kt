@@ -17,13 +17,13 @@ interface ProductoDao {
     fun eliminarProductos()
     //CLARO
     //Obtener Paquetes de Claro Internet
-    @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE 'NAVEGA%' AND nombre LIKE '%MB'")
+    @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE 'NAVEGA%' AND nombre LIKE '%MB' AND (nombre NOT LIKE '%SNAPCHAT%' AND nombre NOT LIKE '%WAZE%' AND nombre NOT LIKE '%YOUTUBE%' AND nombre NOT LIKE '%INSTAGRAM%')")
     fun getClaroInternet():LiveData<List<Producto>>
     //Obtener Paquetes de Claro Voz
     @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE 'PAQUETE%' AND nombre LIKE '%MIN%' AND nombre LIKE '%TAT'")
     fun getClaroVoz():LiveData<List<Producto>>
     //Obtener Paquetes de Claro Todo Incluido
-    @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE '%TODOINCLUIDO%'")
+    @Query("SELECT * FROM productos WHERE operadorId=1 AND( nombre LIKE '%TODOINCLUIDO%' OR nombre LIKE '%TODO_INCLUIDO%')")
     fun getClaroTodoIncl():LiveData<List<Producto>>
     //Obtenet paquetes Claro LDI
     @Query("SELECT * FROM productos WHERE operadorId=1 AND nombre LIKE '%LDI%'")
@@ -39,10 +39,10 @@ interface ProductoDao {
     fun getClaroPrepago():LiveData<List<Producto>>
     //TIGO
     //Obtener paquetes de Combo de Tigo
-    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%CMB%'")
+    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%CMB%' AND nombre LIKE '%TD'")
     fun getTigoCombo():LiveData<List<Producto>>
     //obtener paquetes de Internet de Tigo
-    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%_IN_%'")
+    @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre  LIKE '%\\_IN\\_%' ESCAPE '\\'")
     fun getTigoInter():LiveData<List<Producto>>
     //obtener paquetes de minutos y sms de Tigo
     @Query("SELECT * FROM productos WHERE operadorId=2 AND nombre LIKE '%_MIN_%'  AND nombre LIKE '%_MS'")

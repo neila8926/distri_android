@@ -73,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
 
         android:layout_marginRight="15dp"
 
@@ -85,27 +85,31 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:layout_marginRight="15dp"
         android:text="@string/regresar" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/txTipoPaquete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="2dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="@string/sel_paq"
-        android:textColor="@color/todoIc"
-        android:textSize="20sp" />
+        android:textAlignment="center"
+        android:textColor="@color/todoInter"
+        android:textSize="17sp" />
 
     <FrameLayout
         android:id="@+id/contenedorTipoPaquete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="4dp"
         android:background="@color/colorSecundaryLigth"
         android:padding="4dp">
 

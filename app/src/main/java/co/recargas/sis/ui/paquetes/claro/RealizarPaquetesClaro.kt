@@ -36,6 +36,7 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
     lateinit var nombrePaquete:TextView
     lateinit var valorPaquete:TextView
     lateinit var descripcionPaquete:TextView
+    lateinit var txTipoPaquete:TextView
     var btnRealizarPaquete: Button?=null
     lateinit var numero:EditText
     var fechaActual:String?=null
@@ -55,6 +56,7 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
         btnRegresar=findViewById(R.id.btnRegresar)
+        txTipoPaquete=findViewById(R.id.txTipoPaquete)
 
         btnRegresar?.setOnClickListener {
             var intent= Intent(this, PaquetesActivity::class.java)
@@ -70,39 +72,46 @@ class RealizarPaquetesClaro : AppCompatActivity(), DetallesPaquete {
 
         when(tipo){
             "internet"->{
+                txTipoPaquete.text="Paquetes de Internet\nSeleccione el Paquete"
                 var internet=ProductoFragmentClaroInt()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
 
             }
             "voz"->{
+                txTipoPaquete.text="Paquetes de Voz\nSeleccione el Paquete"
                 var voz = ProductoFragmentClaroVoz()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,voz).commit()
             }
             "todoInc"->{
+                txTipoPaquete.text="Paquetes Todo Incluido\nSeleccione el Paquete"
                 var todoIncluido=ProductoFragmentClaroTodoInc()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,todoIncluido).commit()
 
             }
             "ldi"->{
+                txTipoPaquete.text="Paquetes Larga Distancia Int\nSeleccione el Paquete"
                 var ldi= ProductFragmentClaroLdi()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()
 
             }
             "reventa"->{
+                txTipoPaquete.text="Paquetes de Reventa\nSeleccione el paquete"
                 var reveta=ProductFragmentClaroReventa()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,reveta).commit()
             }
             "apps"->{
+                txTipoPaquete.text="Paquetes de Apps\nSeleccione el paquete"
                 var apps=ProductFragmentClaroApps()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,apps).commit()
             }
             "prepago"->{
+                txTipoPaquete.text="Paquetes de Internet y Tv Prep\nSeleccione el Paquete"
                 var prepago=ProductFragmentClaroPrepago()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,prepago).commit()

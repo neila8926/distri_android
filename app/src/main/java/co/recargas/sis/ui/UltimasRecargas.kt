@@ -133,7 +133,7 @@ class UltimasRecargas : AppCompatActivity(), PrintingCallback {
                     var alerDialogo=AlertDialog.Builder(this@UltimasRecargas)
                     alerDialogo.setTitle("Imprimir")
                     alerDialogo.setMessage(resp)
-                        .setPositiveButton("ok",DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("Imprimir",DialogInterface.OnClickListener { dialog, which ->
 
                             if(!Printooth.hasPairedPrinter()) {
                                 emparejado=true
@@ -148,6 +148,8 @@ class UltimasRecargas : AppCompatActivity(), PrintingCallback {
                                 printFactura()
 
                      })
+                        .setNegativeButton("Cancelar",DialogInterface.OnClickListener { dialog, which ->  })
+                            
                         .show()
                 }
             })

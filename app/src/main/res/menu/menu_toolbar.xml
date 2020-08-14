@@ -3,7 +3,6 @@
 
     <item
         android:id="@+id/cSaldo"
-        android:checkable="false"
         android:title="Consultar Saldo"
         android:visible="true" />
     <item
@@ -12,8 +11,10 @@
         android:visible="true" />
     <item
         android:id="@+id/cEfecty"
-        android:title="Codigo Efecty" />
+        android:title="Codigo Efecty"
+        android:visible="true"/>
     <item
         android:id="@+id/sesion"
-        android:title="Cerrar Sesión" />
+        android:title="Cerrar Sesión"
+        android:visible="true"/>
 </menu>

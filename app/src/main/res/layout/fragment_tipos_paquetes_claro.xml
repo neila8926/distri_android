@@ -83,7 +83,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:inputType="textMultiLine"
                                 android:padding="2dp"
                                 android:text="@string/str_paq_dato"
                                 android:textColor="@color/white"

@@ -79,7 +79,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:inputType="textMultiLine"
                                 android:padding="2dp"
                                 android:text="@string/str_paq_dato"
                                 android:textColor="@color/white"
@@ -240,7 +239,7 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/ic_sd_card_black_24dp" />
+                                app:srcCompat="@drawable/bolsa_24" />
 
                             <TextView
                                 android:id="@+id/textViewrev"

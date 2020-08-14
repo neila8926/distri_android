@@ -113,7 +113,7 @@ class RecargasFragment:Fragment() {
                     logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="TIGO"){
-                    logoOperador?.setImageResource(R.drawable.paquete_tigo)
+                    logoOperador?.setImageResource(R.drawable.tigo_recarga)
                     logoOperador?.visibility=View.VISIBLE
                 }
                 if(nombreOperador=="EXITO"){
@@ -140,6 +140,10 @@ class RecargasFragment:Fragment() {
                     logoOperador?.setImageResource(R.drawable.recarga_avantel)
                     logoOperador?.visibility=View.VISIBLE
                 }
+                if(nombreOperador=="ETB"){
+                    logoOperador?.setImageResource(R.drawable.etb_recarga)
+                    logoOperador?.visibility=View.VISIBLE
+                }
                 if(nombreOperador=="WPLAY"){
                     logoOperador?.setImageResource(R.drawable.recarga_wplay)
                     logoOperador?.visibility=View.VISIBLE
@@ -159,7 +163,7 @@ class RecargasFragment:Fragment() {
                 recargas?.error=null
             operadores.forEach {
                 if(nombreOperador.equals(it.operadorNombre)==true){
-                    operadorId=it.operadorId
+                    operadorId=it.id
 
                     Log.i("INFO",operadorId.toString())
                 }

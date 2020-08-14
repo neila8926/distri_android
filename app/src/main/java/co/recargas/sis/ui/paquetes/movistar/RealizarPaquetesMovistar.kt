@@ -36,6 +36,7 @@ class RealizarPaquetesMovistar : AppCompatActivity(), DetallesPaquete {
     lateinit var nombrePaquete:TextView
     lateinit var valorPaquete:TextView
     lateinit var descripcionPaquete:TextView
+    lateinit var txTipoPaquete:TextView
     var btnRealizarPaquete: Button?=null
     lateinit var numero:EditText
     var fechaActual:String?=null
@@ -47,6 +48,7 @@ class RealizarPaquetesMovistar : AppCompatActivity(), DetallesPaquete {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_realizar_paquetes)
         nombrePaquete=findViewById(R.id.nombrePaquete)
+        txTipoPaquete=findViewById(R.id.txTipoPaquete)
         valorPaquete=findViewById(R.id.valorPaquete)
         descripcionPaquete=findViewById(R.id.descripcion)
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
@@ -68,23 +70,27 @@ class RealizarPaquetesMovistar : AppCompatActivity(), DetallesPaquete {
 
         when(tipo){
             "internet"->{
+                txTipoPaquete.text="Paquetes de Internet,\nSeleccione el Paquete"
                 var internet=ProductFragmentMovistarInternet()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,internet).commit()
 
             }
             "voz"->{
+                txTipoPaquete.text="Paquetes de Voz\nSeleccione el Paquete"
                 var voz = ProductFragmentMovistarVoz()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,voz).commit()
             }
             "todo"->{
+                txTipoPaquete.text="Paquetes Todo Incluido\nSeleccione el paquete"
                 var todoIncluido=ProductFragmentMovistarTodoInc()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,todoIncluido).commit()
 
             }
             "ldi"->{
+                txTipoPaquete.text="Paquetes Larga Distancia Int\nSeleccion el paquete"
                 var ldi= ProductFragmentMovistarLdi()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,ldi).commit()

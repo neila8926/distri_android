@@ -35,6 +35,7 @@ class RealizarPines:AppCompatActivity(),DetallesPaquete{
 
     lateinit var nombrePaquete: TextView
     lateinit var valorPaquete: TextView
+    lateinit var txTipoPaquete:TextView
     lateinit var descripcionPaquete: TextView
     var btnRealizarPin: Button?=null
     lateinit var numero: EditText
@@ -50,11 +51,14 @@ class RealizarPines:AppCompatActivity(),DetallesPaquete{
 
         nombrePaquete=findViewById(R.id.nombrePaquete)
         valorPaquete=findViewById(R.id.valorPaquete)
+        txTipoPaquete=findViewById(R.id.txTipoPaquete)
         descripcionPaquete=findViewById(R.id.descripcion)
         btnRealizarPin=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
         btnRegresar=findViewById(R.id.btnRegresar)
+
+        txTipoPaquete.text="Seleccione el Pin"
 
         btnRegresar?.setOnClickListener {
             var intent=Intent(this,HomeActivity::class.java)

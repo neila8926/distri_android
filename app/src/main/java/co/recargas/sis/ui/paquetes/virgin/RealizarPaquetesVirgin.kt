@@ -32,6 +32,7 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
 
     lateinit var nombrePaquete: TextView
     lateinit var valorPaquete: TextView
+    lateinit var txTipoPaquete:TextView
     lateinit var descripcionPaquete: TextView
     var btnRealizarPaquete: Button?=null
     lateinit var numero: EditText
@@ -48,6 +49,7 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
         nombrePaquete=findViewById(R.id.nombrePaquete)
         valorPaquete=findViewById(R.id.valorPaquete)
         descripcionPaquete=findViewById(R.id.descripcion)
+        txTipoPaquete=findViewById(R.id.txTipoPaquete)
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
@@ -65,21 +67,25 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
 
         when(tipo){
             "antiplan"->{
+                txTipoPaquete.text="Antiplanes\nSeleccione el Paquete"
                 var antiplan=ProductFragmentVirginAntiplan()
                 var fragmentTransaction=fragmentManager.beginTransaction()
                 fragmentTransaction.add(R.id.contenedorTipoPaquete,antiplan).commit()
             }
             "dato"->{
+                txTipoPaquete.text="Bolsas de Datos\nSeleccione el Paquete"
                 var dato=ProductFragmentVirginBolsaDato()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,dato).commit()
             }
             "voz"->{
+                txTipoPaquete.text="Bolsas de Voz\nSeleccione el Paquete"
                 var voz=ProductFragmentVirginBolsaVoz()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,voz).commit()
             }
             "what"->{
+                txTipoPaquete.text="Bolsas de Whatsapp\nSeleccione el paquete"
                 var what=ProductFragmentVirginBolsaWha()
                 var fragmentTransation=fragmentManager.beginTransaction()
                 fragmentTransation.add(R.id.contenedorTipoPaquete,what).commit()

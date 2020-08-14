@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -53,7 +52,7 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
         horaActual= SimpleDateFormat("HH:mm:ss").format(Date());
         idCliente= SharedPreferenceManager.getSomeStringValue("ID")
 
-        Toast.makeText(this,"Probando : $fechaActual $horaActual", Toast.LENGTH_LONG ).show()
+
         //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
         hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
         //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
@@ -126,7 +125,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
 
     override fun paquetesClaro() {
 
-       Toast.makeText(this,"Probando ando ",Toast.LENGTH_LONG).show()
        var intent: Intent= Intent(this,
            PaquetesActivity::class.java)
        intent.putExtra("paquete","claro")
@@ -135,7 +133,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
    }
 
     override fun paquetesTigo() {
-        Toast.makeText(this,"Probando ando ",Toast.LENGTH_LONG).show()
         var intent: Intent= Intent(this,
             PaquetesActivity::class.java)
         intent.putExtra("paquete","tigo")
@@ -144,14 +141,12 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
     }
 
     override fun paqueteVirgin() {
-        Toast.makeText(this, "boton virgin", Toast.LENGTH_SHORT).show()
         var intent:Intent= Intent(this, PaquetesActivity::class.java)
         intent.putExtra("paquete","virgin")
         startActivity(intent)
 
     }
     override fun paqueteEtb() {
-        Toast.makeText(this, "boton etb", Toast.LENGTH_SHORT).show()
         var intent:Intent= Intent(this, PaquetesActivity::class.java)
         intent.putExtra("paquete","etb")
         startActivity(intent)
@@ -159,7 +154,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
     }
 
     override fun paqueteAvantel() {
-        Toast.makeText(this, "boton avantel", Toast.LENGTH_SHORT).show()
         var intent:Intent= Intent(this, PaquetesActivity::class.java)
         intent.putExtra("paquete","avantel")
         startActivity(intent)
@@ -167,7 +161,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
     }
 
     override fun paqueteMovistar() {
-        Toast.makeText(this, "boton movistar", Toast.LENGTH_SHORT).show()
         var intent:Intent= Intent(this, PaquetesActivity::class.java)
         intent.putExtra("paquete","movistar")
         startActivity(intent)
@@ -175,7 +168,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
     }
 
     override fun paqueteExito() {
-        Toast.makeText(this, "boton exito", Toast.LENGTH_SHORT).show()
         var intent:Intent= Intent(this, RealizarPaquetesExito::class.java)
         intent.putExtra("paquete","exito")
         startActivity(intent)
@@ -183,7 +175,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
     }
 
     override fun paqueteKalley() {
-        Toast.makeText(this, "boton kalley", Toast.LENGTH_SHORT).show()
         var intent:Intent= Intent(this, RealizarPaquetesKalley::class.java)
         intent.putExtra("paquete","kalley")
         startActivity(intent)
@@ -191,7 +182,6 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
     }
 
     override fun paqueteWings() {
-        Toast.makeText(this, "boton wigs", Toast.LENGTH_SHORT).show()
         var intent:Intent= Intent(this, RealizarPaquetesWings::class.java)
         intent.putExtra("paquete","wings")
         startActivity(intent)
