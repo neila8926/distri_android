@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:startIconDrawable="@drawable/custom_person_icon">
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/idUsername"
@@ -56,8 +56,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tUser"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tUser"
-        app:startIconDrawable="@drawable/custom_lock_icon">
+        app:layout_constraintTop_toBottomOf="@+id/tUser">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/idPassword"

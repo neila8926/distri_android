@@ -13,24 +13,23 @@
 
         <androidx.gridlayout.widget.GridLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="#ffffff"
             android:paddingBottom="4dp"
             app:columnCount="3"
+            app:orientation="horizontal"
             app:rowCount="3">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnClaroP"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginEnd="2dp"
                 app:layout_columnWeight="1"
-                app:layout_constraintEnd_toStartOf="@+id/btnTigoP"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_rowWeight="1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -65,14 +64,11 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnTigoP"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
                 android:layout_marginTop="10dp"
                 app:layout_columnWeight="2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnClaroP"
-                app:layout_constraintTop_toTopOf="@+id/btnClaroP">
+                app:layout_rowWeight="1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -107,15 +103,13 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnVirgin"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
-                app:layout_columnWeight="1"
-                app:layout_constraintEnd_toStartOf="@+id/btnEtb"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnClaroP">
+                android:layout_marginEnd="2dp"
+                app:layout_columnWeight="3"
+                app:layout_rowWeight="1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -147,15 +141,13 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnEtb"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="2dp"
-                app:layout_columnWeight="2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnVirgin"
-                app:layout_constraintTop_toTopOf="@+id/btnVirgin">
+                android:layout_marginEnd="2dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -189,12 +181,11 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnAvantelP"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
                 android:layout_marginTop="10dp"
-                app:layout_columnWeight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnVirgin">
+                app:layout_columnWeight="2"
+                app:layout_rowWeight="2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -225,11 +216,13 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnMovistarP"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
-                app:layout_columnWeight="2">
+                android:layout_marginEnd="2dp"
+                app:layout_columnWeight="3"
+                app:layout_rowWeight="2">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -262,12 +255,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnExitoP"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="2dp"
+                android:layout_marginEnd="2dp"
                 android:layout_marginBottom="4dp"
-                app:layout_columnWeight="1">
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -300,11 +295,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnKalleyP"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="4dp"
-                app:layout_columnWeight="2">
+                app:layout_columnWeight="2"
+                app:layout_rowWeight="3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -337,12 +333,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnWingsP"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="137dp"
-                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="2dp"
                 android:layout_marginBottom="4dp"
-                app:layout_columnWeight="1">
+                app:layout_columnWeight="3"
+                app:layout_rowWeight="3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

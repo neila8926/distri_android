@@ -17,6 +17,7 @@ import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.interfaces.DetallesPaquete
 import co.recargas.sis.ui.paquetes.PaquetesActivity
+import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -53,8 +54,8 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
         btnRealizarPaquete=findViewById(R.id.btnRealizarPaquete)
         numero=findViewById(R.id.editNumero)
         progressBar=findViewById(R.id.progressBarPaq)
-        var intentTigo=intent.extras
-        var tipo:String=intentTigo?.get("virgin").toString()
+        var intent=intent.extras
+        var tipo:String=intent?.get("virgin").toString()
         var fragmentManager=supportFragmentManager
 
         btnRegresar=findViewById(R.id.btnRegresar)
@@ -94,7 +95,7 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
         }
 
         btnRealizarPaquete?.setOnClickListener {
-            Toast.makeText(this,"Probando Paquete de Tigo", Toast.LENGTH_SHORT).show()
+
 
             if(numero.text.isEmpty() || ValidacionDato.validarCelular(numero.text.toString())==false){
                 numero.setError("Digite un numero de celular Valido")
@@ -184,28 +185,35 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
         }
         override fun doInBackground(vararg params: Void?): Boolean? {
 
+
             if(params.isNotEmpty()){
 
             }
             try {
-                response= ConexionSocket().ClSocket(parametros)
+                response=ConexionSocket().ClSocket(parametros)
                 Log.i("INFO", response)
-            }catch (ex: Exception){
-                ex.printStackTrace()
-            }
-            if(response.equals("Error de Conexión")==false){
-                var reqJson: JSONObject = JSONObject(response);
-                respuesta=reqJson.getString("respuesta")
 
-                if(respuesta.equals("ok")){
-                    //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
-                    // recargaRepository.insertRecargas(recargas)
-                    saldo=reqJson.getString("saldo")
-                    publishProgress()
-                    return true
+                if(response.equals("Error de Conexión")==false){
+                    try {
+                        var reqJson: JSONObject = JSONObject(response);
+                        respuesta = reqJson.getString("respuesta")
 
 
+                        if(respuesta.equals("ok")){
+                            //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
+                            // recargaRepository.insertRecargas(recargas)
+                            saldo=reqJson.getString("saldo")
+                            publishProgress()
+                            return true
+                        }
+                    }catch (e: JSONException){
+                        respuesta=response
+                    }
                 }
+
+            }catch (ex:Exception){
+
+                ex.printStackTrace()
             }
             return false
         }

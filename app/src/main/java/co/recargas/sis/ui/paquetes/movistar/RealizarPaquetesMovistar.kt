@@ -20,6 +20,7 @@ import co.recargas.sis.local.RecargaRepository
 import co.recargas.sis.local.modelo.Recargas
 import co.recargas.sis.ui.paquetes.PaquetesActivity
 import co.recargas.sis.ui.paquetes.tigo.ProductFragmentTigoCombo
+import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -186,28 +187,35 @@ class RealizarPaquetesMovistar : AppCompatActivity(), DetallesPaquete {
         }
         override fun doInBackground(vararg params: Void?): Boolean? {
 
+
             if(params.isNotEmpty()){
 
             }
             try {
                 response=ConexionSocket().ClSocket(parametros)
                 Log.i("INFO", response)
-            }catch (ex:Exception){
-                ex.printStackTrace()
-            }
-            if(response.equals("Error de Conexión")==false){
-                var reqJson: JSONObject = JSONObject(response);
-                respuesta=reqJson.getString("respuesta")
 
-                if(respuesta.equals("ok")){
-                    //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
-                   // recargaRepository.insertRecargas(recargas)
-                    saldo=reqJson.getString("saldo")
-                    publishProgress()
-                        return true
+                if(response.equals("Error de Conexión")==false){
+                    try {
+                        var reqJson: JSONObject = JSONObject(response);
+                        respuesta = reqJson.getString("respuesta")
 
 
+                        if(respuesta.equals("ok")){
+                            //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
+                            // recargaRepository.insertRecargas(recargas)
+                            saldo=reqJson.getString("saldo")
+                            publishProgress()
+                            return true
+                        }
+                    }catch (e: JSONException){
+                        respuesta=response
+                    }
                 }
+
+            }catch (ex:Exception){
+
+                ex.printStackTrace()
             }
             return false
         }

@@ -19,6 +19,7 @@ import co.recargas.sis.common.SharedPreferenceManager
 import co.recargas.sis.common.ValidacionDato
 import co.recargas.sis.local.modelo.Producto
 import com.google.android.material.textfield.TextInputLayout
+import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
 import java.lang.NumberFormatException
@@ -262,13 +263,17 @@ class RecargasFragment:Fragment() {
                 ex.printStackTrace()
             }
             if(response.equals("Error de Conexión")==false){
-                var reqJson: JSONObject = JSONObject(response);
-                respuesta=reqJson.getString("respuesta")
+                try{
+                    var reqJson: JSONObject = JSONObject(response);
+                    respuesta=reqJson.getString("respuesta")
 
-                if(respuesta.equals("ok")){
-                    saldo=reqJson.getString("saldo")
-                    publishProgress()
-                    return true
+                    if(respuesta.equals("ok")){
+                        saldo=reqJson.getString("saldo")
+                        publishProgress()
+                        return true
+                }
+            }catch (e: JSONException){
+                respuesta=response
                 }
             }
             return false

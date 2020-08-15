@@ -20,6 +20,7 @@ import co.recargas.sis.ui.pines.imvu.ProductFragmentImvu
 import co.recargas.sis.ui.pines.minecraft.ProductFragmentMinecraft
 import co.recargas.sis.ui.pines.netflix.ProductFragmentNetflix
 import co.recargas.sis.ui.pines.spotify.ProductFragmentSpotify
+import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -182,28 +183,35 @@ class RealizarPines:AppCompatActivity(),DetallesPaquete{
         }
         override fun doInBackground(vararg params: Void?): Boolean? {
 
+
             if(params.isNotEmpty()){
 
             }
             try {
-                response= ConexionSocket().ClSocket(parametros)
+                response=ConexionSocket().ClSocket(parametros)
                 Log.i("INFO", response)
-            }catch (ex: Exception){
-                ex.printStackTrace()
-            }
-            if(response.equals("Error de Conexión")==false){
-                var reqJson: JSONObject = JSONObject(response);
-                respuesta=reqJson.getString("respuesta")
 
-                if(respuesta.equals("ok")){
-                    //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
-                    // recargaRepository.insertRecargas(recargas)
-                    saldo=reqJson.getString("saldo")
-                    publishProgress()
-                    return true
+                if(response.equals("Error de Conexión")==false){
+                    try {
+                        var reqJson: JSONObject = JSONObject(response);
+                        respuesta = reqJson.getString("respuesta")
 
 
+                        if(respuesta.equals("ok")){
+                            //var recargas:Recargas= Recargas(2,numero.toString(),descripcionPaquete.toString(),valorPaquete.toString().toInt(),fechaActual!! )
+                            // recargaRepository.insertRecargas(recargas)
+                            saldo=reqJson.getString("saldo")
+                            publishProgress()
+                            return true
+                        }
+                    }catch (e: JSONException){
+                        respuesta=response
+                    }
                 }
+
+            }catch (ex:Exception){
+
+                ex.printStackTrace()
             }
             return false
         }

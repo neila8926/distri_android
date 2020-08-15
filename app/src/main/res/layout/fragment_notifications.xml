@@ -21,7 +21,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnNetflix"
-                android:layout_width="150dp"
+                android:layout_width="120dp"
                 android:layout_height="130dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
@@ -63,7 +63,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnSpotify"
-                android:layout_width="150dp"
+                android:layout_width="120dp"
                 android:layout_height="130dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
@@ -105,7 +105,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnImvu"
-                android:layout_width="150dp"
+                android:layout_width="120dp"
                 android:layout_height="130dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
@@ -145,7 +145,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnMinecraft"
-                android:layout_width="150dp"
+                android:layout_width="120dp"
                 android:layout_height="130dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"

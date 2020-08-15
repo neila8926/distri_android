@@ -3,6 +3,7 @@ package co.recargas.sis
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
@@ -15,6 +16,7 @@ import co.recargas.sis.local.RecargaRepository
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.ui.paquetes.products.ProductViewModel
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -29,8 +31,8 @@ class MainActivity : AppCompatActivity() {
     val version=Constantes.VERSION_CODE;
     val ESTADO_BUTTON="SESION"
     private lateinit var progressBarInicio:ProgressDialog
-    private lateinit var edtUsuario:TextInputEditText
-    private lateinit var edtPassword:TextInputEditText
+    private lateinit var edtUsuario:TextInputLayout
+    private lateinit var edtPassword:TextInputLayout
     private lateinit var btnIngresar:Button
     private lateinit var idRegistrase:TextView
     private lateinit var idSesionI:RadioButton
@@ -44,13 +46,17 @@ class MainActivity : AppCompatActivity() {
             var intent=Intent(this,HomeActivity::class.java)
             startActivity(intent)
         }
-        edtUsuario=findViewById(R.id.idUsername);
-        edtPassword=findViewById(R.id.idPassword);
+        edtUsuario=findViewById(R.id.tUser);
+        edtPassword=findViewById(R.id.tPass);
         btnIngresar=findViewById(R.id.idIngresar);
         idRegistrase=findViewById(R.id.idRegistrase)
         idSesionI=findViewById(R.id.idSesionI)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+             edtUsuario.setStartIconDrawable(R.drawable.custom_person_icon)
+            edtPassword.setStartIconDrawable(R.drawable.custom_lock_icon)
+        }
 
-       btnDesactivado=idSesionI.isChecked
+        btnDesactivado=idSesionI.isChecked
 
         idSesionI.setOnClickListener {
             if(btnDesactivado)
@@ -66,16 +72,16 @@ class MainActivity : AppCompatActivity() {
 
         btnIngresar.setOnClickListener{view->
 
-            if(edtUsuario.text?.isEmpty()==true){
+            if(edtUsuario.editText?.text?.isEmpty()==true){
                 edtUsuario.setError("Digite Usuario")
             }
-            if(edtPassword.text?.isEmpty()==true){
+            if(edtPassword.editText?.text?.isEmpty()==true){
                 edtPassword.setError("Digite Contraseña")
 
             }else {
-                if(edtUsuario.text?.isNotEmpty()==true && edtPassword.text?.isNotEmpty()==true) {
+                if(edtUsuario.editText?.text?.isNotEmpty()==true && edtPassword?.editText?.text?.isNotEmpty()==true) {
 
-                    var user=edtUsuario.text.toString().trim().replace("\\s","")
+                    var user=edtUsuario.editText?.text.toString().trim().replace("\\s","")
 
                     //Se obtiene la fecha y la hora actual
                     val fechaActual=SimpleDateFormat("yyyy-MM-dd ").format(Date());
@@ -84,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                     //Se envian los datos al metodo que va a generar la Key de tipo Hexadecimal para ser enviada a Distrirecarga
                     val hmac = calculateRFC2104HMAC(fechaActual + horaActual, "android123*")
                     //Parametros que van a hacer enviados en la peticion Socket en el Inicio de Sesion
-                    parametros = "mov|log|" + horaActual.toString() + "|" + hmac + "|" +user+ "|" + edtPassword.getText().toString().toString() + "|" + version
+                    parametros = "mov|log|" + horaActual.toString() + "|" + hmac + "|" +user+ "|" + edtPassword.editText?.getText().toString().toString() + "|" + version
 
 
                         Ingresar().execute()

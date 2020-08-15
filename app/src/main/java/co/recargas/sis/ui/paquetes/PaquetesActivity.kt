@@ -19,10 +19,13 @@ class PaquetesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paquetes)
         toolbar=findViewById(R.id.toolbar2)
+
+
         toolbar?.setTitle(R.string.tituloToolbar)
         setSupportActionBar(toolbar)
+        var actionBar=supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
 
