@@ -110,12 +110,19 @@ class HomeActivity : AppCompatActivity(), FragmentCom {
                 return true
             }
             R.id.sesion->{
+
                 SharedPreferenceManager.deleteSomeValue()
                 var intent=Intent(this,MainActivity::class.java)
                 startActivity(intent)
                 finish()
                 return true
             }
+            R.id.transferencias->{
+                var intent=Intent(this,BancosActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+
             else->( return super.onOptionsItemSelected(item))
 
         }

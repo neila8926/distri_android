@@ -20,6 +20,7 @@ import co.recargas.sis.ui.paquetes.PaquetesActivity
 import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.crypto.Mac
@@ -116,7 +117,8 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
                 Log.i("INFO", "NOMBRE P "+nombrePaquete)
 
                 if(nombrePaquete.isNotEmpty()==true || valorPaquete.isNotEmpty()==true) {
-                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete+"|"+idPaquete+"|"+version;
+                    parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valorPaquete.toString().replace(",","").replace(".","")+"|"+idPaquete+"|"+version;
+                    Log.i("parametros",parametros)
 
 
                     val alertDialog = AlertDialog.Builder(this)
@@ -167,7 +169,9 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
         descripcionPaquete.visibility=View.VISIBLE
 
         nombrePaquete.text=nombre
-        valorPaquete.text=valor.toString()
+        var numberFormat: NumberFormat = NumberFormat.getInstance()
+
+        valorPaquete?.text=numberFormat.format(valor)
         descripcionPaquete.text=descripcion
         idPaquete=id
     }
@@ -230,9 +234,17 @@ class RealizarPaquetesVirgin:AppCompatActivity(), DetallesPaquete {
                 Toast.makeText(this@RealizarPaquetesVirgin,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
                 val builder = AlertDialog.Builder(this@RealizarPaquetesVirgin)
                 builder.setTitle("Confirmación")
-                builder.setMessage(respuesta)
+                builder.setMessage(respuesta+": Recarga Exitosa\n${saldo}")
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
+                            nombrePaquete.setText("")
+                            valorPaquete.setText("")
+                            descripcionPaquete.setText("")
+                            numero.setText("")
+
+                            nombrePaquete.visibility=View.GONE
+                            valorPaquete.visibility=View.GONE
+                            descripcionPaquete.visibility=View.GONE
                         })
                 builder.show()
             }else{

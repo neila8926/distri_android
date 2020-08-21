@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    
-
     <application
         android:name=".app.AppClase"
         android:allowBackup="true"
@@ -16,22 +14,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BancosActivity"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity"/>
+        </activity>
         <activity
             android:name=".ui.UltimasRecargas"
-            android:parentActivityName=".HomeActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".HomeActivity">
 
             <!-- SOPORTE PARA VERSIONES 4.0 O MENORES -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
-        <activity android:name=".RegistroActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".RegistroActivity"
+            android:parentActivityName=".MainActivity" />
+
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"
-            />
+            android:value=".MainActivity" />
+
         <activity
             android:name=".ui.paquetes.claro.RealizarPaquetesClaro"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -74,6 +80,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 
 </manifest>

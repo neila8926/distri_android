@@ -24,7 +24,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnClaroP"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="2dp"
@@ -65,7 +65,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnTigoP"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginTop="10dp"
                 app:layout_columnWeight="2"
                 app:layout_rowWeight="1">
@@ -104,7 +104,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnVirgin"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="2dp"
@@ -142,7 +142,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnEtb"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="2dp"
@@ -182,7 +182,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnAvantelP"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginTop="10dp"
                 app:layout_columnWeight="2"
                 app:layout_rowWeight="2">
@@ -217,7 +217,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnMovistarP"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="2dp"
@@ -256,7 +256,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnExitoP"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="2dp"
@@ -296,7 +296,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnKalleyP"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="4dp"
                 app:layout_columnWeight="2"
@@ -334,7 +334,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnWingsP"
                 android:layout_width="100dp"
-                android:layout_height="137dp"
+                android:layout_height="140dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="2dp"

@@ -14,6 +14,10 @@
         android:title="Codigo Efecty"
         android:visible="true"/>
     <item
+        android:id="@+id/transferencias"
+        android:title="Bancos y Promociones"
+        android:visible="true"/>
+    <item
         android:id="@+id/sesion"
         android:title="Cerrar Sesión"
         android:visible="true"/>

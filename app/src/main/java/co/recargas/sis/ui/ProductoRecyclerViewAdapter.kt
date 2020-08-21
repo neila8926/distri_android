@@ -14,6 +14,7 @@ import co.recargas.sis.local.modelo.Producto
 
 
 import kotlinx.android.synthetic.main.fragment_producto.view.*
+import java.text.NumberFormat
 
 
 class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
@@ -42,7 +43,9 @@ class ProductoRecyclerViewAdapter() : RecyclerView.Adapter<ProductoRecyclerViewA
     //Se carga la información elemento por elemento al ViewComponet
         holder.nameProduct.text = item.nombre
         holder.descriptionProduct.text = item.observacion
-        holder.priceProduct.text = item.valor.toString()
+    var numberFormat:NumberFormat= NumberFormat.getInstance()
+    var precio=numberFormat.format(item.valor.toInt())
+        holder.priceProduct.text = precio
     if(item.operadorNombre.toUpperCase()=="CLARO"){
         holder.imageLogo.setImageResource(R.drawable.recarga_claro)
     }

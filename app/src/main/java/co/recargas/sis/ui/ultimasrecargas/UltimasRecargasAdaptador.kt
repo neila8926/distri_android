@@ -15,6 +15,7 @@ import co.recargas.sis.interfaces.ClickListenerUltiRec
 import co.recargas.sis.local.modelo.Producto
 import co.recargas.sis.local.modelo.Recargas
 import kotlinx.android.synthetic.main.item_recarga.*
+import java.text.NumberFormat
 
 class UltimasRecargasAdaptador(item:List<Recargas>, var listener:ClickListenerUltiRec):RecyclerView.Adapter<UltimasRecargasAdaptador.ViewHolder>() {
     private var recargas : List<Recargas> = ArrayList()
@@ -35,19 +36,17 @@ class UltimasRecargasAdaptador(item:List<Recargas>, var listener:ClickListenerUl
         val ite= item?.get(position)
         Log.i("itema",ite?.valor!!)
         holder.numero?.text=ite?.numero!!.toString()
-        holder.valor?.text=ite?.valor!!.toString()
+        var numberFormat:NumberFormat= NumberFormat.getNumberInstance()
+
+        holder.valor?.text=numberFormat.format(ite?.valor.toFloat()).toString()
         holder.respuesta?.text=ite?.observacion!!.toString()
         holder.producto?.text=ite?.producto!!.toString()
         holder.fecha?.text=ite?.fecha!!.toString()
         holder.operador?.text=ite?.operador!!.toString()
         holder.numero
-
     }
 
     override fun getItemCount(): Int =item!!.size
-
-
-
 
     class ViewHolder(vista:View, listener: ClickListenerUltiRec):RecyclerView.ViewHolder(vista),View.OnClickListener{
 

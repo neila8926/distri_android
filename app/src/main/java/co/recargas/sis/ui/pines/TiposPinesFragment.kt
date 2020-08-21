@@ -19,7 +19,7 @@ class TiposPinesFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_notifications,container,false)
+        var view = inflater.inflate(R.layout.fragment_pines,container,false)
         netflix=view.findViewById(R.id.btnNetflix)
         spotyfy=view.findViewById(R.id.btnSpotify)
         imvu=view.findViewById(R.id.btnImvu)

@@ -23,6 +23,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
 import java.lang.NumberFormatException
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.crypto.Mac
@@ -59,7 +60,7 @@ class RecargasFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root: View =
-            inflater.inflate(R.layout.fragment_dashboard, container, false)
+            inflater.inflate(R.layout.fragment_recargas, container, false)
         recargas=root.findViewById(R.id.recargas)
         editNumero=root.findViewById(R.id.editTextNumber2)
         edtValor=root.findViewById(R.id.editTextNumber)
@@ -170,8 +171,9 @@ class RecargasFragment:Fragment() {
                 }
              }
 
-            if(editNumero.editText?.text?.isEmpty()==true || ValidacionDato.validarCelular(editNumero.editText?.text.toString())==false ){
-                editNumero.setError("Digite un numero de celular Valido")
+            if(editNumero.editText?.text?.isEmpty()==true || (!ValidacionDato.validarCelular(editNumero.editText?.text.toString()) && operadorId!=4 && operadorId!=204)){
+
+                    editNumero.setError("Digite un numero de celular Valido")
 
             }else
             if(edtValor.editText?.text?.isEmpty()==true ){
@@ -200,9 +202,10 @@ class RecargasFragment:Fragment() {
                    // Log.i("INFO", "NOMBRE P "+nombrePaquete)
                     parametros = "mov|rec|"+horaActual+"|"+hmac +"|"+idCliente+"|"+celular+"|"+valor+"|"+operadorId+"|"+version;
 
+                    var numeroFormato:NumberFormat= NumberFormat.getInstance()
                     var alertDialog=AlertDialog.Builder(context!!)
                     alertDialog.setTitle("Confirmar Recargar")
-                    alertDialog.setMessage("Numero: ${celular}\nPaquete: ${nombreOperador}\nValor: ${valor}")
+                    alertDialog.setMessage("Numero: ${celular}\nPaquete: ${nombreOperador}\nValor: ${numeroFormato.format( valor.toInt())}")
                     alertDialog.apply {
                         setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, id ->
                             RealizarRecarga().execute()
@@ -292,16 +295,13 @@ class RecargasFragment:Fragment() {
                 Toast.makeText(context,"Recarga Exitosa ${saldo}", Toast.LENGTH_SHORT).show()
                 val builder = AlertDialog.Builder(context!!)
                 builder.setTitle("Confirmación")
-                builder.setMessage(respuesta)
+                builder.setMessage(respuesta+": Recarga Exitosa\n${saldo}")
                     .setPositiveButton("Aceptar",
                         DialogInterface.OnClickListener { dialog, id ->
+                            editNumero.editText?.setText("")
+                            edtValor.editText?.setText("")
                         })
-                    .setNegativeButton("Imprimir",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            // User cancelled the dialog
-                        })
-
-                builder.show()
+                    builder.show()
             }else{
                 Toast.makeText(context, "Recargar fallida ${respuesta}",Toast.LENGTH_SHORT).show()
 

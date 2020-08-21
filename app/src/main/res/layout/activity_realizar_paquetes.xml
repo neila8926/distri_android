@@ -35,10 +35,13 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
         android:layout_marginRight="10dp"
+        android:inputType="numberDecimal"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:visibility="gone" />
+        android:digits="0123456789.,$"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/descripcion"
@@ -47,6 +50,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
         android:layout_marginRight="10dp"
+        android:textSize="15sp"
         android:visibility="gone" />
 
     <EditText
@@ -71,7 +75,7 @@
         android:id="@+id/btnRealizarPaquete"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="42dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="3dp"
 

@@ -79,4 +79,14 @@
     <string name="regresar">Regresar</string>
     <string name="conectar_impresora">Sincronizar Impresora</string>
     <string name="sesionIn">Mantener la sesión iniciada</string>
+    <string name="numero_cuenta">Numero de Cuenta</string>
+    <string name="cuenta_banco">788-8888-9131</string>
+    <string name="tipo__cuenta">Cuenta de Ahorro</string>
+    <string name="nit_sis">Siscompal Nit 900.327.586</string>
+    <string name="cuenta_davi">0560056169997626</string>
+    <string name="nit_sis3">Siscompal Nit 900.327.586-3</string>
+    <string name="mens_cuenta">Cuentas Para Solo Transferencias</string>
+    <string name="mens_report">Reportar sus carga al Whatsapp:\n 316 4540917</string>
+    <string name="mens_promo">Si utilizas el servicio USSD y pasas a realizar todas tus recargas por la App, recibiras 15 Sim Cards Gratis, más información en el telefono 3136500024</string>
+    <string name="promo">Promo</string>
 </resources>
